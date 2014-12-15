@@ -2,17 +2,17 @@ using System.Collections.Generic;
 
 namespace GM.Entity.Models
 {
-    public sealed class Departement
+    public partial class Departement
     {
         public Departement()
         {
-            Employes = new List<Employe>();
-            Magasins = new List<Magasin>();
+            this.Employes = new List<Employe>();
+            this.Magasins = new List<Magasin>();
         }
 
         public int Id { get; set; }
         public string Libelle { get; set; }
-        public ICollection<Employe> Employes { get; set; }
-        public ICollection<Magasin> Magasins { get; set; }
+        public virtual ICollection<Employe> Employes { get; set; }
+        public virtual ICollection<Magasin> Magasins { get; set; }
     }
 }

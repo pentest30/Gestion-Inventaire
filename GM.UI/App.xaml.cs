@@ -14,6 +14,7 @@ namespace GM.UI
         {
             var container = new UnityContainer();
             var dbContext = new GMStoreContext();
+            container.RegisterInstance(new EntityFactory<Departement>(dbContext));
             container.RegisterInstance(new Repository<Departement>(dbContext));
             container.RegisterInstance(new Repository<Service>(dbContext));
             container.RegisterInstance(new Repository<Employe>(dbContext));

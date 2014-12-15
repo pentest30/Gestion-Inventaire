@@ -1,6 +1,6 @@
-﻿using BLL;
-using GM.Entity.Models;
-using Microsoft.Practices.Unity;
+﻿using System.Windows;
+using GM.UI.Views;
+using ZonaTools.XPlorerBar;
 
 namespace GM.UI
 {
@@ -12,9 +12,22 @@ namespace GM.UI
         public MainWindow()
         {
             InitializeComponent();
-            var container = new UnityContainer();
-            var rep = container.Resolve<Repository<Departement>>();
-            DataGrid.ItemsSource = rep.SelectAll();
+            //ContentControl.Content = new DepartementView();
+
+        }
+
+        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        {
+            switch (((XPlorerItem)sender).ItemText)
+            {
+                    
+                case "Départements": ContentControl.Content = new DepartementView();
+                    break;
+                case "Catégories": ContentControl.Content = new CategorieView();
+                    break;
+                case "Services": ContentControl.Content = new ServiceView();
+                    break;
+            }
         }
     }
 }

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace GM.Entity.Models
 {
-    public sealed class Service
+    public  class Service
     {
         public Service()
         {
@@ -13,6 +13,7 @@ namespace GM.Entity.Models
         public int Id { get; set; }
         public string Libelle { get; set; }
         public int? DepartementId { get; set; }
+        public virtual Departement Departement { get; set; }
         public ICollection<Employe> Employes { get; set; }
         public ICollection<Mouvement> Mouvements { get; set; }
     }

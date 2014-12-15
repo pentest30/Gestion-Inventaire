@@ -1,12 +1,14 @@
+using System;
 using System.Collections.Generic;
 
 namespace GM.Entity.Models
 {
-    public sealed class Article
+    public partial class Article
     {
         public Article()
         {
-            BonEntrees = new List<BonEntree>();
+            this.BonEntrees = new List<BonEntree>();
+           
         }
 
         public long Id { get; set; }
@@ -20,11 +22,11 @@ namespace GM.Entity.Models
         public long? QntMagsin { get; set; }
         public decimal? Poids { get; set; }
         public string Code { get; set; }
-        public Categorie Categorie { get; set; }
-        public Marque Marque { get; set; }
+        public virtual Categorie Categorie { get; set; }
+        public virtual Marque Marque { get; set; }
       
-        public SousCategorie SousCategorie { get; set; }
-        public ICollection<BonEntree> BonEntrees { get; set; }
-        
+        public virtual SousCategorie SousCategorie { get; set; }
+        public virtual ICollection<BonEntree> BonEntrees { get; set; }
+       
     }
 }

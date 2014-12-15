@@ -9,23 +9,23 @@ namespace BLL
     public class Repository<T> : IRepository<T> where T : class
     {
         private readonly GMStoreContext _dbContext;
-        private readonly DbSet<T> _set;
+        public readonly DbSet<T> Set;
 
         public Repository(GMStoreContext dbContext)
         {
             _dbContext = dbContext;
-            _set = _dbContext.Set<T>();
+            Set = _dbContext.Set<T>();
         }
 
         public T SelectById(object id)
         {
-            return _set.Find(id);
+            return Set.Find(id);
         }
 
         public void Delete(object id)
         {
-            var item = _set.Find(id);
-            _set.Remove(item);
+            var item = Set.Find(id);
+            Set.Remove(item);
         }
 
         public void Save()
@@ -35,18 +35,18 @@ namespace BLL
 
         public IEnumerable<T> Find(Func<T, bool> predicate)
         {
-            return _set.Where(predicate);
+            return Set.Where(predicate);
         }
 
 
         public void Insert(T item)
         {
-            _set.Add(item);
+            Set.Add(item);
         }
 
         public void Update(T item)
         {
-            _set.Attach(item);
+            Set.Attach(item);
             _dbContext.Entry(item).State = EntityState.Modified;
         }
 
@@ -54,7 +54,7 @@ namespace BLL
 
         public IEnumerable<T> SelectAll()
         {
-            return _set.ToList();
+            return Set.ToList();
         }
     }
 }

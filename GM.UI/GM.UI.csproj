@@ -41,6 +41,9 @@
     <Reference Include="EntityFramework.SqlServer">
       <HintPath>..\packages\EntityFramework.6.1.1\lib\net40\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="ItemsFilter">
+      <HintPath>..\..\GMG.ST\GMG.UI1\bin\Debug\ItemsFilter.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Practices.ServiceLocation">
       <HintPath>..\packages\CommonServiceLocator.1.0\lib\NET35\Microsoft.Practices.ServiceLocation.dll</HintPath>
     </Reference>
@@ -53,20 +56,52 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="UIControls">
+      <HintPath>..\..\GMG.ST\GMG.UI1\bin\Debug\UIControls.dll</HintPath>
+    </Reference>
+    <Reference Include="VIBlend.WPF.Editors">
+      <HintPath>..\..\GMG.ST\GMG.UI1\bin\Debug\VIBlend.WPF.Editors.dll</HintPath>
+    </Reference>
+    <Reference Include="VIBlend.WPF.Utilities">
+      <HintPath>..\..\GMG.ST\GMG.UI1\bin\Debug\VIBlend.WPF.Utilities.dll</HintPath>
+    </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="WPFOfficeTheme">
+      <HintPath>..\..\Carta.App\Carta.App\bin\x86\Debug\WPFOfficeTheme.dll</HintPath>
+    </Reference>
+    <Reference Include="WPFToolkit">
+      <HintPath>..\..\GMG.ST\GMG.UI1\bin\Debug\WPFToolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="ZonaTools.XPlorerBar">
+      <HintPath>..\..\GMG.ST\GMG.UI1\bin\Debug\ZonaTools.XPlorerBar.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="UI.Helpers\PBar.cs" />
+    <Compile Include="UI.Helpers\RepositionPopupBehavior.cs" />
+    <Compile Include="Views\CategorieView.xaml.cs">
+      <DependentUpon>CategorieView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DepartementView.xaml.cs">
+      <DependentUpon>DepartementView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ServiceView.xaml.cs">
+      <DependentUpon>ServiceView.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -75,10 +110,26 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Common\DelegateCommand.cs" />
+    <Compile Include="Common\ObjectBase.cs" />
+    <Compile Include="Converters\BindablePasswordBox.cs" />
+    <Compile Include="Converters\Nan2Visible.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\CategorieView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DepartementView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ServiceView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -120,6 +171,7 @@
       <Name>GM.Entity</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

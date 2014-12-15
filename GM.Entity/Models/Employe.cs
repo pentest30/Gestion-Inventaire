@@ -3,22 +3,22 @@ using System.Collections.Generic;
 
 namespace GM.Entity.Models
 {
-    public sealed class Employe
+    public partial class Employe
     {
         public Employe()
         {
-            Mouvements = new List<Mouvement>();
+            this.Mouvements = new List<Mouvement>();
         }
 
         public int Id { get; set; }
         public string Nom { get; set; }
         public string Prenom { get; set; }
-        public DateTime? DateNaissance { get; set; }
+        public Nullable<System.DateTime> DateNaissance { get; set; }
         public string Fonction { get; set; }
-        public int? DeprtementId { get; set; }
-        public int? ServiceId { get; set; }
-        public Departement Departement { get; set; }
-        public Service Service { get; set; }
-        public ICollection<Mouvement> Mouvements { get; set; }
+        public Nullable<int> DeprtementId { get; set; }
+        public Nullable<int> ServiceId { get; set; }
+        public virtual Departement Departement { get; set; }
+        public virtual Service Service { get; set; }
+        public virtual ICollection<Mouvement> Mouvements { get; set; }
     }
 }

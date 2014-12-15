@@ -8,20 +8,20 @@ namespace DAL.Mapping
         public MagasinMap()
         {
             // Primary Key
-            HasKey(t => t.Id);
+            this.HasKey(t => t.Id);
 
             // Properties
-            Property(t => t.Libelle)
+            this.Property(t => t.Libelle)
                 .HasMaxLength(50);
 
             // Table & Column Mappings
-            ToTable("Magasin");
-            Property(t => t.Id).HasColumnName("Id");
-            Property(t => t.Libelle).HasColumnName("Libelle");
-            Property(t => t.DeprtementId).HasColumnName("DeprtementId");
+            this.ToTable("Magasin");
+            this.Property(t => t.Id).HasColumnName("Id");
+            this.Property(t => t.Libelle).HasColumnName("Libelle");
+            this.Property(t => t.DeprtementId).HasColumnName("DeprtementId");
 
             // Relationships
-            HasOptional(t => t.Departement)
+            this.HasOptional(t => t.Departement)
                 .WithMany(t => t.Magasins)
                 .HasForeignKey(d => d.DeprtementId);
 

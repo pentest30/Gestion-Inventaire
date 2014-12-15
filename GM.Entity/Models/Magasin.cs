@@ -1,18 +1,19 @@
+using System;
 using System.Collections.Generic;
 
 namespace GM.Entity.Models
 {
-    public sealed class Magasin
+    public partial class Magasin
     {
         public Magasin()
         {
-            Pieces = new List<Piece>();
+            this.Pieces = new List<Piece>();
         }
 
         public int Id { get; set; }
         public string Libelle { get; set; }
-        public int? DeprtementId { get; set; }
-        public Departement Departement { get; set; }
-        public ICollection<Piece> Pieces { get; set; }
+        public Nullable<int> DeprtementId { get; set; }
+        public virtual Departement Departement { get; set; }
+        public virtual ICollection<Piece> Pieces { get; set; }
     }
 }
