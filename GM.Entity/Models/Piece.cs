@@ -21,7 +21,12 @@ namespace GM.Entity.Models
         public bool?  Garantissable { get; set; }
         //public string TypePeriode { get; set; }
         public int Periode { get; set; }
+        public int MagasinId { get; set; }
+        public long BonEntreeId { get; set; }
+        public DateTime? DateEntree { get; set; }
 
+        public Magasin Magasin { get; set; }
+        public BonEntree BonEntree { get; set; }
 
         public Article Article { get; set; }
         [NotMapped]

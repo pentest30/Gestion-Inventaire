@@ -3,7 +3,7 @@ namespace DAL.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class mg23122014 : DbMigration
+    public partial class mg1 : DbMigration
     {
         public override void Up()
         {
@@ -15,6 +15,7 @@ namespace DAL.Migrations
                         Libelle = c.String(),
                         CategorieId = c.Int(),
                         SousCategorieId = c.Int(),
+                        TypeId = c.Int(),
                         MarqueId = c.Int(),
                         Image = c.Binary(),
                         Discription = c.String(),
@@ -28,8 +29,10 @@ namespace DAL.Migrations
                 .ForeignKey("dbo.Categories", t => t.CategorieId)
                 .ForeignKey("dbo.Marques", t => t.MarqueId)
                 .ForeignKey("dbo.SousCategories", t => t.SousCategorieId)
+                .ForeignKey("dbo.Types", t => t.TypeId)
                 .Index(t => t.CategorieId)
                 .Index(t => t.SousCategorieId)
+                .Index(t => t.TypeId)
                 .Index(t => t.MarqueId);
             
             CreateTable(
@@ -181,6 +184,21 @@ namespace DAL.Migrations
                 .Index(t => t.CategorieId);
             
             CreateTable(
+                "dbo.Types",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Libelle = c.String(),
+                        CategorieId = c.Int(),
+                        SousCategorieId = c.Int(),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Categories", t => t.CategorieId)
+                .ForeignKey("dbo.SousCategories", t => t.SousCategorieId)
+                .Index(t => t.CategorieId)
+                .Index(t => t.SousCategorieId);
+            
+            CreateTable(
                 "dbo.BonSortieLignes",
                 c => new
                     {
@@ -300,6 +318,9 @@ namespace DAL.Migrations
             DropForeignKey("dbo.CommandeInternes", "ServiceId", "dbo.Services");
             DropForeignKey("dbo.CommandeInternes", "DepartementId", "dbo.Departements");
             DropForeignKey("dbo.BonSortieLignes", "ArticleId", "dbo.Articles");
+            DropForeignKey("dbo.Articles", "TypeId", "dbo.Types");
+            DropForeignKey("dbo.Types", "SousCategorieId", "dbo.SousCategories");
+            DropForeignKey("dbo.Types", "CategorieId", "dbo.Categories");
             DropForeignKey("dbo.SousCategories", "CategorieId", "dbo.Categories");
             DropForeignKey("dbo.Articles", "SousCategorieId", "dbo.SousCategories");
             DropForeignKey("dbo.Articles", "MarqueId", "dbo.Marques");
@@ -329,6 +350,8 @@ namespace DAL.Migrations
             DropIndex("dbo.BonSortieLignes", new[] { "ServiceId" });
             DropIndex("dbo.BonSortieLignes", new[] { "DepartementId" });
             DropIndex("dbo.BonSortieLignes", new[] { "ArticleId" });
+            DropIndex("dbo.Types", new[] { "SousCategorieId" });
+            DropIndex("dbo.Types", new[] { "CategorieId" });
             DropIndex("dbo.SousCategories", new[] { "CategorieId" });
             DropIndex("dbo.Services", new[] { "DepartementId" });
             DropIndex("dbo.Pieces", new[] { "ArticleId" });
@@ -342,6 +365,7 @@ namespace DAL.Migrations
             DropIndex("dbo.BonEntreeLignes", new[] { "BonEntreeId" });
             DropIndex("dbo.BonEntreeLignes", new[] { "ArticleId" });
             DropIndex("dbo.Articles", new[] { "MarqueId" });
+            DropIndex("dbo.Articles", new[] { "TypeId" });
             DropIndex("dbo.Articles", new[] { "SousCategorieId" });
             DropIndex("dbo.Articles", new[] { "CategorieId" });
             DropTable("dbo.Reformets");
@@ -350,6 +374,7 @@ namespace DAL.Migrations
             DropTable("dbo.CommandeInternes");
             DropTable("dbo.BonSorties");
             DropTable("dbo.BonSortieLignes");
+            DropTable("dbo.Types");
             DropTable("dbo.SousCategories");
             DropTable("dbo.Marques");
             DropTable("dbo.Categories");

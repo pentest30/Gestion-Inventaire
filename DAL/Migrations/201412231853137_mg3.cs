@@ -7,12 +7,12 @@ namespace DAL.Migrations
     {
         public override void Up()
         {
-            AddColumn("dbo.Articles", "TypeId", c => c.Int());
+            RenameTable(name: "dbo.PieceServices", newName: "PieceEmployees");
         }
         
         public override void Down()
         {
-            DropColumn("dbo.Articles", "TypeId");
+            RenameTable(name: "dbo.PieceEmployees", newName: "PieceServices");
         }
     }
 }

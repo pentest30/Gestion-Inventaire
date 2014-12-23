@@ -2,7 +2,7 @@ using System;
 
 namespace GM.Entity.Models
 {
-    public class PieceService : IMovement
+    public class PieceEmployee : IMovement
     {
         public long Id { get; set; }
         public long PieceId { get; set; }

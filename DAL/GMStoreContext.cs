@@ -28,7 +28,7 @@ namespace DAL
         public DbSet<SousCategorie> SousCategories { get; set; }
         public DbSet<Reformet> ReformeMovements { get; set; }
         public DbSet<PieceMagasin> PieceMagasins { get; set; }
-        public DbSet<PieceService> UseMouvements { get; set; }
+        public DbSet<PieceEmployee> UseMouvements { get; set; }
         public DbSet<BonEntreeLigne> BonEntreeLignes { get; set; }
         public DbSet<BonSortie> BonSorties { get; set; }
         public DbSet<BonSortieLigne> BonSortieLignes { get; set; }

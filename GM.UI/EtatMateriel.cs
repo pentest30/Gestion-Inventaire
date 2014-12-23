@@ -7,6 +7,7 @@ namespace GM.UI
         Neuf,
         Occasion,
         Réforme,
+        Endommagé
     }
 
 

@@ -34,9 +34,9 @@
                     </xPlorerBar:XPlorerSection>
                     <xPlorerBar:XPlorerSection Header="Structure" >
                         <StackPanel>
-                            <xPlorerBar:XPlorerItem ItemText="Fournisseurs" Click="ButtonBase_OnClick"/>
-                            <xPlorerBar:XPlorerItem ItemText="Employés" />
+                           <xPlorerBar:XPlorerItem ItemText="Employés" />
                             <xPlorerBar:XPlorerItem ItemText="Articles" Click="ButtonBase_OnClick"/>
+                            <xPlorerBar:XPlorerItem ItemText="Pieces" Click="ButtonBase_OnClick"/>
                         </StackPanel>
 
                     </xPlorerBar:XPlorerSection>
