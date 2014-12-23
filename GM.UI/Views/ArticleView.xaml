@@ -1,0 +1,204 @@
+﻿<UserControl
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:converters="clr-namespace:GM.UI.Converters"
+             xmlns:models="clr-namespace:GM.Entity.Models;assembly=GM.Entity"
+             xmlns:bsFilter="http://schemas.bolapansoft.com/xaml/Controls/ItemsFilter"
+              xmlns:helpers1="clr-namespace:WPF.Core.Helpers;assembly=WPF.Core"
+    x:Class="GM.UI.Views.ArticleView"
+             mc:Ignorable="d" 
+             >
+    <UserControl.Resources>
+        <converters:Nan2Visible x:Key="Nan2Visible"/>
+        <converters:Visible2Enable x:Key="Visible2Enable"/>
+        <converters:Visible2NDisable x:Key="Visible2Disable"/>
+    </UserControl.Resources>
+
+ <Grid>
+     <Grid.RowDefinitions>
+         <RowDefinition Height="Auto"/>
+         <RowDefinition />
+     </Grid.RowDefinitions>
+        <Grid DataContext="{Binding ElementName=DataGrid ,Path=SelectedItem}" DockPanel.Dock="Top" x:Name="Grid">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <GroupBox BorderBrush="Gray" Header="Articles:" Margin="10" >
+                <Grid Margin="10" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock VerticalAlignment="Center" Text="Code d'article:"/>
+                    <TextBox CharacterCasing="Upper"  
+				IsEnabled="{Binding Visibility, Converter={StaticResource Visible2Disable}, ElementName=AddButton}" 
+				Grid.Row="0" Grid.Column="1" 
+				Text="{Binding Code}"/>
+                    <TextBlock VerticalAlignment="Center" Grid.Column="2" Grid.Row="0" Text="Nom d'article:"/>
+                    <TextBox CharacterCasing="Upper"  
+				IsEnabled="{Binding Visibility, Converter={StaticResource Visible2Disable}, ElementName=AddButton}" 
+				Grid.Row="0" Grid.Column="3" 
+				Text="{Binding Libelle}"/>
+                    <TextBlock VerticalAlignment="Center" Grid.Column="0" Grid.Row="1" Text="Catégorie:"/>
+                    <ComboBox SelectionChanged="CbCategorie_OnSelectionChanged" IsEnabled="{Binding Visibility, Converter={StaticResource Visible2Disable}, ElementName=AddButton}"
+				x:Name="CbCategorie" 
+				Grid.Column="1" 
+				Grid.Row="1" 
+				DisplayMemberPath="Libelle"
+				SelectedValue="{Binding CategorieId}" 
+				SelectedValuePath="Id"/>
+
+                    <TextBlock VerticalAlignment="Center" Grid.Column="2" Grid.Row="1" Text="Sous catégorie:"/>
+                    <helpers1:AutoFilteredComboBox Margin="2" 
+                                                   IsEnabled="{Binding Visibility, Converter={StaticResource Visible2Disable}, ElementName=AddButton}"
+				x:Name="CbSousCategorie" 
+				Grid.Column="3" 
+				Grid.Row="1" 
+				DisplayMemberPath="Libelle"
+				SelectedValue="{Binding SousCategorieId}" 
+				SelectedValuePath="Id"
+                                                   SelectionChanged="CbSousCategorie_OnSelectionChanged"/>
+                    <TextBlock Grid.Column="0" VerticalAlignment="Center" Grid.Row="2" Text="Type:"/>
+                    <helpers1:AutoFilteredComboBox Margin="2" IsEnabled="{Binding Visibility, Converter={StaticResource Visible2Disable}, ElementName=AddButton}"
+				x:Name="CbType" 
+				Grid.Column="1" 
+				Grid.Row="2" 
+				DisplayMemberPath="Libelle"
+				SelectedValue="{Binding MarqueId}" 
+				SelectedValuePath="Id"/>
+                    <TextBlock Grid.Column="2" VerticalAlignment="Center" Grid.Row="2" Text="Marque:"/>
+                    <helpers1:AutoFilteredComboBox Margin="2" IsEnabled="{Binding Visibility, Converter={StaticResource Visible2Disable}, ElementName=AddButton}"
+				x:Name="CbMaruqe" 
+				Grid.Column="3" 
+				Grid.Row="2" 
+				DisplayMemberPath="Libelle"
+				SelectedValue="{Binding MarqueId}" 
+				SelectedValuePath="Id"/>
+                    <TextBlock Grid.Column="0" VerticalAlignment="Center" Grid.Row="3" Text="Poids:"/>
+                    <TextBox helpers1:TextBoxMaskBehavior.Mask="Decimal"
+				IsEnabled="{Binding Visibility, Converter={StaticResource Visible2Disable}, ElementName=AddButton}" 
+				Grid.Row="3" 
+				Grid.Column="1" 
+                        Margin="2"
+				Text="{Binding Poids}"/>
+                    <TextBlock Grid.Column="2" Grid.Row="3" VerticalAlignment="Center" Text="Qnt Totale:"/>
+                    <TextBox helpers1:TextBoxMaskBehavior.Mask="Integer" 
+				IsEnabled="False" 
+				Grid.Row="3"
+                        Margin="2"
+				Grid.Column="3" 
+				Text="{Binding QntTotal}"/>
+                    <TextBlock Grid.Column="0" VerticalAlignment="Center" Grid.Row="4" Text="Qnt Magasins:"/>
+                    <TextBlock Grid.Column="2" VerticalAlignment="Center" Grid.Row="4" Text="Qnt Minimale:"/>
+                    <TextBox helpers1:TextBoxMaskBehavior.Mask="Integer"
+				IsEnabled="False" 
+				Grid.Row="4" 
+                        Margin="2"
+				Grid.Column="1"
+				
+                            Foreground="Red"
+				Text="{Binding QntMagsin}"/>
+                    
+                    <TextBox helpers1:TextBoxMaskBehavior.Mask="Integer"
+				           
+				            Grid.Row="4" 
+                                    Margin="2"
+				            Grid.Column="3"
+                             IsEnabled="{Binding Visibility, Converter={StaticResource Visible2Disable}, ElementName=AddButton}" 
+				
+                            Foreground="Red"
+				Text="{Binding  QntMin}"/>
+                </Grid>
+            </GroupBox>
+            <Grid Grid.Column="1" Margin="20">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Border Grid.Row="0" BorderBrush="Gray" BorderThickness="1">
+                    <Image Height="150" MaxHeight="150" Width="200" Source="{Binding Image}" Name="Image" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
+                </Border>
+                <Button IsEnabled="{Binding Visibility, Converter={StaticResource Visible2Disable}, ElementName=AddButton}" Click="BtnImageLoader_OnClick" Name="BtnImageLoader" Content="Nouvelle image ..." Grid.Row="1" Height="25"/>
+            </Grid>
+        </Grid>
+     <Grid Grid.Row="1" Margin="10" >
+           <Grid.ColumnDefinitions>
+               <ColumnDefinition/>
+               <ColumnDefinition Width="150"/>
+           </Grid.ColumnDefinitions>
+         <Grid.RowDefinitions>
+             <RowDefinition Height="30"/>
+             <RowDefinition Height="30"/>
+             <RowDefinition Height="30"/>
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <bsFilter:FilterDataGrid
+                Grid.Column="0"
+                Grid.Row="0"
+                Grid.RowSpan="4"
+                
+                    IsEnabled="{Binding Visibility, Converter={StaticResource Visible2Enable}, ElementName=AddButton}" 
+                    AutoGenerateColumns="False" 
+                    CanUserAddRows="False" 
+                    Name="DataGrid">
+                <bsFilter:FilterDataGrid.DataContext>
+                    <models:Article/>
+                </bsFilter:FilterDataGrid.DataContext>
+                <bsFilter:FilterDataGrid.Columns>
+                    <DataGridTextColumn Width="*" Header="Code" Binding="{Binding Code}"/>
+                    <DataGridTextColumn Width="*" Header="Libelle" Binding="{Binding Libelle}"/>
+                    <DataGridTextColumn Width="*" Header="Marque" Binding="{Binding Marque.Libelle}"/>
+                   <DataGridTextColumn Width="*" Header="Qnt totale" Binding="{Binding QntTotal}"/>
+                </bsFilter:FilterDataGrid.Columns>
+            </bsFilter:FilterDataGrid>
+            <Button  
+                    Visibility="Visible" 
+                         x:Name="AddButton" 
+                        Click="AddButton_OnClick"
+                        
+                         Margin="5,0,0,0" 
+                         Content="Ajouter"
+                         Grid.Row="0" Grid.Column="1" />
+            <Button  
+                    Click="UpdateButton_OnClick"
+                        x:Name="UpdateButton"  
+                        Margin="5,0,0,0" 
+                        Content="Modifier" 
+                        Grid.Row="1" Grid.Column="1"/>
+            <Button  
+                     
+                        Visibility="{Binding Visibility, Converter={StaticResource Nan2Visible}, ElementName=AddButton}" 
+                        x:Name="SaveButton"  
+                        Margin="5,0,0,0" 
+                        Click="SaveButton_OnClick"
+                        Content="Enregistrer" 
+                         Grid.Row="0" Grid.Column="1"/>
+            <Button 
+                        x:Name="BackButton"  
+                        Visibility="{Binding Visibility, Converter={StaticResource Nan2Visible}, ElementName=AddButton}" 
+                        Margin="5,0,0,0" 
+                        Content="Annuler" 
+                    Click="BackButton_OnClick"
+                         Grid.Row="1" Grid.Column="1"/>
+            <Button
+                       x:Name="DeleteButton" 
+                    Click="DeleteButton_OnClick"
+                        Margin="5,0,0,0" 
+                        Content="Supprimer" 
+                        Grid.Row="2" Grid.Column="1"/>
+
+        </Grid>
+    </Grid>
+</UserControl>
