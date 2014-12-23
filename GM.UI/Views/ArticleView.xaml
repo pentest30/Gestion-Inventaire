@@ -71,12 +71,13 @@
 				SelectedValuePath="Id"
                                                    SelectionChanged="CbSousCategorie_OnSelectionChanged"/>
                     <TextBlock Grid.Column="0" VerticalAlignment="Center" Grid.Row="2" Text="Type:"/>
-                    <helpers1:AutoFilteredComboBox Margin="2" IsEnabled="{Binding Visibility, Converter={StaticResource Visible2Disable}, ElementName=AddButton}"
+                    <helpers1:AutoFilteredComboBox Margin="2" 
+                                                   IsEnabled="{Binding Visibility, Converter={StaticResource Visible2Disable}, ElementName=AddButton}"
 				x:Name="CbType" 
 				Grid.Column="1" 
 				Grid.Row="2" 
 				DisplayMemberPath="Libelle"
-				SelectedValue="{Binding MarqueId}" 
+				SelectedValue="{Binding TypeId}" 
 				SelectedValuePath="Id"/>
                     <TextBlock Grid.Column="2" VerticalAlignment="Center" Grid.Row="2" Text="Marque:"/>
                     <helpers1:AutoFilteredComboBox Margin="2" IsEnabled="{Binding Visibility, Converter={StaticResource Visible2Disable}, ElementName=AddButton}"

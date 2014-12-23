@@ -138,6 +138,9 @@
     <Compile Include="Views\SousCategorieView.xaml.cs">
       <DependentUpon>SousCategorieView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\TypeView.xaml.cs">
+      <DependentUpon>TypeView.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -207,6 +210,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\SousCategorieView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TypeView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

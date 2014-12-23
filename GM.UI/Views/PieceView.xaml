@@ -17,13 +17,7 @@
         <converters:Nan2Visible x:Key="Nan2Visible"/>
         <converters:Visible2Enable x:Key="Visible2Enable"/>
         <converters:Visible2NDisable x:Key="Visible2Disable"/>
-        <ObjectDataProvider x:Key="EtatMaterielEnum"
-                            MethodName="GetValues" 
-                            ObjectType="{x:Type sys:Enum}">
-            <ObjectDataProvider.MethodParameters>
-                <x:Type TypeName="local:EtatMateriel"/>
-            </ObjectDataProvider.MethodParameters>
-        </ObjectDataProvider>
+        <local:EtatMateriel x:Key="EtatMateriel"/>
     </UserControl.Resources>
   <Grid>
       
@@ -31,7 +25,7 @@
           <RowDefinition Height="Auto"/>
           <RowDefinition/>
       </Grid.RowDefinitions>
-        <GroupBox Header="Stock:" BorderBrush="Gray" Margin="10">
+        <GroupBox Header="Stock:" BorderBrush="Gray" Margin="10" DataContext="{Binding ElementName=DataGrid ,Path=SelectedItem}">
             <Grid Margin="10" Name="Grid">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto"/>
@@ -50,48 +44,57 @@
                     <RowDefinition Height="30"/>
                     <RowDefinition Height="30"/>
                 </Grid.RowDefinitions>
-                <Grid.DataContext>
-                    <models:Piece/>
-                </Grid.DataContext>
+                
                 <TextBlock  Text="Catégorie:" VerticalAlignment="Center"/>
                 <TextBlock Grid.Row="0" Grid.Column="2" Text="Sous catégorie:" VerticalAlignment="Center"/>
                 <TextBlock Grid.Row="1" Grid.Column="0" Text="Type:" VerticalAlignment="Center"/>
                 <TextBlock Grid.Row="1" Grid.Column="2" Text="Article:" VerticalAlignment="Center"/>
                 <helpers:AutoFilteredComboBox 
+                     IsEnabled="{Binding Visibility, Converter={StaticResource Visible2Disable}, ElementName=AddButton}" 
+			
             x:Name="CbCategorie" 
             Grid.Column="1" 
             Grid.Row="0" 
             Margin="2" 
             DisplayMemberPath="Libelle" 
             SelectedValuePath="Id" 
+                    SelectedValue="{Binding Article.CategorieId}"
                     SelectionChanged="CbCategorie_OnSelectionChanged"
-            SelectedValue="Id"/>
+            />
                 <helpers:AutoFilteredComboBox 
             x:Name="CbSousCategorie" 
             Grid.Column="3" 
             Grid.Row="0" 
+                    SelectedValue="{Binding Article.SousCategorieId}"
             Margin="2" 
-            DisplayMemberPath="Libelle" 
+            IsEnabled="{Binding Visibility, Converter={StaticResource Visible2Disable}, ElementName=AddButton}" 
+			
+                    DisplayMemberPath="Libelle" 
             SelectedValuePath="Id" 
-            SelectedValue="Id"/>
+                    SelectionChanged="CbSousCategorie_OnSelectionChanged"
+           />
                 <helpers:AutoFilteredComboBox 
             x:Name="CbType" 
             Grid.Column="1"
+                    SelectedValue="{Binding Article.TypeId}"
                 SelectionChanged="CbType_OnSelectionChanged"
             Grid.Row="1" 
-            Margin="2" 
+            IsEnabled="{Binding Visibility, Converter={StaticResource Visible2Disable}, ElementName=AddButton}" 
+			
+                    Margin="2" 
             DisplayMemberPath="Libelle" 
             SelectedValuePath="Id" 
-            SelectedValue="Id"/>
+            />
                 
                 <helpers:AutoFilteredComboBox 
             x:Name="CbArticle" 
             Grid.Column="3" 
             Grid.Row="1"
-                
             Margin="2" 
             DisplayMemberPath="Libelle" 
             SelectedValuePath="Id" 
+                    IsEnabled="{Binding Visibility, Converter={StaticResource Visible2Disable}, ElementName=AddButton}" 
+			
             SelectedValue="{Binding ArticleId}"/>
                 <TextBlock 
             VerticalAlignment="Center"
@@ -115,8 +118,11 @@
             IsEnabled="{Binding Visibility, Converter={StaticResource Visible2Disable}, ElementName=AddButton}" 
             Grid.Row="3" 
             Grid.Column="1" 
-                    ItemsSource="{Binding Source={StaticResource EtatMaterielEnum}}"
-            SelectedValue="{Binding Path=EtatPiece}"/>
+                    DisplayMemberPath="Etat"
+                    SelectedValuePath="Etat"
+                    SelectedValue="{Binding Path=EtatPiece,Mode=TwoWay}"
+                    ItemsSource="{Binding Source={StaticResource EtatMateriel} ,Path=EtatMateriels}"
+            />
                 <TextBlock Grid.Row="3" 
                        VerticalAlignment="Center"
                        Grid.Column="2" Text="Date de fabrication:"/>
@@ -149,13 +155,15 @@
                        Grid.Column="2" 
                        VerticalAlignment="Center"/>
                 <TextBox Grid.Column="3" 
+                         Foreground="Red"
                      Grid.Row="5" 
+                         Text="{Binding Periode}"
                      helpers:TextBoxMaskBehavior.Mask="Integer"/>
                 <Separator  Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="6"/>
                 <TextBlock VerticalAlignment="Center" Grid.Column="0" Grid.Row="7" Text="Magasin:"/>
                 <ComboBox IsEnabled="{Binding Visibility, Converter={StaticResource Visible2Disable}, ElementName=AddButton}" Name="CbMagasin" Grid.Column="1" Grid.Row="7" DisplayMemberPath="Libelle" SelectedValuePath="Id" SelectedValue="{Binding Path=MagasinId}"/>
                 <TextBlock VerticalAlignment="Center" Grid.Column="2" Grid.Row="7" Text="Bon d'entrée:"/>
-                <ComboBox IsEnabled="{Binding Visibility, Converter={StaticResource Visible2Disable}, ElementName=AddButton}" Name="CbBEntree" Grid.Column="3" Grid.Row="7" DisplayMemberPath="Libelle" SelectedValuePath="Id" SelectedValue="{Binding Path=MagasinId}"/>
+                <ComboBox IsEnabled="{Binding Visibility, Converter={StaticResource Visible2Disable}, ElementName=AddButton}" Name="CbBEntree" Grid.Column="3" Grid.Row="7" DisplayMemberPath="NBon" SelectedValuePath="Id" SelectedValue="{Binding Path=BonEntreeId}"/>
                 <TextBlock VerticalAlignment="Center" Grid.Column="2" Grid.Row="8" Text="Date d'entréé:"/>
                 <DatePicker Margin="2" IsEnabled="{Binding Visibility, Converter={StaticResource Visible2Disable}, ElementName=AddButton}" Grid.Column="3" Grid.Row="8" SelectedDate="{Binding DateEntree}"/>
 

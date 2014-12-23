@@ -20,7 +20,7 @@ namespace GM.Entity.Models
         public string Code { get; set; }
         public virtual Categorie Categorie { get; set; }
         public virtual Marque Marque { get; set; }
-        public Type Type { get; set; }
+        public virtual Type Type { get; set; }
         public virtual ICollection<BonEntreeLigne> BonEntreeLignes { get; set; }
       
         public virtual SousCategorie SousCategorie { get; set; }

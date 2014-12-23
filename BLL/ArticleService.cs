@@ -56,7 +56,7 @@ namespace BLL
 
        public Article SelectById(object id)
        {
-           return _db.Articles.FirstOrDefault(a=>a.Id== (int)id);
+           return _db.Articles.FirstOrDefault(a=>a.Id== (long)id);
        }
 
        public void Insert(Article item)

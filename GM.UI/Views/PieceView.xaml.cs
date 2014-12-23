@@ -17,6 +17,7 @@ namespace GM.UI.Views
     {
         private readonly ArticleService _articleService;
         private readonly Repository<SousCategorie> _sousCategorieRepository;
+        readonly Repository<Entity.Models.Type> _typeRepository;
         private readonly PieceService _pieceService;
 
 
@@ -26,14 +27,20 @@ namespace GM.UI.Views
             var container = new UnityContainer();
             _articleService = container.Resolve<ArticleService>();
             _pieceService = container.Resolve<PieceService>();
-            //_articleRepository = container.Resolve<Repository<Article>>();
-            //var marqueRepository = container.Resolve<Repository<Marque>>();
+           var beRepository = container.Resolve<Repository<BonEntree>>();
+            var magasinRepository = container.Resolve<Repository<Magasin>>();
             var categorieRepository = container.Resolve<Repository<Categorie>>();
             _sousCategorieRepository = container.Resolve<Repository<SousCategorie>>();
-            var typeRepository = container.Resolve<Repository<Entity.Models.Type>>();
+             _typeRepository = container.Resolve<Repository<Entity.Models.Type>>();
             CbCategorie.ItemsSource = categorieRepository.SelectAll();
-            CbType.ItemsSource = typeRepository.SelectAll();
-            DataGrid.ItemsSource = new ObservableCollection<Piece>(_pieceService.GetAllLazyLoad(x=>x.Article ,x=>x.Magasin));
+            CbMagasin.ItemsSource = magasinRepository.SelectAll();
+            CbBEntree.ItemsSource = beRepository.SelectAll();
+            LoadData();
+        }
+
+        private void LoadData()
+        {
+            DataGrid.ItemsSource = new ObservableCollection<Piece>(_pieceService.GetAllLazyLoad(x => x.Magasin, x => x.Article,x=>x.BonEntree));
         }
 
         private void AddButton_OnClick(object sender, RoutedEventArgs e)
@@ -128,9 +135,7 @@ namespace GM.UI.Views
             var categorie = CbCategorie.SelectedItem as Categorie;
             var sousCategorie = CbSousCategorie.SelectedItem as SousCategorie;
             if (type != null && categorie!= null && sousCategorie!=null)
-                CbArticle.ItemsSource = _articleService.Find(x => x.TypeId == type.Id 
-                    && x.SousCategorieId==sousCategorie.Id 
-                    && x.CategorieId== categorie.Id);
+                CbArticle.ItemsSource = _articleService.Find(x => x.TypeId == type.Id ).ToList();
         }
 
         private void CbCategorie_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -144,6 +149,18 @@ namespace GM.UI.Views
         private string GenerateInventoryName(string article)
         {
             return string.Format("{0}_{1}", DateTime.Now.ToString("yyyyMMddHHmmssfff"), article);
+        }
+
+        private void CbSousCategorie_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (CbSousCategorie.SelectedIndex == -1) return;
+           
+            var categorie = CbCategorie.SelectedItem as Categorie;
+            var sousCategorie = CbSousCategorie.SelectedItem as SousCategorie;
+            if (sousCategorie != null && categorie != null )
+                CbType.ItemsSource = _typeRepository.Find(x => x.CategorieId == categorie.Id
+                    && x.SousCategorieId == sousCategorie.Id
+                    );
         }
     }
 }

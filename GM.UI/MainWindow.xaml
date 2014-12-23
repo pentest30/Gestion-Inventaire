@@ -27,6 +27,7 @@
                             <xPlorerBar:XPlorerItem ItemText="Magasins" Click="ButtonBase_OnClick"/>
                             <xPlorerBar:XPlorerItem ItemText="Catégories" Click="ButtonBase_OnClick"/>
                             <xPlorerBar:XPlorerItem ItemText="Sous catégories" Click="ButtonBase_OnClick"/>
+                            <xPlorerBar:XPlorerItem ItemText="Types" Click="ButtonBase_OnClick"/>
                             <xPlorerBar:XPlorerItem ItemText="Marques" Click="ButtonBase_OnClick"/>
 
                         </StackPanel>
@@ -39,15 +40,11 @@
                         </StackPanel>
 
                     </xPlorerBar:XPlorerSection>
-                    <xPlorerBar:XPlorerSection Header="Gestion de stock">
-                        <StackPanel>
-                            <xPlorerBar:XPlorerItem ItemText="Stock" Click="ButtonBase_OnClick"/>
-                            
-                        </StackPanel>
-                    </xPlorerBar:XPlorerSection>
+                   
                     <xPlorerBar:XPlorerSection Header="Gestion de magasin">
                       <StackPanel>
                             <xPlorerBar:XPlorerItem ItemText="Bons d'entrées" Click="ButtonBase_OnClick"/>
+                            <xPlorerBar:XPlorerItem ItemText="Stock" Click="ButtonBase_OnClick"/>
                             <xPlorerBar:XPlorerItem ItemText="Bons de sortie" Click="ButtonBase_OnClick"/>
                         </StackPanel>
                     </xPlorerBar:XPlorerSection>
