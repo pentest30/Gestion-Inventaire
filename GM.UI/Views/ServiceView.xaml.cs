@@ -52,6 +52,7 @@ namespace GM.UI.Views
             var item = (Service)Grid.DataContext;
             if (item.Id <= 0)
             {
+                
                 _serviceRepository.Insert(item);
                 ((ObservableCollection<Service>)DataGrid.ItemsSource).Add(item);
 
@@ -105,5 +106,7 @@ namespace GM.UI.Views
             ((ObservableCollection<Departement>)DataGrid.ItemsSource).Remove(deleted);
             _serviceRepository.Save();
         }
+
+       
     }
 }

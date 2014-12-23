@@ -1,7 +1,6 @@
 ﻿<Window x:Class="GM.UI.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:tools="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
         xmlns:xPlorerBar="clr-namespace:ZonaTools.XPlorerBar;assembly=ZonaTools.XPlorerBar"
         Title="MainWindow" WindowState="Maximized">
     <DockPanel >
@@ -36,16 +35,20 @@
                         <StackPanel>
                            <xPlorerBar:XPlorerItem ItemText="Employés" />
                             <xPlorerBar:XPlorerItem ItemText="Articles" Click="ButtonBase_OnClick"/>
-                            <xPlorerBar:XPlorerItem ItemText="Pieces" Click="ButtonBase_OnClick"/>
+                            
                         </StackPanel>
 
                     </xPlorerBar:XPlorerSection>
+                    <xPlorerBar:XPlorerSection Header="Gestion de stock">
+                        <StackPanel>
+                            <xPlorerBar:XPlorerItem ItemText="Stock" Click="ButtonBase_OnClick"/>
+                            
+                        </StackPanel>
+                    </xPlorerBar:XPlorerSection>
                     <xPlorerBar:XPlorerSection Header="Gestion de magasin">
                       <StackPanel>
-                            <xPlorerBar:XPlorerItem ItemText="Matériels entrants" Click="ButtonBase_OnClick"/>
                             <xPlorerBar:XPlorerItem ItemText="Bons d'entrées" Click="ButtonBase_OnClick"/>
                             <xPlorerBar:XPlorerItem ItemText="Bons de sortie" Click="ButtonBase_OnClick"/>
-
                         </StackPanel>
                     </xPlorerBar:XPlorerSection>
                 </xPlorerBar:XPlorerBar>

@@ -44,7 +44,7 @@ namespace GM.UI
                         break;
                     case "Bons de sortie": ContentControl.Content = new BonSortieView();
                         break;
-                    case "Pieces": ContentControl.Content = new PieceView();
+                    case "Stock": ContentControl.Content = new PieceView();
                         break;
                 }
             }
