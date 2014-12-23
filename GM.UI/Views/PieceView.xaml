@@ -32,7 +32,7 @@
           <RowDefinition/>
       </Grid.RowDefinitions>
         <GroupBox Header="Stock:" BorderBrush="Gray" Margin="10">
-            <Grid Margin="10">
+            <Grid Margin="10" Name="Grid">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto"/>
                     <ColumnDefinition Width="*"/>
@@ -64,7 +64,8 @@
             Margin="2" 
             DisplayMemberPath="Libelle" 
             SelectedValuePath="Id" 
-            SelectedValue="{Binding ArticleId}"/>
+                    SelectionChanged="CbCategorie_OnSelectionChanged"
+            SelectedValue="Id"/>
                 <helpers:AutoFilteredComboBox 
             x:Name="CbSousCategorie" 
             Grid.Column="3" 
@@ -72,16 +73,16 @@
             Margin="2" 
             DisplayMemberPath="Libelle" 
             SelectedValuePath="Id" 
-            SelectedValue="{Binding ArticleId}"/>
+            SelectedValue="Id"/>
                 <helpers:AutoFilteredComboBox 
             x:Name="CbType" 
             Grid.Column="1"
-                
+                SelectionChanged="CbType_OnSelectionChanged"
             Grid.Row="1" 
             Margin="2" 
             DisplayMemberPath="Libelle" 
             SelectedValuePath="Id" 
-            SelectedValue="{Binding ArticleId}"/>
+            SelectedValue="Id"/>
                 
                 <helpers:AutoFilteredComboBox 
             x:Name="CbArticle" 
@@ -181,13 +182,14 @@
                     CanUserAddRows="False" 
                     Name="DataGrid">
                 <bsFilter:FilterDataGrid.DataContext>
-                    <models:Article/>
+                    <models:Piece/>
                 </bsFilter:FilterDataGrid.DataContext>
                 <bsFilter:FilterDataGrid.Columns>
-                    <DataGridTextColumn Width="*" Header="Code" Binding="{Binding Code}"/>
-                    <DataGridTextColumn Width="*" Header="Libelle" Binding="{Binding Libelle}"/>
-                    <DataGridTextColumn Width="*" Header="Marque" Binding="{Binding Marque.Libelle}"/>
-                    <DataGridTextColumn Width="*" Header="Qnt totale" Binding="{Binding QntTotal}"/>
+                    <DataGridTextColumn Width="*" Header="N° d'inventaire" Binding="{Binding NInventaire}"/>
+                    <DataGridTextColumn Width="*" Header="Article" Binding="{Binding Article.Libelle}"/>
+                    <DataGridTextColumn Width="*" Header="Magasin" Binding="{Binding Magasin.Libelle}"/>
+                    <DataGridTextColumn Width="*" Header="N° Bon d'entrée" Binding="{Binding BonEntree.NBon}"/>
+                    <DataGridTextColumn Width="*" Header="Date d'entrée" Binding="{Binding DateEntree}"/>
                 </bsFilter:FilterDataGrid.Columns>
             </bsFilter:FilterDataGrid>
             <Button  
