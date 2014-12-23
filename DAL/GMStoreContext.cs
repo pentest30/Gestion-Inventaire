@@ -1,18 +1,17 @@
 using System.Data.Entity;
-using DAL.Mapping;
 using GM.Entity.Models;
 
 namespace DAL
 {
-    public class GMStoreContext : DbContext
+    public class GmStoreContext : DbContext
     {
-        static GMStoreContext()
+        static GmStoreContext()
         {
-            Database.SetInitializer<GMStoreContext>(null);
+            Database.SetInitializer<GmStoreContext>(null);
         }
 
-        public GMStoreContext()
-            : base("Name=GMStoreContext")
+        public GmStoreContext()
+            : base("Name=GmStoreContext")
         {
         }
 
@@ -23,26 +22,25 @@ namespace DAL
         public DbSet<Employe> Employes { get; set; }
         public DbSet<Magasin> Magasins { get; set; }
         public DbSet<Marque> Marques { get; set; }
-        public DbSet<Mouvement> Mouvements { get; set; }
+        //public DbSet<UseMouvement> Mouvements { get; set; }
         public DbSet<Piece> Pieces { get; set; }
         public DbSet<Service> Services { get; set; }
         public DbSet<SousCategorie> SousCategories { get; set; }
+        public DbSet<Reformet> ReformeMovements { get; set; }
+        public DbSet<PieceMagasin> PieceMagasins { get; set; }
+        public DbSet<PieceService> UseMouvements { get; set; }
+        public DbSet<BonEntreeLigne> BonEntreeLignes { get; set; }
+        public DbSet<BonSortie> BonSorties { get; set; }
+        public DbSet<BonSortieLigne> BonSortieLignes { get; set; }
+        public DbSet<CommandeInterne> CommandeInternes { get; set; }
+        public DbSet<CommandeLigne> CommandeLignes { get; set; }
+        public DbSet<Type> Types { get; set; }
+
+
+
+
         
 
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
-            modelBuilder.Configurations.Add(new ArticleMap());
-            modelBuilder.Configurations.Add(new BonEntreeMap());
-            modelBuilder.Configurations.Add(new CategorieMap());
-            modelBuilder.Configurations.Add(new DepartementMap());
-            modelBuilder.Configurations.Add(new EmployeMap());
-            modelBuilder.Configurations.Add(new MagasinMap());
-            modelBuilder.Configurations.Add(new MarqueMap());
-            modelBuilder.Configurations.Add(new MouvementMap());
-            modelBuilder.Configurations.Add(new PieceMap());
-            modelBuilder.Configurations.Add(new ServiceMap());
-            modelBuilder.Configurations.Add(new SousCategorieMap());
-           
-        }
+       
     }
 }

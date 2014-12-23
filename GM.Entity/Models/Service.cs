@@ -6,8 +6,8 @@ namespace GM.Entity.Models
     {
         public Service()
         {
-            Employes = new List<Employe>();
-            Mouvements = new List<Mouvement>();
+            //Employes = new List<Employe>();
+            //Mouvements = new List<UseMouvement>();
         }
 
         public int Id { get; set; }
@@ -15,6 +15,6 @@ namespace GM.Entity.Models
         public int? DepartementId { get; set; }
         public virtual Departement Departement { get; set; }
         public ICollection<Employe> Employes { get; set; }
-        public ICollection<Mouvement> Mouvements { get; set; }
+        public ICollection<PieceService> Mouvements { get; set; }
     }
 }

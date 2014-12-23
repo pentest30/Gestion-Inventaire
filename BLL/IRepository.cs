@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
 
 namespace BLL
 {
@@ -12,6 +14,7 @@ namespace BLL
         void Delete(object id);
         void Save();
         IEnumerable<T> Find(Func<T, bool> predicate);
+        IQueryable<T> GetAllLazyLoad( params Expression<Func<T, object>>[] children);
 
     }
 }

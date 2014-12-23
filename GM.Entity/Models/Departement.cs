@@ -6,8 +6,8 @@ namespace GM.Entity.Models
     {
         public Departement()
         {
-            this.Employes = new List<Employe>();
-            this.Magasins = new List<Magasin>();
+            //this.Employes = new List<Employe>();
+            //this.Magasins = new List<Magasin>();
         }
 
         public int Id { get; set; }

@@ -82,6 +82,10 @@
     <Reference Include="WPFToolkit">
       <HintPath>..\..\GMG.ST\GMG.UI1\bin\Debug\WPFToolkit.dll</HintPath>
     </Reference>
+    <Reference Include="Xceed.Wpf.Toolkit, Version=2.3.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Dll\Xceed.Wpf.Toolkit.dll</HintPath>
+    </Reference>
     <Reference Include="ZonaTools.XPlorerBar">
       <HintPath>..\..\GMG.ST\GMG.UI1\bin\Debug\ZonaTools.XPlorerBar.dll</HintPath>
     </Reference>
@@ -91,16 +95,48 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="UI.Helpers\PBar.cs" />
-    <Compile Include="UI.Helpers\RepositionPopupBehavior.cs" />
+    <Compile Include="EtatMateriel.cs" />
+    <Compile Include="Resources\WindowStyleChrome.xaml.cs">
+      <DependentUpon>WindowStyleChrome.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ArticleView.xaml.cs">
+      <DependentUpon>ArticleView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\BonEntreeLigneFrm.xaml.cs">
+      <DependentUpon>BonEntreeLigneFrm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\BonEntreeMagasinView.xaml.cs">
+      <DependentUpon>BonEntreeMagasinView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\BonSortieLigneFrm.xaml.cs">
+      <DependentUpon>BonSortieLigneFrm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\BonSortieView.xaml.cs">
+      <DependentUpon>BonSortieView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\CategorieView.xaml.cs">
       <DependentUpon>CategorieView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\DepartementView.xaml.cs">
       <DependentUpon>DepartementView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\MagasinView.xaml.cs">
+      <DependentUpon>MagasinView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MarqueView.xaml.cs">
+      <DependentUpon>MarqueView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MaterielInView.xaml.cs">
+      <DependentUpon>MaterielInView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PieceView.xaml.cs">
+      <DependentUpon>PieceView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ServiceView.xaml.cs">
       <DependentUpon>ServiceView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SousCategorieView.xaml.cs">
+      <DependentUpon>SousCategorieView.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -118,6 +154,30 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Resources\WindowStyleChrome.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ArticleView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\BonEntreeLigneFrm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\BonEntreeMagasinView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\BonSortieLigneFrm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\BonSortieView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\CategorieView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -126,7 +186,27 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\MagasinView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MarqueView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MaterielInView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PieceView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ServiceView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SousCategorieView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -170,8 +250,228 @@
       <Project>{2c4020f2-9a2e-405a-8a4a-12270f17f52d}</Project>
       <Name>GM.Entity</Name>
     </ProjectReference>
+    <ProjectReference Include="..\WPF.Core\WPF.Core.csproj">
+      <Project>{9e34fa9d-5354-47e9-8356-4d63080ce7dd}</Project>
+      <Name>WPF.Core</Name>
+    </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="icons\1.ico" />
+    <Resource Include="icons\10.ico" />
+    <Resource Include="icons\1001.ico" />
+    <Resource Include="icons\1003.ico" />
+    <Resource Include="icons\1004.ico" />
+    <Resource Include="icons\1007.ico" />
+    <Resource Include="icons\1011.ico" />
+    <Resource Include="icons\11.ico" />
+    <Resource Include="icons\12.ico" />
+    <Resource Include="icons\13.ico" />
+    <Resource Include="icons\133.ico" />
+    <Resource Include="icons\134.ico" />
+    <Resource Include="icons\137.ico" />
+    <Resource Include="icons\138.ico" />
+    <Resource Include="icons\139.ico" />
+    <Resource Include="icons\14.ico" />
+    <Resource Include="icons\140.ico" />
+    <Resource Include="icons\141.ico" />
+    <Resource Include="icons\142.ico" />
+    <Resource Include="icons\143.ico" />
+    <Resource Include="icons\144.ico" />
+    <Resource Include="icons\145.ico" />
+    <Resource Include="icons\146.ico" />
+    <Resource Include="icons\147.ico" />
+    <Resource Include="icons\15.ico" />
+    <Resource Include="icons\151.ico" />
+    <Resource Include="icons\152.ico" />
+    <Resource Include="icons\153.ico" />
+    <Resource Include="icons\154.ico" />
+    <Resource Include="icons\155.ico" />
+    <Resource Include="icons\156.ico" />
+    <Resource Include="icons\157.ico" />
+    <Resource Include="icons\16.ico" />
+    <Resource Include="icons\160.ico" />
+    <Resource Include="icons\161.ico" />
+    <Resource Include="icons\165.ico" />
+    <Resource Include="icons\166.ico" />
+    <Resource Include="icons\167.ico" />
+    <Resource Include="icons\16718.ico" />
+    <Resource Include="icons\168.ico" />
+    <Resource Include="icons\169.ico" />
+    <Resource Include="icons\17.ico" />
+    <Resource Include="icons\170.ico" />
+    <Resource Include="icons\172.ico" />
+    <Resource Include="icons\173.ico" />
+    <Resource Include="icons\174.ico" />
+    <Resource Include="icons\175.ico" />
+    <Resource Include="icons\176.ico" />
+    <Resource Include="icons\177.ico" />
+    <Resource Include="icons\178.ico" />
+    <Resource Include="icons\179.ico" />
+    <Resource Include="icons\18.ico" />
+    <Resource Include="icons\180.ico" />
+    <Resource Include="icons\181.ico" />
+    <Resource Include="icons\182.ico" />
+    <Resource Include="icons\183.ico" />
+    <Resource Include="icons\184.ico" />
+    <Resource Include="icons\185.ico" />
+    <Resource Include="icons\186.ico" />
+    <Resource Include="icons\187.ico" />
+    <Resource Include="icons\19.ico" />
+    <Resource Include="icons\191.ico" />
+    <Resource Include="icons\192.ico" />
+    <Resource Include="icons\193.ico" />
+    <Resource Include="icons\194.ico" />
+    <Resource Include="icons\196.ico" />
+    <Resource Include="icons\197.ico" />
+    <Resource Include="icons\198.ico" />
+    <Resource Include="icons\199.ico" />
+    <Resource Include="icons\2.ico" />
+    <Resource Include="icons\20.ico" />
+    <Resource Include="icons\200.ico" />
+    <Resource Include="icons\21.ico" />
+    <Resource Include="icons\210.ico" />
+    <Resource Include="icons\22.ico" />
+    <Resource Include="icons\220.ico" />
+    <Resource Include="icons\221.ico" />
+    <Resource Include="icons\222.ico" />
+    <Resource Include="icons\223.ico" />
+    <Resource Include="icons\224.ico" />
+    <Resource Include="icons\225.ico" />
+    <Resource Include="icons\226.ico" />
+    <Resource Include="icons\227.ico" />
+    <Resource Include="icons\228.ico" />
+    <Resource Include="icons\229.ico" />
+    <Resource Include="icons\23.ico" />
+    <Resource Include="icons\230.ico" />
+    <Resource Include="icons\232.ico" />
+    <Resource Include="icons\233.ico" />
+    <Resource Include="icons\234.ico" />
+    <Resource Include="icons\235.ico" />
+    <Resource Include="icons\236.ico" />
+    <Resource Include="icons\237.ico" />
+    <Resource Include="icons\238.ico" />
+    <Resource Include="icons\239.ico" />
+    <Resource Include="icons\24.ico" />
+    <Resource Include="icons\240.ico" />
+    <Resource Include="icons\241.ico" />
+    <Resource Include="icons\242.ico" />
+    <Resource Include="icons\243.ico" />
+    <Resource Include="icons\244.ico" />
+    <Resource Include="icons\245.ico" />
+    <Resource Include="icons\246.ico" />
+    <Resource Include="icons\247.ico" />
+    <Resource Include="icons\248.ico" />
+    <Resource Include="icons\249.ico" />
+    <Resource Include="icons\25.ico" />
+    <Resource Include="icons\250.ico" />
+    <Resource Include="icons\251.ico" />
+    <Resource Include="icons\252.ico" />
+    <Resource Include="icons\253.ico" />
+    <Resource Include="icons\254.ico" />
+    <Resource Include="icons\255.ico" />
+    <Resource Include="icons\256.ico" />
+    <Resource Include="icons\257.ico" />
+    <Resource Include="icons\258.ico" />
+    <Resource Include="icons\259.ico" />
+    <Resource Include="icons\26.ico" />
+    <Resource Include="icons\260.ico" />
+    <Resource Include="icons\263.ico" />
+    <Resource Include="icons\264.ico" />
+    <Resource Include="icons\265.ico" />
+    <Resource Include="icons\266.ico" />
+    <Resource Include="icons\267.ico" />
+    <Resource Include="icons\268.ico" />
+    <Resource Include="icons\269.ico" />
+    <Resource Include="icons\27.ico" />
+    <Resource Include="icons\270.ico" />
+    <Resource Include="icons\271.ico" />
+    <Resource Include="icons\272.ico" />
+    <Resource Include="icons\273.ico" />
+    <Resource Include="icons\274.ico" />
+    <Resource Include="icons\275.ico" />
+    <Resource Include="icons\276.ico" />
+    <Resource Include="icons\277.ico" />
+    <Resource Include="icons\278.ico" />
+    <Resource Include="icons\279.ico" />
+    <Resource Include="icons\281.ico" />
+    <Resource Include="icons\282.ico" />
+    <Resource Include="icons\283.ico" />
+    <Resource Include="icons\284.ico" />
+    <Resource Include="icons\289.ico" />
+    <Resource Include="icons\29.ico" />
+    <Resource Include="icons\290.ico" />
+    <Resource Include="icons\291.ico" />
+    <Resource Include="icons\292.ico" />
+    <Resource Include="icons\293.ico" />
+    <Resource Include="icons\294.ico" />
+    <Resource Include="icons\295.ico" />
+    <Resource Include="icons\296.ico" />
+    <Resource Include="icons\297.ico" />
+    <Resource Include="icons\298.ico" />
+    <Resource Include="icons\299.ico" />
+    <Resource Include="icons\3.ico" />
+    <Resource Include="icons\30.ico" />
+    <Resource Include="icons\300.ico" />
+    <Resource Include="icons\301.ico" />
+    <Resource Include="icons\302.ico" />
+    <Resource Include="icons\303.ico" />
+    <Resource Include="icons\304.ico" />
+    <Resource Include="icons\305.ico" />
+    <Resource Include="icons\306.ico" />
+    <Resource Include="icons\307.ico" />
+    <Resource Include="icons\308.ico" />
+    <Resource Include="icons\309.ico" />
+    <Resource Include="icons\310.ico" />
+    <Resource Include="icons\311.ico" />
+    <Resource Include="icons\312.ico" />
+    <Resource Include="icons\313.ico" />
+    <Resource Include="icons\314.ico" />
+    <Resource Include="icons\315.ico" />
+    <Resource Include="icons\316.ico" />
+    <Resource Include="icons\317.ico" />
+    <Resource Include="icons\318.ico" />
+    <Resource Include="icons\319.ico" />
+    <Resource Include="icons\32.ico" />
+    <Resource Include="icons\320.ico" />
+    <Resource Include="icons\321.ico" />
+    <Resource Include="icons\322.ico" />
+    <Resource Include="icons\323.ico" />
+    <Resource Include="icons\324.ico" />
+    <Resource Include="icons\326.ico" />
+    <Resource Include="icons\327.ico" />
+    <Resource Include="icons\328.ico" />
+    <Resource Include="icons\33.ico" />
+    <Resource Include="icons\330.ico" />
+    <Resource Include="icons\331.ico" />
+    <Resource Include="icons\337.ico" />
+    <Resource Include="icons\338.ico" />
+    <Resource Include="icons\339.ico" />
+    <Resource Include="icons\34.ico" />
+    <Resource Include="icons\35.ico" />
+    <Resource Include="icons\36.ico" />
+    <Resource Include="icons\37.ico" />
+    <Resource Include="icons\38.ico" />
+    <Resource Include="icons\39.ico" />
+    <Resource Include="icons\4.ico" />
+    <Resource Include="icons\40.ico" />
+    <Resource Include="icons\41.ico" />
+    <Resource Include="icons\42.ico" />
+    <Resource Include="icons\43.ico" />
+    <Resource Include="icons\44.ico" />
+    <Resource Include="icons\45.ico" />
+    <Resource Include="icons\46.ico" />
+    <Resource Include="icons\47.ico" />
+    <Resource Include="icons\48.ico" />
+    <Resource Include="icons\5.ico" />
+    <Resource Include="icons\512.ico" />
+    <Resource Include="icons\54.ico" />
+    <Resource Include="icons\6.ico" />
+    <Resource Include="icons\7.ico" />
+    <Resource Include="icons\8.ico" />
+    <Resource Include="icons\8240.ico" />
+    <Resource Include="icons\9.ico" />
+    <Resource Include="icons\downloadfolder.ico" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

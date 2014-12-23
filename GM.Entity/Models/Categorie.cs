@@ -6,7 +6,7 @@ namespace GM.Entity.Models
     {
         public Categorie()
         {
-            this.Articles = new List<Article>();
+            //this.Articles = new List<Article>();
         }
 
         public int Id { get; set; }
