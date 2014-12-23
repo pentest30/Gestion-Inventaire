@@ -197,7 +197,7 @@
                     <DataGridTextColumn Width="*" Header="Article" Binding="{Binding Article.Libelle}"/>
                     <DataGridTextColumn Width="*" Header="Magasin" Binding="{Binding Magasin.Libelle}"/>
                     <DataGridTextColumn Width="*" Header="N° Bon d'entrée" Binding="{Binding BonEntree.NBon}"/>
-                    <DataGridTextColumn Width="*" Header="Date d'entrée" Binding="{Binding DateEntree}"/>
+                    <DataGridTextColumn Width="*" Header="Date d'entrée" Binding="{Binding DateEntree ,StringFormat=d}"/>
                 </bsFilter:FilterDataGrid.Columns>
             </bsFilter:FilterDataGrid>
             <Button  
