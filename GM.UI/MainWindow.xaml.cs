@@ -44,6 +44,10 @@ namespace GM.UI
                         break;
                     case "Bons de sortie": ContentControl.Content = new BonSortieView();
                         break;
+                    case "Stock": ContentControl.Content = new PieceView();
+                        break;
+                    case "Types": ContentControl.Content = new TypeView();
+                        break;
                 }
             }
             catch (Exception exception)

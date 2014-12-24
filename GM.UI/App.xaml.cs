@@ -16,6 +16,7 @@ namespace GM.UI
             var container = new UnityContainer();
             var dbContext = new GmStoreContext();
             container.RegisterInstance(new ArticleService(dbContext));
+            container.RegisterInstance(new PieceService(dbContext));
             container.RegisterInstance(new EntityFactory<Departement>(dbContext));
             container.RegisterInstance(new Repository<Departement>(dbContext));
             container.RegisterInstance(new Repository<Service>(dbContext));
@@ -23,7 +24,7 @@ namespace GM.UI
             container.RegisterInstance(new Repository<Article>(dbContext)); 
             container.RegisterInstance(new Repository<Magasin>(dbContext));
             container.RegisterInstance(new Repository<Marque>(dbContext));
-            container.RegisterInstance(new Repository<PieceService>(dbContext));
+            container.RegisterInstance(new Repository<PieceEmployee>(dbContext));
             container.RegisterInstance(new Repository<Piece>(dbContext));
             container.RegisterInstance(new Repository<Categorie>(dbContext));
             container.RegisterInstance(new Repository<SousCategorie>(dbContext));

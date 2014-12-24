@@ -14,7 +14,7 @@ namespace GM.Entity.Models
         public int? ServiceId { get; set; }
         public virtual Departement Departement { get; set; }
         public virtual Service Service { get; set; }
-        public virtual ICollection<PieceService> Mouvements { get; set; }
+        public virtual ICollection<PieceEmployee> Mouvements { get; set; }
        
     }
 }

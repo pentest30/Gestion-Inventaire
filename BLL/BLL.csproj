@@ -58,6 +58,7 @@
     <Compile Include="EntityFactory.cs" />
     <Compile Include="IRepository.cs" />
     <Compile Include="IService.cs" />
+    <Compile Include="PieceService.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository.cs" />
