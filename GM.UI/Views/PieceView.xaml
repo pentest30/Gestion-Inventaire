@@ -97,7 +97,7 @@
             SelectedValuePath="Id" 
                     IsEnabled="{Binding Visibility, Converter={StaticResource Visible2Disable}, ElementName=AddButton}" 
 			
-            SelectedValue="{Binding MarqueId}"/>
+            SelectedValue="{Binding Article.MarqueId}"/>
                 <helpers:AutoFilteredComboBox 
             x:Name="CbArticle" 
             Grid.Column="3" 

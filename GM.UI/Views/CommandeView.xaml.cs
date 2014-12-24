@@ -30,6 +30,7 @@ namespace GM.UI.Views
             _serviceRepository = container.Resolve<Repository<Service>>();
             CbDepartement.ItemsSource = departementRepository.SelectAll();
             LoadData();
+            
         }
 
         private void LoadData()
@@ -40,7 +41,9 @@ namespace GM.UI.Views
 
         private void DataGrid_OnSelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
         {
-            
+            if (DataGrid.SelectedIndex == -1) return;
+            var item = DataGrid.SelectedItem as CommandeInterne;
+            LoadLigneData(item);
         }
 
         private void AddButton_OnClick(object sender, RoutedEventArgs e)
@@ -129,7 +132,25 @@ namespace GM.UI.Views
 
         private void LBonAddBtn_OnClick(object sender, RoutedEventArgs e)
         {
-            
+            if (CheckSelectedItem()) return;
+            var be = DataGrid.SelectedItem as CommandeInterne;
+            if (be == null) return;
+            var frm = new CommndeInterneLigneFrm(be.Id, new CommandeLigne());
+            frm.UpdateDataDg += UpdateDG;
+            frm.ShowDialog();
+        }
+
+        private void UpdateDG(long id)
+        {
+            if (DataGrid.SelectedIndex ==-1)return;
+            var item = DataGrid.SelectedItem as CommandeInterne;
+            if(item!=null)LoadLigneData(item);
+        }
+
+        private void LoadLigneData(CommandeInterne item)
+        {
+            DataGridLignes.ItemsSource =
+                new ObservableCollection<CommandeLigne>(_commandeLigneRepository.Find(c => c.CommandeInterneId == item.Id));
         }
 
         private void DeleteBeLignesButton_OnClick(object sender, RoutedEventArgs e)
@@ -139,7 +160,15 @@ namespace GM.UI.Views
 
         private void BtnModifierBeLigne_OnClick(object sender, RoutedEventArgs e)
         {
-            
+            if (DataGridLignes.SelectedIndex < 0)
+            {
+                MessageBox.Show("Selectionner un champ", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+            var ligne = (DataGridLignes.SelectedItem) as CommandeLigne;
+            var frm = new CommndeInterneLigneFrm(0,ligne);
+            frm.UpdateDataDg += UpdateDG;
+            frm.ShowDialog();
         }
 
         private void CbDepartement_OnSelectionChanged(object sender, SelectionChangedEventArgs e)

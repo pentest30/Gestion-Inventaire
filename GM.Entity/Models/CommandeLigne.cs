@@ -6,7 +6,7 @@
        public int CommandeInterneId { get; set; }
        public long ArticleId { get; set; }
        public int? Qnt { get; set; }
-       public Article Article { get; set; }
+       public virtual Article Article { get; set; }
        public CommandeInterne CommandeInterne { get; set; }
 
 
