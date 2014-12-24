@@ -56,13 +56,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GMStoreContext.cs" />
-    <Compile Include="Migrations\201412240817210_mg1.cs" />
-    <Compile Include="Migrations\201412240817210_mg1.Designer.cs">
-      <DependentUpon>201412240817210_mg1.cs</DependentUpon>
+    <Compile Include="Migrations\201412241631536_mg4.cs" />
+    <Compile Include="Migrations\201412241631536_mg4.Designer.cs">
+      <DependentUpon>201412241631536_mg4.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201412241028263_mg5.cs" />
-    <Compile Include="Migrations\201412241028263_mg5.Designer.cs">
-      <DependentUpon>201412241028263_mg5.cs</DependentUpon>
+    <Compile Include="Migrations\201412241838472_lf4.cs" />
+    <Compile Include="Migrations\201412241838472_lf4.Designer.cs">
+      <DependentUpon>201412241838472_lf4.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -81,11 +81,11 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201412240817210_mg1.resx">
-      <DependentUpon>201412240817210_mg1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201412241631536_mg4.resx">
+      <DependentUpon>201412241631536_mg4.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201412241028263_mg5.resx">
-      <DependentUpon>201412241028263_mg5.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201412241838472_lf4.resx">
+      <DependentUpon>201412241838472_lf4.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

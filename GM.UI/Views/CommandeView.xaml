@@ -33,9 +33,9 @@
                     <RowDefinition Height="30"/>
                 </Grid.RowDefinitions>
                 <TextBlock VerticalAlignment="Center" Text="N°:"/>
-                <TextBox IsEnabled="{Binding Visibility, Converter={StaticResource Visible2Disable}, ElementName=AddButton}" Text="{Binding NBon}" helper1:TextBoxMaskBehavior.Mask="Integer" Grid.Column="1" Grid.Row="0"/>
+                <TextBox IsEnabled="{Binding Visibility, Converter={StaticResource Visible2Disable}, ElementName=AddButton}" Text="{Binding Libelle}" helper1:TextBoxMaskBehavior.Mask="Integer" Grid.Column="1" Grid.Row="0"/>
                 <TextBlock VerticalAlignment="Center" Grid.Column="2" Grid.Row="0" Text="Date de commande:"/>
-                <DatePicker Margin="2" IsEnabled="{Binding Visibility, Converter={StaticResource Visible2Disable}, ElementName=AddButton}" Grid.Column="3" Grid.Row="0" SelectedDate="{Binding DateEntree}"/>
+                <DatePicker Margin="2" IsEnabled="{Binding Visibility, Converter={StaticResource Visible2Disable}, ElementName=AddButton}" Grid.Column="3" Grid.Row="0" SelectedDate="{Binding Path=DateCommnde, StringFormat=d}"/>
                 <TextBlock VerticalAlignment="Center" Text="Département:" Grid.Column="0" Grid.Row="1" />
                 <ComboBox IsEnabled="{Binding Visibility, Converter={StaticResource Visible2Disable}, ElementName=AddButton}" 
                           Name="CbDepartement" Grid.Column="1"  

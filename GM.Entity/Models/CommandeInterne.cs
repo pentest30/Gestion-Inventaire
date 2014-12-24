@@ -7,7 +7,7 @@ namespace GM.Entity.Models
     {
         public int Id { get; set; }
         public string Libelle { get; set; }
-        public DateTime DateCommnde { get; set; }
+        public DateTime? DateCommnde { get; set; }
         [ForeignKey("Departement")]
         public int? DepartementId { get; set; }
          [ForeignKey("Service")]

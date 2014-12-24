@@ -6,8 +6,7 @@ namespace GM.UI
 {
     public class EtatMateriel
     {
-        
-         List<EtatMateriel> GetValue()
+        static List<EtatMateriel> GetValue()
         {
             var  etats= new List<EtatMateriel>
             {
