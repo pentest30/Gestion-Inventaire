@@ -2,16 +2,17 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Linq.Expressions;
 using DAL;
 
 namespace BLL
 {
     public class Repository<T> : IRepository<T> where T : class
     {
-        private readonly GMStoreContext _dbContext;
+        private readonly GmStoreContext _dbContext;
         public readonly DbSet<T> Set;
 
-        public Repository(GMStoreContext dbContext)
+        public Repository(GmStoreContext dbContext)
         {
             _dbContext = dbContext;
             Set = _dbContext.Set<T>();
@@ -25,6 +26,7 @@ namespace BLL
         public void Delete(object id)
         {
             var item = Set.Find(id);
+            if (item== null) return;
             Set.Remove(item);
         }
 
@@ -36,6 +38,12 @@ namespace BLL
         public IEnumerable<T> Find(Func<T, bool> predicate)
         {
             return Set.Where(predicate);
+        }
+
+        public IQueryable<T> GetAllLazyLoad( params Expression<Func<T, object>>[] children)
+        {
+            children.ToList().ForEach(x => Set.Include(x).Load());
+            return Set;
         }
 
 
@@ -56,5 +64,8 @@ namespace BLL
         {
             return Set.ToList();
         }
+
+
+      
     }
 }

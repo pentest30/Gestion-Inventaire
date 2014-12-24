@@ -56,17 +56,22 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GMStoreContext.cs" />
-    <Compile Include="Mapping\ArticleMap.cs" />
-    <Compile Include="Mapping\BonEntreeMap.cs" />
-    <Compile Include="Mapping\CategorieMap.cs" />
-    <Compile Include="Mapping\DepartementMap.cs" />
-    <Compile Include="Mapping\EmployeMap.cs" />
-    <Compile Include="Mapping\MagasinMap.cs" />
-    <Compile Include="Mapping\MarqueMap.cs" />
-    <Compile Include="Mapping\MouvementMap.cs" />
-    <Compile Include="Mapping\PieceMap.cs" />
-    <Compile Include="Mapping\ServiceMap.cs" />
-    <Compile Include="Mapping\SousCategorieMap.cs" />
+    <Compile Include="Migrations\201412230959286_mg23122014.cs" />
+    <Compile Include="Migrations\201412230959286_mg23122014.Designer.cs">
+      <DependentUpon>201412230959286_mg23122014.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201412231000396_mg2.cs" />
+    <Compile Include="Migrations\201412231000396_mg2.Designer.cs">
+      <DependentUpon>201412231000396_mg2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201412231002152_mg3.cs" />
+    <Compile Include="Migrations\201412231002152_mg3.Designer.cs">
+      <DependentUpon>201412231002152_mg3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201412231003252_mg4.cs" />
+    <Compile Include="Migrations\201412231003252_mg4.Designer.cs">
+      <DependentUpon>201412231003252_mg4.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -82,6 +87,20 @@
       <Project>{2c4020f2-9a2e-405a-8a4a-12270f17f52d}</Project>
       <Name>GM.Entity</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201412230959286_mg23122014.resx">
+      <DependentUpon>201412230959286_mg23122014.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201412231000396_mg2.resx">
+      <DependentUpon>201412231000396_mg2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201412231002152_mg3.resx">
+      <DependentUpon>201412231002152_mg3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201412231003252_mg4.resx">
+      <DependentUpon>201412231003252_mg4.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

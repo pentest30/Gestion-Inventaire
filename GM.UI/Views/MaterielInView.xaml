@@ -1,0 +1,105 @@
+﻿<UserControl x:Class="GM.UI.Views.MaterielInView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:models="clr-namespace:GM.Entity.Models;assembly=GM.Entity"
+             xmlns:bsFilter="http://schemas.bolapansoft.com/xaml/Controls/ItemsFilter"
+             xmlns:converters="clr-namespace:GM.UI.Converters"
+             xmlns:uiControls="clr-namespace:UIControls;assembly=UIControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <converters:Nan2Visible x:Key="Nan2Visible"/>
+        <converters:Visible2Enable x:Key="Visible2Enable"/>
+        <converters:Visible2NDisable x:Key="Visible2Disable"/>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="35"/>
+            <RowDefinition />
+            <RowDefinition  Height="5"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+        <uiControls:SearchTextBox Margin="5"/>
+        <bsFilter:FilterDataGrid
+            Margin="5"
+                Grid.Column="0"
+                Grid.Row="1"
+              Grid.RowSpan="3"
+                    IsEnabled="{Binding Visibility, Converter={StaticResource Visible2Enable}, ElementName=AddButton}" 
+                    AutoGenerateColumns="False" 
+                    CanUserAddRows="False" 
+                    Name="DataGrid">
+            <bsFilter:FilterDataGrid.DataContext>
+                <models:Article/>
+            </bsFilter:FilterDataGrid.DataContext>
+            <bsFilter:FilterDataGrid.Columns>
+                <DataGridTextColumn Width="*" Header="Code" Binding="{Binding Code}"/>
+                <DataGridTextColumn Width="*" Header="Libelle" Binding="{Binding Libelle}"/>
+                <DataGridTextColumn Width="*" Header="Marque" Binding="{Binding Marque.Libelle}"/>
+                <DataGridTextColumn Width="*" Header="Qnt totale" Binding="{Binding QntTotal}"/>
+            </bsFilter:FilterDataGrid.Columns>
+        </bsFilter:FilterDataGrid>
+       <Grid
+           Grid.Column="1" Grid.Row="1">
+           <Grid.ColumnDefinitions>
+               <ColumnDefinition/>
+               <ColumnDefinition Width="120"/>
+           </Grid.ColumnDefinitions>
+           <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <bsFilter:FilterDataGrid Margin="5" Grid.Row="0" Grid.RowSpan="4">
+                <bsFilter:FilterDataGrid.DataContext>
+                    <models:BonEntree/>
+                </bsFilter:FilterDataGrid.DataContext>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Width="*" Header="N°" Binding="{Binding NBon}"/>
+                    <DataGridTextColumn Width="*" Header="Date" Binding="{Binding DateEntree}"/>
+                    <DataGridTextColumn Width="*" Header="Qnt" Binding="{Binding Qnt}"/>
+                </DataGrid.Columns>
+            </bsFilter:FilterDataGrid>
+           <Button Name="AddBonBtn" Click="AddBonBtn_OnClick" Grid.Row="0" Grid.Column="1" Content="Ajouter"/>
+            <Button Grid.Row="1" Grid.Column="1" Content="Modifier"/>
+            <Button Grid.Row="2" Grid.Column="1" Content="Supprimer"/>
+        </Grid>
+        <Separator Grid.Column="1" Grid.Row="2" Margin="2" BorderBrush="Gray" BorderThickness="2"/>
+        <Grid
+           Grid.Column="1" Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="120"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <bsFilter:FilterDataGrid Margin="5" Grid.Row="0" Grid.RowSpan="4">
+                <bsFilter:FilterDataGrid.DataContext>
+                    <models:Piece/>
+                </bsFilter:FilterDataGrid.DataContext>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Width="*" Header="N° d'inventaire" Binding="{Binding NInventaire}"/>
+                    <DataGridTextColumn Width="*" Header="Etat" Binding="{Binding Etat}"/>
+                    
+                </DataGrid.Columns>
+            </bsFilter:FilterDataGrid>
+            <Button Grid.Row="0" Grid.Column="1" Content="Ajouter"/>
+            <Button Grid.Row="1" Grid.Column="1" Content="Modifier"/>
+            <Button Grid.Row="2" Grid.Column="1" Content="Supprimer"/>
+        </Grid>
+
+
+    </Grid>
+</UserControl>
