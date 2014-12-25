@@ -3,11 +3,14 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
+using System.Windows.Input;
 using BLL;
 using GM.Entity.Models;
 using Microsoft.Practices.Unity;
 using AutoMapper;
+using Microsoft.Windows.Controls;
 
 namespace GM.UI.Views
 {
@@ -232,5 +235,23 @@ namespace GM.UI.Views
         {
             LoadData();
         }
+
+
+        private void My_first_event_handler(object sender, KeyEventArgs e)
+        {
+            switch (e.Key)
+            {
+                case Key.S:DeleteButton.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
+                    break;
+                case Key.M: UpdateButton.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
+                    break;
+                case Key.A: AddButton.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
+                    break;
+               
+            }
+          
+        }
+
+       
     }
 }
