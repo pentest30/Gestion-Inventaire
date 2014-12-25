@@ -139,8 +139,14 @@ namespace GM.UI.Views
 
             foreach (var item in items.OfType<Piece>())
             {
-                var stock = StockService.Find(x => x.PieceId == item.Id).FirstOrDefault();
-                if(stock!=null)StockService.Delete(stock.Id);
+                if (item==null)continue;
+                Piece piece = item;
+                var stock = StockService.Find(x => x.PieceId == piece.Id).FirstOrDefault();
+                if (stock != null)
+                {
+                    StockService.Delete(stock.Id);
+                    StockService.Save();
+                }
                 PieceService.Delete(item.Id);
                 PieceService.Save();
             }
@@ -208,7 +214,7 @@ namespace GM.UI.Views
             var ligne =  _beLigneRepository.Find(x => x.BonEntreeId == item.BonEntreeId && x.ArticleId == item.ArticleId).FirstOrDefault();
             var countStock = StockService.Find(x => x.ArticleId == item.ArticleId && x.BonEntreeId == item.BonEntreeId).Count();
             if (ligne == null) return;
-            var qnt = ligne.Qnt - (countStock+1);
+            var qnt = ligne.Qnt - (countStock+1)>=0 ?ligne.Qnt - (countStock+1):0;
             var frm = new MulitStockFrm(Convert.ToInt32(qnt), item);
             try
             {
