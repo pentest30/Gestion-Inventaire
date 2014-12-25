@@ -7,6 +7,6 @@ namespace GM.Entity.Models
         long Id { get; set; }
         long PieceId { get; set; }
          DateTime Date { get; set; }
-         string Etat { get; set; }
+         //tring Etat { get; set; }
     }
 }

@@ -191,10 +191,17 @@ namespace GM.UI.Views
             }
             var item = DataGrid.SelectedItem as Piece;
             if (item ==null) return;
-            BonEntreeLigne ligne = _beLigneRepository.Find(x => x.BonEntreeId == item.BonEntreeId && x.ArticleId == item.ArticleId).FirstOrDefault();
+            var ligne = _beLigneRepository.Find(x => x.BonEntreeId == item.BonEntreeId && x.ArticleId == item.ArticleId).FirstOrDefault();
+            if (ligne == null) return;
             var qnt = ligne.Qnt - 1;
-            var frm = new MulitStockFrm(Convert.ToInt32(qnt) , item);
+            var frm = new MulitStockFrm(Convert.ToInt32(qnt), item);
+            frm.Update += UpdateDataGrid;
             frm.ShowDialog();
+        }
+
+         void UpdateDataGrid(long id)
+        {
+            LoadData();
         }
     }
 }
