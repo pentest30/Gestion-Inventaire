@@ -152,13 +152,11 @@
                      Grid.Row="4" 
                      Grid.Column="1" 
                      Grid.ColumnSpan="3"/>
-                <TextBlock Grid.Row="5"
-                       Grid.Column="0" 
-                       Text="Garantie" 
-                       VerticalAlignment="Center"/>
-                <CheckBox IsEnabled="{Binding Visibility, Converter={StaticResource Visible2Disable}, ElementName=AddButton}" 
+              
+                <CheckBox Content="Garantie"  IsEnabled="{Binding Visibility, Converter={StaticResource Visible2Disable}, ElementName=AddButton}" 
                       Grid.Row="5" 
-                      Grid.Column="1" 
+                      Grid.Column="1"
+                         
                       IsChecked="{Binding Path=Garantissable}" 
                       VerticalAlignment="Center"
                       HorizontalAlignment="Center"/>

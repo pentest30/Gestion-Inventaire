@@ -1,6 +1,7 @@
-﻿using System.Windows;
+﻿using System.Collections.ObjectModel;
 using System.Windows.Controls;
 using BLL;
+using GM.Entity.Models;
 using Microsoft.Practices.Unity;
 
 namespace GM.UI.Views
@@ -10,20 +11,19 @@ namespace GM.UI.Views
     /// </summary>
     public partial class MaterielInView
     {
-        private static  StockService _StockService;
+        private static  StockService _stockService;
         public MaterielInView()
         {
             InitializeComponent();
             var container = new UnityContainer();
-            _StockService = container.Resolve<StockService>();
-            DataGridStock.ItemsSource = _StockService.SelectAll();
+            _stockService = container.Resolve<StockService>();
+            LoadData();
 
         }
 
-        private void AddBonBtn_OnClick(object sender, RoutedEventArgs e)
+        private void LoadData()
         {
-        //    var frm = new BonEntreeLigneFrm();
-        //    frm.Show();
+            DataGridStock.ItemsSource = new ObservableCollection<PieceMagasin>(_stockService.GetAllLazyLoad(x=>x.BonEntree, x=>x.Piece,w=>w.Magasin));
         }
 
         private void CbCategorie_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
