@@ -66,11 +66,11 @@ namespace GM.UI.Views
 
         private static void SavePiece(Piece nouveauPeice)
         {
-            PieceView._pieceService.Insert(nouveauPeice);
-            PieceView._pieceService.Save();
+            PieceView.PieceService.Insert(nouveauPeice);
+            PieceView.PieceService.Save();
             var stcok = Mapper.Map<PieceMagasin>(nouveauPeice);
-            PieceView._StockService.Insert(stcok);
-            PieceView._StockService.Save();
+            PieceView.StockService.Insert(stcok);
+            PieceView.StockService.Save();
         }
     }
 }

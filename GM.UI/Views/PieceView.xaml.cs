@@ -19,8 +19,8 @@ namespace GM.UI.Views
         private readonly ArticleService _articleService;
         private readonly Repository<SousCategorie> _sousCategorieRepository;
         private readonly Repository<Entity.Models.Type> _typeRepository;
-        public static PieceService _pieceService;
-        public static StockService _StockService;
+        public static PieceService PieceService;
+        public static StockService StockService;
         private readonly Repository<BonEntreeLigne> _beLigneRepository;
 
 
@@ -29,8 +29,8 @@ namespace GM.UI.Views
             InitializeComponent();
             var container = new UnityContainer();
             _articleService = container.Resolve<ArticleService>();
-            _pieceService = container.Resolve<PieceService>();
-            _StockService = container.Resolve<StockService>();
+            PieceService = container.Resolve<PieceService>();
+            StockService = container.Resolve<StockService>();
             var beRepository = container.Resolve<Repository<BonEntree>>();
             _beLigneRepository = container.Resolve<Repository<BonEntreeLigne>>();
             var magasinRepository = container.Resolve<Repository<Magasin>>();
@@ -42,14 +42,13 @@ namespace GM.UI.Views
             CbMagasin.ItemsSource = magasinRepository.SelectAll();
             CbBEntree.ItemsSource = beRepository.SelectAll();
             CbMarque.ItemsSource = marqueRepository.SelectAll();
-
             LoadData();
         }
 
         private void LoadData()
         {
             DataGrid.ItemsSource =
-                new ObservableCollection<Piece>(_pieceService.GetAllLazyLoad(x => x.Magasin, x => x.Article,
+                new ObservableCollection<Piece>(PieceService.GetAllLazyLoad(x => x.Magasin, x => x.Article,
                     x => x.BonEntree));
         }
 
@@ -57,7 +56,7 @@ namespace GM.UI.Views
         {
             AddButton.Visibility = Visibility.Hidden;
             var list = DataGrid.ItemsSource.OfType<Piece>().ToList();
-            list.Add(_pieceService.Create());
+            list.Add(PieceService.Create());
             Grid.DataContext = list.Last();
         }
 
@@ -86,19 +85,19 @@ namespace GM.UI.Views
                     item.EtatStock = EtatStock.Stock.ToString();
 
                 }
-                _pieceService.Insert(item);
+                PieceService.Insert(item);
                 // ((ObservableCollection<Article>)DataGrid.ItemsSource).Add(item);
             }
             else
             {
-                _pieceService.Update(item);
+                PieceService.Update(item);
             }
             try
             {
-                _pieceService.Save();
+                PieceService.Save();
                 var stcok = Mapper.Map<PieceMagasin>(item);
-                _StockService.Insert(stcok);
-                _StockService.Save();
+                StockService.Insert(stcok);
+                StockService.Save();
             }
             catch (Exception ex)
             {
@@ -140,8 +139,10 @@ namespace GM.UI.Views
 
             foreach (var item in items.OfType<Piece>())
             {
-                _pieceService.Delete(item.Id);
-                _pieceService.Save();
+                var stock = StockService.Find(x => x.PieceId == item.Id).FirstOrDefault();
+                if(stock!=null)StockService.Delete(stock.Id);
+                PieceService.Delete(item.Id);
+                PieceService.Save();
             }
             LoadData();
         }
@@ -191,8 +192,8 @@ namespace GM.UI.Views
             var marque = CbMagasin.SelectedItem as Marque;
             if (sousCategorie != null && categorie != null && marque != null)
                 CbArticle.ItemsSource = _articleService.Find(x => x.CategorieId == categorie.Id
-                                                                  && x.SousCategorieId == sousCategorie.Id &&
-                                                                  x.MarqueId == marque.Id);
+                                                                  && x.SousCategorieId == sousCategorie.Id 
+                                                                  && x.MarqueId == marque.Id);
         }
 
         private void AddMultButton_OnClick(object sender, RoutedEventArgs e)
@@ -204,11 +205,10 @@ namespace GM.UI.Views
             }
             var item = DataGrid.SelectedItem as Piece;
             if (item == null) return;
-            var ligne =  _beLigneRepository.Find(x => x.BonEntreeId == item.BonEntreeId 
-                && x.ArticleId == item.ArticleId).FirstOrDefault();
-
+            var ligne =  _beLigneRepository.Find(x => x.BonEntreeId == item.BonEntreeId && x.ArticleId == item.ArticleId).FirstOrDefault();
+            var countStock = StockService.Find(x => x.ArticleId == item.ArticleId && x.BonEntreeId == item.BonEntreeId).Count();
             if (ligne == null) return;
-            var qnt = ligne.Qnt - 1;
+            var qnt = ligne.Qnt - (countStock+1);
             var frm = new MulitStockFrm(Convert.ToInt32(qnt), item);
             try
             {

@@ -5,7 +5,7 @@ namespace GM.Entity.Models
    public class Reformet:IMovement
     {
        public long Id { get; set; }
-       public long PieceId { get; set; }
+       public long? PieceId { get; set; }
 
        public string PieceNInventaire { get; set; }
 
