@@ -68,6 +68,18 @@
     <Compile Include="Migrations\201412251519068_lk2.Designer.cs">
       <DependentUpon>201412251519068_lk2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201412251613116_mk3.cs" />
+    <Compile Include="Migrations\201412251613116_mk3.Designer.cs">
+      <DependentUpon>201412251613116_mk3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201412251711573_mk.cs" />
+    <Compile Include="Migrations\201412251711573_mk.Designer.cs">
+      <DependentUpon>201412251711573_mk.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201412251712553_mk31.cs" />
+    <Compile Include="Migrations\201412251712553_mk31.Designer.cs">
+      <DependentUpon>201412251712553_mk31.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -93,6 +105,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201412251519068_lk2.resx">
       <DependentUpon>201412251519068_lk2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201412251613116_mk3.resx">
+      <DependentUpon>201412251613116_mk3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201412251711573_mk.resx">
+      <DependentUpon>201412251711573_mk.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201412251712553_mk31.resx">
+      <DependentUpon>201412251712553_mk31.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

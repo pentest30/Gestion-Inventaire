@@ -12,9 +12,9 @@ namespace BLL
         private readonly GmStoreContext _dbContext;
         public readonly DbSet<T> Set;
 
-        public Repository(GmStoreContext dbContext)
+        public Repository()
         {
-            _dbContext = dbContext;
+            _dbContext = ContextSingleton.Instance;
             Set = _dbContext.Set<T>();
         }
 

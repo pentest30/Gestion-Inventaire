@@ -7,6 +7,7 @@ using System.Windows.Data;
 using BLL;
 using GM.Entity.Models;
 using Microsoft.Practices.Unity;
+using AutoMapper;
 
 namespace GM.UI.Views
 {
@@ -17,10 +18,10 @@ namespace GM.UI.Views
     {
         private readonly ArticleService _articleService;
         private readonly Repository<SousCategorie> _sousCategorieRepository;
-        readonly Repository<Entity.Models.Type> _typeRepository;
-       public static PieceService _pieceService;
+        private readonly Repository<Entity.Models.Type> _typeRepository;
+        public static PieceService _pieceService;
         public static StockService _StockService;
-        readonly Repository<BonEntreeLigne> _beLigneRepository;
+        private readonly Repository<BonEntreeLigne> _beLigneRepository;
 
 
         public PieceView()
@@ -41,13 +42,15 @@ namespace GM.UI.Views
             CbMagasin.ItemsSource = magasinRepository.SelectAll();
             CbBEntree.ItemsSource = beRepository.SelectAll();
             CbMarque.ItemsSource = marqueRepository.SelectAll();
-            
+
             LoadData();
         }
 
         private void LoadData()
         {
-            DataGrid.ItemsSource = new ObservableCollection<Piece>(_pieceService.GetAllLazyLoad(x => x.Magasin, x => x.Article,x=>x.BonEntree));
+            DataGrid.ItemsSource =
+                new ObservableCollection<Piece>(_pieceService.GetAllLazyLoad(x => x.Magasin, x => x.Article,
+                    x => x.BonEntree));
         }
 
         private void AddButton_OnClick(object sender, RoutedEventArgs e)
@@ -55,7 +58,7 @@ namespace GM.UI.Views
             AddButton.Visibility = Visibility.Hidden;
             var list = DataGrid.ItemsSource.OfType<Piece>().ToList();
             list.Add(_pieceService.Create());
-            Grid.DataContext = list.Last(); 
+            Grid.DataContext = list.Last();
         }
 
         private void UpdateButton_OnClick(object sender, RoutedEventArgs e)
@@ -72,8 +75,8 @@ namespace GM.UI.Views
 
         private void SaveButton_OnClick(object sender, RoutedEventArgs e)
         {
-            var item = (Piece)Grid.DataContext;
-          
+            var item = (Piece) Grid.DataContext;
+
             if (item.Id <= 0)
             {
                 if (string.IsNullOrEmpty(item.NInventaire))
@@ -93,6 +96,9 @@ namespace GM.UI.Views
             try
             {
                 _pieceService.Save();
+                var stcok = Mapper.Map<PieceMagasin>(item);
+                _StockService.Insert(stcok);
+                _StockService.Save();
             }
             catch (Exception ex)
             {
@@ -103,8 +109,8 @@ namespace GM.UI.Views
             }
 
             AddButton.Visibility = Visibility.Visible;
-            DataGrid.ItemsSource = new ObservableCollection<Piece>(_pieceService.GetAllLazyLoad(x => x.Article, x => x.Magasin));
-            var binding = new Binding { ElementName = "DataGrid", Path = new PropertyPath("SelectedItem") };
+            LoadData();
+            var binding = new Binding {ElementName = "DataGrid", Path = new PropertyPath("SelectedItem")};
             Grid.SetBinding(DataContextProperty, binding);
             UpdateButton.Visibility = Visibility.Visible;
             DeleteButton.Visibility = Visibility.Visible;
@@ -115,7 +121,7 @@ namespace GM.UI.Views
             AddButton.Visibility = Visibility.Visible;
             UpdateButton.Visibility = Visibility.Visible;
             DeleteButton.Visibility = Visibility.Visible;
-            var binding = new Binding { ElementName = "DataGrid", Path = new PropertyPath("SelectedItem") };
+            var binding = new Binding {ElementName = "DataGrid", Path = new PropertyPath("SelectedItem")};
             Grid.SetBinding(DataContextProperty, binding);
         }
 
@@ -142,8 +148,8 @@ namespace GM.UI.Views
             var type = CbType.SelectedItem as Entity.Models.Type;
             var categorie = CbCategorie.SelectedItem as Categorie;
             var sousCategorie = CbSousCategorie.SelectedItem as SousCategorie;
-            if (type != null && categorie!= null && sousCategorie!=null)
-                CbArticle.ItemsSource = _articleService.Find(x => x.TypeId == type.Id ).ToList();
+            if (type != null && categorie != null && sousCategorie != null)
+                CbArticle.ItemsSource = _articleService.Find(x => x.TypeId == type.Id).ToList();
         }
 
         private void CbCategorie_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -169,7 +175,7 @@ namespace GM.UI.Views
             //var marque = CbMagasin.SelectedItem as Marque;
             if (sousCategorie != null && categorie != null)
                 CbType.ItemsSource = _typeRepository.Find(x => x.CategorieId == categorie.Id
-                    && x.SousCategorieId == sousCategorie.Id);
+                                                               && x.SousCategorieId == sousCategorie.Id);
         }
 
         private void CbMarque_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -179,9 +185,10 @@ namespace GM.UI.Views
             var categorie = CbCategorie.SelectedItem as Categorie;
             var sousCategorie = CbSousCategorie.SelectedItem as SousCategorie;
             var marque = CbMagasin.SelectedItem as Marque;
-            if (sousCategorie != null && categorie != null && marque!= null)
+            if (sousCategorie != null && categorie != null && marque != null)
                 CbArticle.ItemsSource = _articleService.Find(x => x.CategorieId == categorie.Id
-                    && x.SousCategorieId == sousCategorie.Id  &&x.MarqueId == marque.Id);
+                                                                  && x.SousCategorieId == sousCategorie.Id &&
+                                                                  x.MarqueId == marque.Id);
         }
 
         private void AddMultButton_OnClick(object sender, RoutedEventArgs e)
@@ -192,16 +199,26 @@ namespace GM.UI.Views
                 return;
             }
             var item = DataGrid.SelectedItem as Piece;
-            if (item ==null) return;
-            var ligne = _beLigneRepository.Find(x => x.BonEntreeId == item.BonEntreeId && x.ArticleId == item.ArticleId).FirstOrDefault();
+            if (item == null) return;
+            var ligne =  _beLigneRepository.Find(x => x.BonEntreeId == item.BonEntreeId 
+                && x.ArticleId == item.ArticleId).FirstOrDefault();
+
             if (ligne == null) return;
             var qnt = ligne.Qnt - 1;
             var frm = new MulitStockFrm(Convert.ToInt32(qnt), item);
-            frm.Update += UpdateDataGrid;
-            frm.ShowDialog();
+            try
+            {
+                frm.Update += UpdateDataGrid;
+                frm.ShowDialog();
+
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
         }
 
-         void UpdateDataGrid(long id)
+        private void UpdateDataGrid(long id)
         {
             LoadData();
         }

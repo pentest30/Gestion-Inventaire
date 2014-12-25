@@ -15,7 +15,7 @@ namespace BLL
         public  T Create()
         {
             var container = new UnityContainer();
-            container.RegisterInstance(new Repository<T>(_context));
+            container.RegisterInstance(new Repository<T>());
             _repository = container.Resolve<Repository<T>>();
             return _repository.Set.Create<T>();
         }

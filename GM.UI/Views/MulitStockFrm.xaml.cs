@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using System.Windows;
+using AutoMapper;
 using GM.Entity.Models;
 using WPF.Core.Helpers;
 
@@ -17,7 +18,6 @@ namespace GM.UI.Views
         public MulitStockFrm(int qnt , Piece piece)
         {
             InitializeComponent();
-            
             TextBox.Text = qnt.ToString(CultureInfo.InvariantCulture);
             _piece = piece;
             _qnt = qnt;
@@ -26,12 +26,7 @@ namespace GM.UI.Views
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
-            AutoMapper.Mapper.CreateMap<Piece, Piece>()
-                .ForMember(x => x.Article, o => o.MapFrom(s => s.Article))
-                .ForMember(x => x.Magasin, o => o.MapFrom(s => s.Magasin))
-                .ForMember(x => x.BonEntree, o => o.MapFrom(s => s.BonEntree))
-                .ForMember(x => x.Id, o => o.Ignore())
-                .ForMember(x => x.NInventaire, o => o.Ignore());
+           
             ProgressBar.Minimum = 0;
             ProgressBar.Maximum = _qnt;
             var pBar = new PBar(ProgressBar);
@@ -40,7 +35,7 @@ namespace GM.UI.Views
                 ProgressBar.Visibility = Visibility.Visible;
                 for (var i = 0; i <Convert.ToInt32( TextBox.Text); i++)
                 {
-                    var nouveauPeice = AutoMapper.Mapper.Map<Piece>(_piece);
+                    var nouveauPeice = NouveauPeice();
                     nouveauPeice.NInventaire = PieceView.GenerateInventoryName(nouveauPeice.Article.Libelle);
                     SavePiece(nouveauPeice);
                     pBar.IncPB();
@@ -55,8 +50,7 @@ namespace GM.UI.Views
             {
                 for (var i = 0; i < Convert.ToInt32(TextBox.Text); i++)
                 {
-                    var nouveauPeice = AutoMapper.Mapper.Map<Piece>(_piece);
-                   // nouveauPeice.NInventaire = PieceView.GenerateInventoryName(nouveauPeice.Article.Libelle);
+                    var nouveauPeice = NouveauPeice();
                     SavePiece(nouveauPeice);
                 }
             }
@@ -64,10 +58,19 @@ namespace GM.UI.Views
             ProgressBar.Visibility = Visibility.Collapsed;
         }
 
+        private Piece NouveauPeice()
+        {
+            var nouveauPeice = Mapper.Map<Piece>(_piece);
+            return nouveauPeice;
+        }
+
         private static void SavePiece(Piece nouveauPeice)
         {
             PieceView._pieceService.Insert(nouveauPeice);
             PieceView._pieceService.Save();
+            var stcok = Mapper.Map<PieceMagasin>(nouveauPeice);
+            PieceView._StockService.Insert(stcok);
+            PieceView._StockService.Save();
         }
     }
 }

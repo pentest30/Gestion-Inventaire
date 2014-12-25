@@ -17,9 +17,9 @@ namespace BLL
        
 
 
-       public PieceService(GmStoreContext context)
+       public PieceService()
        {
-           _context = context;
+           _context = ContextSingleton.Instance;
            _container.RegisterInstance(new EntityFactory<Piece>(_context));
            _factory = _container.Resolve<EntityFactory<Piece>>();
            
@@ -42,6 +42,7 @@ namespace BLL
 
        public void Insert(Piece item)
        {
+           
            _context.Pieces.Attach(item);
            _context.Pieces.Add(item);
        }

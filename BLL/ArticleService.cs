@@ -15,12 +15,12 @@ namespace BLL
        readonly static UnityContainer Container = new UnityContainer();
        private static EntityFactory<Article> _factory; 
        private  static GmStoreContext _db;
-       public ArticleService(GmStoreContext db)
+       public ArticleService()
        {
-           _db = db;
+           _db = ContextSingleton.Instance;
            Container.RegisterInstance(new EntityFactory<Article>(_db));
            _factory = Container.Resolve<EntityFactory<Article>>();
-           Container.RegisterInstance(new Repository<Article>(_db));
+           Container.RegisterInstance(new Repository<Article>());
            //_articleRepository = Container.Resolve<Repository<Article>>();
        }
 

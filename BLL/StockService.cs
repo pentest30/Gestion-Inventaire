@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Core.Objects;
 using System.Linq;
 using System.Linq.Expressions;
 using DAL;
@@ -15,12 +16,12 @@ namespace BLL
        private static EntityFactory<PieceMagasin> _factory;
        private static GmStoreContext _db;
 
-       public StockService(GmStoreContext db)
+       public StockService()
        {
-           _db = db;
+           _db = ContextSingleton.Instance;
            Container.RegisterInstance(new EntityFactory<PieceMagasin>(_db));
            _factory = Container.Resolve<EntityFactory<PieceMagasin>>();
-           Container.RegisterInstance(new Repository<PieceMagasin>(_db));
+           Container.RegisterInstance(new Repository<PieceMagasin>());
        }
 
        public IEnumerable<PieceMagasin> SelectAll()
@@ -35,6 +36,7 @@ namespace BLL
 
        public void Insert(PieceMagasin item)
        {
+         
            _db.PieceMagasins.Add(item);
        }
 
@@ -42,14 +44,13 @@ namespace BLL
 
        public void Update(PieceMagasin item)
        {
-           _db.PieceMagasins.Attach(item);
+         
            _db.Entry(item).State = EntityState.Modified;
        }
 
        public void Delete(object id)
        {
            var item = _db.PieceMagasins.Find(id);
-           _db.PieceMagasins.Attach(item);
            _db.Entry(item).State = EntityState.Deleted;
        }
 

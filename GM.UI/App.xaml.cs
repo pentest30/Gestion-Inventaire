@@ -13,26 +13,38 @@ namespace GM.UI
     {
         public App()
         {
-            var container = new UnityContainer();
-            var dbContext = new GmStoreContext();
-            container.RegisterInstance(new ArticleService(dbContext));
-            container.RegisterInstance(new PieceService(dbContext));
-            container.RegisterInstance(new EntityFactory<Departement>(dbContext));
-            container.RegisterInstance(new Repository<Departement>(dbContext));
-            container.RegisterInstance(new Repository<Service>(dbContext));
-            container.RegisterInstance(new Repository<Employe>(dbContext));
-            container.RegisterInstance(new Repository<Article>(dbContext)); 
-            container.RegisterInstance(new Repository<Magasin>(dbContext));
-            container.RegisterInstance(new Repository<Marque>(dbContext));
-            container.RegisterInstance(new Repository<PieceEmployee>(dbContext));
-            container.RegisterInstance(new Repository<Piece>(dbContext));
-            container.RegisterInstance(new Repository<Categorie>(dbContext));
-            container.RegisterInstance(new Repository<SousCategorie>(dbContext));
-            container.RegisterInstance(new Repository<BonEntree>(dbContext));
-            container.RegisterInstance(new Repository<BonEntreeLigne>(dbContext));
-            container.RegisterInstance(new Repository<BonSortie>(dbContext));
-            container.RegisterInstance(new Repository<BonSortieLigne>(dbContext));
-           
+            using (var db = new GmStoreContext())
+            {
+                var container = new UnityContainer();
+
+                container.RegisterInstance(new ArticleService());
+                container.RegisterInstance(new PieceService());
+                container.RegisterInstance(new StockService());
+                container.RegisterInstance(new EntityFactory<Departement>(db));
+                container.RegisterInstance(new Repository<Departement>());
+                container.RegisterInstance(new Repository<Service>());
+                container.RegisterInstance(new Repository<Employe>());
+                container.RegisterInstance(new Repository<Article>());
+                container.RegisterInstance(new Repository<Magasin>());
+                container.RegisterInstance(new Repository<Marque>());
+                container.RegisterInstance(new Repository<PieceEmployee>());
+                container.RegisterInstance(new Repository<Piece>());
+                container.RegisterInstance(new Repository<Categorie>());
+                container.RegisterInstance(new Repository<SousCategorie>());
+                container.RegisterInstance(new Repository<BonEntree>());
+                container.RegisterInstance(new Repository<BonEntreeLigne>());
+                container.RegisterInstance(new Repository<BonSortie>());
+                container.RegisterInstance(new Repository<BonSortieLigne>());
+            }
+            AutoMapper.Mapper.CreateMap<Piece, Piece>()
+               .ForMember(x => x.Id, o => o.Ignore())
+               .ForMember(x => x.NInventaire, o => o.Ignore());
+            AutoMapper.Mapper.CreateMap<Piece, PieceMagasin>()
+                .ForMember(x => x.PieceId, o => o.MapFrom(p => p.Id))
+                .ForMember(x => x.MagasinId, o => o.MapFrom(p => p.MagasinId))
+                .ForMember(x => x.Date, o => o.MapFrom(p => p.DateEntree))
+                .ForMember(x => x.BonEntreeId, o => o.MapFrom(p => p.BonEntreeId));
+
         }
     }
 }

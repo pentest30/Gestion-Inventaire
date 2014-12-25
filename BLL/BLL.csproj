@@ -55,6 +55,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ContextSingleton.cs" />
     <Compile Include="EntityFactory.cs" />
     <Compile Include="IDisposable.cs" />
     <Compile Include="IRepository.cs" />
