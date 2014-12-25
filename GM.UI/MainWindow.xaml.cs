@@ -40,7 +40,7 @@ namespace GM.UI
                         break;
                     case "Articles": ContentControl.Content = new ArticleView();
                         break;
-                    case "Matériels entrants": ContentControl.Content = new MaterielInView();
+                    case "Piece service": ContentControl.Content = new MaterielInView();
                         break;
                     case "Bons d'entrées": ContentControl.Content = new BonEntreeMagasinView();
                    

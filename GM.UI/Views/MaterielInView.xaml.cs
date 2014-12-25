@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
 
 namespace GM.UI.Views
 {
@@ -16,6 +17,16 @@ namespace GM.UI.Views
         {
         //    var frm = new BonEntreeLigneFrm();
         //    frm.Show();
+        }
+
+        private void CbCategorie_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            
+        }
+
+        private void CbSousCategorie_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            
         }
     }
 }

@@ -173,9 +173,9 @@ namespace GM.UI.Views
             if (!result.ToString().Equals("Yes")) return;
             var ligne = DataGridLignes.SelectedItem as BonEntreeLigne;
             if (ligne == null) return;
-            _beRepository.Delete(ligne.Id);
-            _beRepository.Save();
-            DataGridLignes.ItemsSource =_beRepository.SelectAll();
+            _beLigneRepository.Delete(ligne.Id);
+            _beLigneRepository.Save();
+            DataGridLignes.ItemsSource =_beLigneRepository.SelectAll();
         }
     }
 }

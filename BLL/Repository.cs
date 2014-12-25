@@ -26,6 +26,7 @@ namespace BLL
         public void Delete(object id)
         {
             var item = Set.Find(id);
+            Set.Attach(item);
             if (item== null) return;
             Set.Remove(item);
         }

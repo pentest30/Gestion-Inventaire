@@ -190,13 +190,14 @@
                 <RowDefinition Height="30"/>
                 <RowDefinition Height="30"/>
                 <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
                 <RowDefinition />
             </Grid.RowDefinitions>
             <bsFilter:FilterDataGrid
+                IsReadOnly="True"
                 Grid.Column="0"
                 Grid.Row="0"
-                Grid.RowSpan="4"
-                
+                Grid.RowSpan="5"
                     IsEnabled="{Binding Visibility, Converter={StaticResource Visible2Enable}, ElementName=AddButton}" 
                     AutoGenerateColumns="False" 
                     CanUserAddRows="False" 
@@ -247,6 +248,13 @@
                         Margin="5,0,0,0" 
                         Content="Supprimer" 
                         Grid.Row="2" Grid.Column="1"/>
+            <Button
+                       x:Name="AddMultButton" 
+                    Click="AddMultButton_OnClick"
+                        Margin="5,0,0,0" 
+                        Content="Ajout Multiple" 
+                        Grid.Row="3" Grid.Column="1"/>
+
 
         </Grid>
     </Grid>

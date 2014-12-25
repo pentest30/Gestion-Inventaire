@@ -18,7 +18,8 @@ namespace GM.UI.Views
         private readonly ArticleService _articleService;
         private readonly Repository<SousCategorie> _sousCategorieRepository;
         readonly Repository<Entity.Models.Type> _typeRepository;
-        private readonly PieceService _pieceService;
+       public static PieceService _pieceService;
+        readonly Repository<BonEntreeLigne> _beLigneRepository;
 
 
         public PieceView()
@@ -28,6 +29,7 @@ namespace GM.UI.Views
             _articleService = container.Resolve<ArticleService>();
             _pieceService = container.Resolve<PieceService>();
             var beRepository = container.Resolve<Repository<BonEntree>>();
+            _beLigneRepository = container.Resolve<Repository<BonEntreeLigne>>();
             var magasinRepository = container.Resolve<Repository<Magasin>>();
             var categorieRepository = container.Resolve<Repository<Categorie>>();
             var marqueRepository = container.Resolve<Repository<Marque>>();
@@ -150,7 +152,8 @@ namespace GM.UI.Views
                 CbSousCategorie.ItemsSource = _sousCategorieRepository.Find(x => x.CategorieId == categorie.Id);
 
         }
-        private static string GenerateInventoryName(string article)
+
+        public static string GenerateInventoryName(string article)
         {
             return string.Format("{0}_{1}", DateTime.Now.ToString("yyyyMMddHHmmssfff"), article);
         }
@@ -177,6 +180,21 @@ namespace GM.UI.Views
             if (sousCategorie != null && categorie != null && marque!= null)
                 CbArticle.ItemsSource = _articleService.Find(x => x.CategorieId == categorie.Id
                     && x.SousCategorieId == sousCategorie.Id  &&x.MarqueId == marque.Id);
+        }
+
+        private void AddMultButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (DataGrid.SelectedIndex < 0)
+            {
+                MessageBox.Show("Selectionner un champ", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+            var item = DataGrid.SelectedItem as Piece;
+            if (item ==null) return;
+            BonEntreeLigne ligne = _beLigneRepository.Find(x => x.BonEntreeId == item.BonEntreeId && x.ArticleId == item.ArticleId).FirstOrDefault();
+            var qnt = ligne.Qnt - 1;
+            var frm = new MulitStockFrm(Convert.ToInt32(qnt) , item);
+            frm.ShowDialog();
         }
     }
 }

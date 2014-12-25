@@ -6,51 +6,117 @@
              xmlns:models="clr-namespace:GM.Entity.Models;assembly=GM.Entity"
              xmlns:bsFilter="http://schemas.bolapansoft.com/xaml/Controls/ItemsFilter"
              xmlns:converters="clr-namespace:GM.UI.Converters"
-             xmlns:uiControls="clr-namespace:UIControls;assembly=UIControls"
-             mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             xmlns:helpers="clr-namespace:WPF.Core.Helpers;assembly=WPF.Core"
+             mc:Ignorable="d" >
     <UserControl.Resources>
         <converters:Nan2Visible x:Key="Nan2Visible"/>
         <converters:Visible2Enable x:Key="Visible2Enable"/>
         <converters:Visible2NDisable x:Key="Visible2Disable"/>
     </UserControl.Resources>
-
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="35"/>
-            <RowDefinition />
-            <RowDefinition  Height="5"/>
-            <RowDefinition />
-        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="3*"/>
             <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
-        <uiControls:SearchTextBox Margin="5"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+      <GroupBox Margin="5" Header="Paramètres de recherche:" BorderBrush="Gray">
+            <Grid Margin="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <TextBlock VerticalAlignment="Center" Text="Catégorie:"/>
+                <TextBlock VerticalAlignment="Center" Grid.Row="0" Grid.Column="2" Text="Sous catégorie:"/>
+                <TextBlock VerticalAlignment="Center" Grid.Row="1" Grid.Column="0" Text="Type:"/>
+                <TextBlock VerticalAlignment="Center" Grid.Row="1" Grid.Column="2" Text="Marque:"/>
+                <TextBlock VerticalAlignment="Center" Grid.Row="2" Grid.Column="0" Text="Article:" HorizontalAlignment="Left" Width="54"/>
+                <TextBlock VerticalAlignment="Center" Grid.Row="2" Grid.Column="2" Text="Magasin:"/>
+                <ComboBox SelectionChanged="CbCategorie_OnSelectionChanged" 
+				x:Name="CbCategorie" 
+				Grid.Column="1" 
+				Grid.Row="0" 
+				DisplayMemberPath="Libelle"
+				SelectedValue="{Binding CategorieId}" 
+				SelectedValuePath="Id"/>
+                <helpers:AutoFilteredComboBox Margin="2"
+                x:Name="CbSousCategorie" 
+				Grid.Column="3" 
+				Grid.Row="0" 
+				DisplayMemberPath="Libelle"
+				SelectedValue="{Binding SousCategorieId}" 
+				SelectedValuePath="Id"
+                SelectionChanged="CbSousCategorie_OnSelectionChanged"/>
+                <helpers:AutoFilteredComboBox Margin="2" 
+				x:Name="CbType" 
+				Grid.Column="1" 
+				Grid.Row="1" 
+				DisplayMemberPath="Libelle"
+				SelectedValue="{Binding TypeId}" 
+				SelectedValuePath="Id"/>
+                <helpers:AutoFilteredComboBox Margin="2" 
+				x:Name="CbMaruqe" 
+				Grid.Column="3" 
+				Grid.Row="1" 
+				DisplayMemberPath="Libelle"
+				SelectedValue="{Binding MarqueId}" 
+				SelectedValuePath="Id"/>
+                <helpers:AutoFilteredComboBox 
+            x:Name="CbArticle" 
+            Grid.Column="1" 
+            Grid.Row="2"
+            Margin="2" 
+            DisplayMemberPath="Libelle" 
+            SelectedValuePath="Id" 
+                    IsEnabled="{Binding Visibility, Converter={StaticResource Visible2Disable}, ElementName=AddButton}" 
+			
+            SelectedValue="{Binding ArticleId}"/>
+                <helpers:AutoFilteredComboBox 
+                Margin="2"
+                Name="CbMagasin" Grid.Column="3" Grid.Row="2" 
+                DisplayMemberPath="Libelle" 
+                SelectedValuePath="Id" 
+                SelectedValue="{Binding Path=MagasinId}"/>
+
+
+            </Grid>
+        </GroupBox>
         <bsFilter:FilterDataGrid
             Margin="5"
+                
                 Grid.Column="0"
+               
                 Grid.Row="1"
-              Grid.RowSpan="3"
                     IsEnabled="{Binding Visibility, Converter={StaticResource Visible2Enable}, ElementName=AddButton}" 
                     AutoGenerateColumns="False" 
                     CanUserAddRows="False" 
                     Name="DataGrid">
+
             <bsFilter:FilterDataGrid.DataContext>
-                <models:Article/>
+                <models:Piece/>
             </bsFilter:FilterDataGrid.DataContext>
             <bsFilter:FilterDataGrid.Columns>
-                <DataGridTextColumn Width="*" Header="Code" Binding="{Binding Code}"/>
-                <DataGridTextColumn Width="*" Header="Libelle" Binding="{Binding Libelle}"/>
-                <DataGridTextColumn Width="*" Header="Marque" Binding="{Binding Marque.Libelle}"/>
-                <DataGridTextColumn Width="*" Header="Qnt totale" Binding="{Binding QntTotal}"/>
+                <DataGridTextColumn Width="*" Header="Code" Binding="{Binding Article.Libelle}"/>
+                <DataGridTextColumn Width="*" Header="Libelle" Binding="{Binding NInventaire}"/>
+                <DataGridTextColumn Width="*" Header="Marque" Binding="{Binding EtatPiece}"/>
+                <DataGridTextColumn Width="*" Header="Qnt totale" Binding="{Binding EtatStock}"/>
             </bsFilter:FilterDataGrid.Columns>
         </bsFilter:FilterDataGrid>
-       <Grid
-           Grid.Column="1" Grid.Row="1" Grid.RowSpan="3">
+
+        <Grid Margin="5"
+              Grid.Row="0" Grid.Column="1">
            <Grid.ColumnDefinitions>
-               <ColumnDefinition/>
-               <ColumnDefinition />
+               
            </Grid.ColumnDefinitions>
            <Grid.RowDefinitions>
                 <RowDefinition Height="30"/>
@@ -58,7 +124,7 @@
                 <RowDefinition Height="30"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <bsFilter:FilterDataGrid Margin="5" Grid.Row="0" Grid.Column="1" Grid.RowSpan="4">
+            <bsFilter:FilterDataGrid Margin="5" Grid.Row="3" >
                 <bsFilter:FilterDataGrid.DataContext>
                     <models:BonEntree/>
                 </bsFilter:FilterDataGrid.DataContext>
@@ -68,10 +134,8 @@
                     <DataGridTextColumn Width="*" Header="Qnt" Binding="{Binding Qnt}"/>
                 </DataGrid.Columns>
             </bsFilter:FilterDataGrid>
-           <Button Name="AddBonBtn" Click="AddBonBtn_OnClick" Grid.Row="0" Grid.Column="0" Content="Ajouter"/>
                    </Grid>
-        <Separator Grid.Column="1" Grid.Row="2" Margin="2" BorderBrush="Gray" BorderThickness="2"/>
-      
+       
 
 
     </Grid>
