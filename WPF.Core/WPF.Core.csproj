@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Helpers\BaseResource.cs" />
+    <Compile Include="Helpers\EventHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Helpers\AutoFilterComboBox.cs" />
     <Compile Include="Helpers\PBar.cs" />

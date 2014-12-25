@@ -191,7 +191,7 @@
                 <RowDefinition />
             </Grid.RowDefinitions>
             <bsFilter:FilterDataGrid
-                KeyDown="My_first_event_handler"
+                
                 IsReadOnly="True"
                 Grid.Column="0"
                 Grid.Row="0"
@@ -211,19 +211,19 @@
                     <DataGridTextColumn Width="*" Header="Date d'entrée" Binding="{Binding DateEntree ,StringFormat=d}"/>
                 </bsFilter:FilterDataGrid.Columns>
             </bsFilter:FilterDataGrid>
-            <Button  
+            <Button  FontSize="10"
                     Visibility="Visible" 
                          x:Name="AddButton" 
                         Click="AddButton_OnClick"
                         
                          Margin="5,0,0,0" 
-                         Content="Ajouter"
+                         Content="Ajouter (ctr+ A)"
                          Grid.Row="0" Grid.Column="1" />
             <Button  
                     Click="UpdateButton_OnClick"
                         x:Name="UpdateButton"  
                         Margin="5,0,0,0" 
-                        Content="Modifier" 
+                        Content="Modifier(ctr +M)" 
                         Grid.Row="1" Grid.Column="1"/>
             <Button  
                      
@@ -244,7 +244,7 @@
                        x:Name="DeleteButton" 
                     Click="DeleteButton_OnClick"
                         Margin="5,0,0,0" 
-                        Content="Supprimer" 
+                        Content="Supprimer(ctr +S)" 
                         Grid.Row="2" Grid.Column="1"/>
             <Button
                        x:Name="AddMultButton" 

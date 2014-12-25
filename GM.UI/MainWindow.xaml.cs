@@ -1,5 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
+using System.Windows.Input;
 using GM.UI.Views;
 using ZonaTools.XPlorerBar;
 
@@ -59,6 +64,35 @@ namespace GM.UI
             {
 
                 MessageBox.Show(exception.Message);
+            }
+        }
+
+        private void MainWindow_OnKeyDown(object sender, KeyEventArgs e)
+        {
+            List<Button> buttons = EventHelper.GetLogicalChildCollection<Button>(ContentControl);
+            if (e.Key == (Key.A  ) &&Keyboard.IsKeyDown(Key.LeftCtrl))
+            {
+                 var add = buttons.FirstOrDefault(x => x.Name == "AddButton");
+                    if (add != null)
+                        add.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
+            }
+            if (e.Key == (Key.M) && Keyboard.IsKeyDown(Key.LeftCtrl))
+            {
+                var update = buttons.FirstOrDefault(x => x.Name == "UpdateButton");
+                    if (update != null)
+                        update.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
+            }
+            if (e.Key == (Key.S) && Keyboard.IsKeyDown(Key.LeftCtrl))
+            {
+                var delete = buttons.FirstOrDefault(c => c.Name.Equals("DeleteButton"));
+                if (delete != null)
+                    delete.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
+            }
+            if (e.Key == (Key.B) && Keyboard.IsKeyDown(Key.LeftCtrl))
+            {
+                var back = buttons.FirstOrDefault(c => c.Name.Equals("BackButton"));
+                if (back != null)
+                    back.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
             }
         }
     }
