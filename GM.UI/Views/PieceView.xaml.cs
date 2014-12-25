@@ -19,6 +19,7 @@ namespace GM.UI.Views
         private readonly Repository<SousCategorie> _sousCategorieRepository;
         readonly Repository<Entity.Models.Type> _typeRepository;
        public static PieceService _pieceService;
+        public static StockService _StockService;
         readonly Repository<BonEntreeLigne> _beLigneRepository;
 
 
@@ -28,6 +29,7 @@ namespace GM.UI.Views
             var container = new UnityContainer();
             _articleService = container.Resolve<ArticleService>();
             _pieceService = container.Resolve<PieceService>();
+            _StockService = container.Resolve<StockService>();
             var beRepository = container.Resolve<Repository<BonEntree>>();
             _beLigneRepository = container.Resolve<Repository<BonEntreeLigne>>();
             var magasinRepository = container.Resolve<Repository<Magasin>>();
