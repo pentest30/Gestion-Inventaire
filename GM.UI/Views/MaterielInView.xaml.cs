@@ -1,5 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using BLL;
+using Microsoft.Practices.Unity;
 
 namespace GM.UI.Views
 {
@@ -8,9 +10,14 @@ namespace GM.UI.Views
     /// </summary>
     public partial class MaterielInView
     {
+        private static  StockService _StockService;
         public MaterielInView()
         {
             InitializeComponent();
+            var container = new UnityContainer();
+            _StockService = container.Resolve<StockService>();
+            DataGridStock.ItemsSource = _StockService.SelectAll();
+
         }
 
         private void AddBonBtn_OnClick(object sender, RoutedEventArgs e)

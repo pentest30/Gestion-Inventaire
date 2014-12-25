@@ -93,23 +93,22 @@
         </GroupBox>
         <bsFilter:FilterDataGrid
             Margin="5"
-                
                 Grid.Column="0"
                
                 Grid.Row="1"
                     IsEnabled="{Binding Visibility, Converter={StaticResource Visible2Enable}, ElementName=AddButton}" 
                     AutoGenerateColumns="False" 
                     CanUserAddRows="False" 
-                    Name="DataGrid">
+                    Name="DataGridStock">
 
             <bsFilter:FilterDataGrid.DataContext>
-                <models:Piece/>
+                <models:PieceMagasin/>
             </bsFilter:FilterDataGrid.DataContext>
             <bsFilter:FilterDataGrid.Columns>
-                <DataGridTextColumn Width="*" Header="Code" Binding="{Binding Article.Libelle}"/>
-                <DataGridTextColumn Width="*" Header="Libelle" Binding="{Binding NInventaire}"/>
-                <DataGridTextColumn Width="*" Header="Marque" Binding="{Binding EtatPiece}"/>
-                <DataGridTextColumn Width="*" Header="Qnt totale" Binding="{Binding EtatStock}"/>
+                <DataGridTextColumn Width="*" Header="Code" Binding="{Binding Piece.NInventaire}"/>
+                <DataGridTextColumn Width="*" Header="Libelle" Binding="{Binding BonEntree.NBon}"/>
+                <DataGridTextColumn Width="*" Header="Marque" Binding="{Binding Piece.DateEntree}"/>
+                <DataGridTextColumn Width="*" Header="Qnt totale" Binding="{Binding Piece.EtatPiece}"/>
             </bsFilter:FilterDataGrid.Columns>
         </bsFilter:FilterDataGrid>
 

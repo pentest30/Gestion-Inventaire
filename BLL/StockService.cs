@@ -26,7 +26,7 @@ namespace BLL
 
        public IEnumerable<PieceMagasin> SelectAll()
        {
-           return _db.PieceMagasins;
+           return _db.PieceMagasins.ToList();
        }
 
        public PieceMagasin SelectById(object id)
