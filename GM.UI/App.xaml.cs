@@ -40,6 +40,7 @@ namespace GM.UI
                .ForMember(x => x.Id, o => o.Ignore())
                .ForMember(x => x.NInventaire, o => o.Ignore());
             AutoMapper.Mapper.CreateMap<Piece, PieceMagasin>()
+                .ForMember(x => x.ArticleId, o => o.MapFrom(p => p.ArticleId))
                 .ForMember(x => x.PieceId, o => o.MapFrom(p => p.Id))
                 .ForMember(x => x.MagasinId, o => o.MapFrom(p => p.MagasinId))
                 .ForMember(x => x.Date, o => o.MapFrom(p => p.DateEntree))

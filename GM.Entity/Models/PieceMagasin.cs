@@ -10,13 +10,13 @@ namespace GM.Entity.Models
 
         public int? MagasinId { get; set; }
         public long? BonEntreeId { get; set; }
-
+        public long? ArticleId { get; set; }
         //public string PieceNInventaire { get; set; }
 
         public DateTime Date { get; set; }
 
 
-        //public string Etat { get; set; }
+        public Article Article { get; set; }
 
 
         public Piece Piece { get; set; }

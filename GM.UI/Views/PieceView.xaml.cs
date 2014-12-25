@@ -135,11 +135,15 @@ namespace GM.UI.Views
             var result = MessageBox.Show("Est vous sure!", "Warning", MessageBoxButton.YesNo,
                 MessageBoxImage.Warning);
             if (!result.ToString().Equals("Yes")) return;
-            var item = DataGrid.SelectedItem as Piece;
-            if (item == null) return;
-            _pieceService.Delete(item.Id);
-            ((ObservableCollection<Piece>) DataGrid.ItemsSource).Remove(item);
-            _pieceService.Save();
+            var items = DataGrid.SelectedItems;
+            if (items == null) return;
+
+            foreach (var item in items.OfType<Piece>())
+            {
+                _pieceService.Delete(item.Id);
+                _pieceService.Save();
+            }
+            LoadData();
         }
 
         private void CbType_OnSelectionChanged(object sender, SelectionChangedEventArgs e)

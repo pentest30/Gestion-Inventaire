@@ -195,7 +195,7 @@
                 IsReadOnly="True"
                 Grid.Column="0"
                 Grid.Row="0"
-                Grid.RowSpan="5"
+                Grid.RowSpan="5" SelectionMode="Extended"
                     IsEnabled="{Binding Visibility, Converter={StaticResource Visible2Enable}, ElementName=AddButton}" 
                     AutoGenerateColumns="False" 
                     CanUserAddRows="False" 
