@@ -5,6 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:models="clr-namespace:GM.Entity.Models;assembly=GM.Entity"
              xmlns:bsFilter="http://schemas.bolapansoft.com/xaml/Controls/ItemsFilter"
+             xmlns:extendedDataGrid="clr-namespace:ExtendedGrid.ExtendedGridControl;assembly=ExtendedGrid"
+             xmlns:extendedColumn="clr-namespace:ExtendedGrid.ExtendedColumn;assembly=ExtendedGrid"
              xmlns:converters="clr-namespace:GM.UI.Converters"
              xmlns:helpers="clr-namespace:WPF.Core.Helpers;assembly=WPF.Core"
              mc:Ignorable="d" >
@@ -22,7 +24,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-      <GroupBox Margin="5" Header="Paramètres de recherche:" BorderBrush="Gray">
+        <GroupBox Margin="5" Header="Paramètres de recherche:" BorderBrush="Gray">
             <Grid Margin="5">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
@@ -47,14 +49,14 @@
 				Grid.Column="1" 
 				Grid.Row="0" 
 				DisplayMemberPath="Libelle"
-				SelectedValue="{Binding CategorieId}" 
 				SelectedValuePath="Id"/>
                 <helpers:AutoFilteredComboBox Margin="2"
+                                         
                 x:Name="CbSousCategorie" 
 				Grid.Column="3" 
 				Grid.Row="0" 
 				DisplayMemberPath="Libelle"
-				SelectedValue="{Binding SousCategorieId}" 
+				
 				SelectedValuePath="Id"
                 SelectionChanged="CbSousCategorie_OnSelectionChanged"/>
                 <helpers:AutoFilteredComboBox Margin="2" 
@@ -62,14 +64,15 @@
 				Grid.Column="1" 
 				Grid.Row="1" 
 				DisplayMemberPath="Libelle"
-				SelectedValue="{Binding TypeId}" 
+                                              SelectionChanged="CbType_OnSelectionChanged"
+			
 				SelectedValuePath="Id"/>
                 <helpers:AutoFilteredComboBox Margin="2" 
-				x:Name="CbMaruqe" 
+				x:Name="CbMarque" 
 				Grid.Column="3" 
 				Grid.Row="1" 
 				DisplayMemberPath="Libelle"
-				SelectedValue="{Binding MarqueId}" 
+                 SelectionChanged="CbMaruqe_OnSelectionChanged"
 				SelectedValuePath="Id"/>
                 <helpers:AutoFilteredComboBox 
             x:Name="CbArticle" 
@@ -79,43 +82,37 @@
             DisplayMemberPath="Libelle" 
             SelectedValuePath="Id" 
                     IsEnabled="{Binding Visibility, Converter={StaticResource Visible2Disable}, ElementName=AddButton}" 
-			
-            SelectedValue="{Binding ArticleId}"/>
+			SelectionChanged="CbArticle_OnSelectionChanged" />
                 <helpers:AutoFilteredComboBox 
-                Margin="2"
-                Name="CbMagasin" Grid.Column="3" Grid.Row="2" 
+                Margin="0,2,2,2"
+               x:Name="CbMagasin"
+                    Grid.Column="3" Grid.Row="2" 
                 DisplayMemberPath="Libelle" 
                 SelectedValuePath="Id" 
-                SelectedValue="{Binding Path=MagasinId}"/>
-
-
+                SelectionChanged="CbMagasin_OnSelectionChanged" />
             </Grid>
         </GroupBox>
-        <bsFilter:FilterDataGrid
+        <extendedDataGrid:ExtendedDataGrid
             Margin="5"
                 Grid.Column="0"
-               
+               IsReadOnly="True"
                 Grid.Row="1"
                     IsEnabled="{Binding Visibility, Converter={StaticResource Visible2Enable}, ElementName=AddButton}" 
-                    AutoGenerateColumns="False" 
+                     AutoGenerateColumns="False"
                     CanUserAddRows="False" 
                     Name="DataGridStock">
-
-            <bsFilter:FilterDataGrid.DataContext>
-                <models:PieceMagasin/>
-            </bsFilter:FilterDataGrid.DataContext>
-            <bsFilter:FilterDataGrid.Columns>
-                <DataGridTextColumn Width="*" Header="Code" Binding="{Binding Piece.NInventaire}"/>
-                <DataGridTextColumn Width="*" Header="Libelle" Binding="{Binding BonEntree.NBon}"/>
-                <DataGridTextColumn Width="*" Header="Marque" Binding="{Binding Piece.DateEntree}"/>
-                <DataGridTextColumn Width="*" Header="Qnt totale" Binding="{Binding Piece.EtatPiece}"/>
-            </bsFilter:FilterDataGrid.Columns>
-        </bsFilter:FilterDataGrid>
+          
+            <extendedDataGrid:ExtendedDataGrid.Columns>
+               <extendedColumn:ExtendedDataGridTextColumn AllowAutoFilter="True" Width="*" Header="N° d'inventaire" Binding="{Binding Path=Inventaire}"/>
+                <extendedColumn:ExtendedDataGridTextColumn AllowAutoFilter="True" Width="*" Header="Date d'entrée" Binding="{Binding Path=Date}"/>
+                <extendedColumn:ExtendedDataGridTextColumn Width="*" Header="N° de bon d'entré" Binding="{Binding Path= NBon}"/>
+            </extendedDataGrid:ExtendedDataGrid.Columns>
+        </extendedDataGrid:ExtendedDataGrid>
 
         <Grid Margin="5"
               Grid.Row="0" Grid.Column="1">
-         
-           <Grid.RowDefinitions>
+
+            <Grid.RowDefinitions>
                 <RowDefinition Height="30"/>
                 <RowDefinition Height="30"/>
                 <RowDefinition Height="30"/>
@@ -131,8 +128,8 @@
                     <DataGridTextColumn Width="*" Header="Qnt" Binding="{Binding Qnt}"/>
                 </DataGrid.Columns>
             </bsFilter:FilterDataGrid>
-                   </Grid>
-       
+        </Grid>
+
 
 
     </Grid>

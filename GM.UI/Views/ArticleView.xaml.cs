@@ -34,9 +34,12 @@ namespace GM.UI.Views
             var categorieRepository = container.Resolve<Repository<Categorie>>();
             _sousCategorieRepository = container.Resolve<Repository<SousCategorie>>();
             _typeRepository = container.Resolve<Repository<Entity.Models.Type>>();
+           
             DataGrid.ItemsSource =(_articleService.ListWithCount().Any())? _articleService.ListWithCount(): new List<Article>();
             CbCategorie.ItemsSource = categorieRepository.SelectAll();
             CbMaruqe.ItemsSource = marqueRepository.SelectAll();
+           
+            
         }
 
       

@@ -47,6 +47,10 @@
     <Reference Include="EntityFramework.SqlServer">
       <HintPath>..\packages\EntityFramework.6.1.1\lib\net40\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="ExtendedGrid, Version=2.0.0.15, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>D:\wpf\datagrid auto filter\ExtendedGrid.dll</HintPath>
+    </Reference>
     <Reference Include="ItemsFilter">
       <HintPath>..\..\GMG.ST\GMG.UI1\bin\Debug\ItemsFilter.dll</HintPath>
     </Reference>
@@ -102,6 +106,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="EtatMateriel.cs" />
+    <Compile Include="ModelView\StockModelView.cs" />
     <Compile Include="Resources\WindowStyleChrome.xaml.cs">
       <DependentUpon>WindowStyleChrome.xaml</DependentUpon>
     </Compile>
