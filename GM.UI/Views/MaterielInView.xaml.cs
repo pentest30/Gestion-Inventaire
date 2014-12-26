@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Controls;
@@ -16,7 +16,7 @@ namespace GM.UI.Views
     {
         private static  StockService _stockService;
         private readonly Repository<SousCategorie> _sousCategorieRepository;
-        private readonly Repository<Entity.Models.Type> _typeRepository;
+        private readonly Repository<Type> _typeRepository;
         private readonly ArticleService _articleService;
         public MaterielInView()
         {
@@ -27,18 +27,13 @@ namespace GM.UI.Views
             var marqueRepository = container.Resolve<Repository<Marque>>();
             var categorieRepository = container.Resolve<Repository<Categorie>>();
             _sousCategorieRepository = container.Resolve<Repository<SousCategorie>>();
-            _typeRepository = container.Resolve<Repository<Entity.Models.Type>>();
+            _typeRepository = container.Resolve<Repository<Type>>();
             var magasinRepository = container.Resolve<Repository<Magasin>>();
             CbCategorie.ItemsSource = categorieRepository.SelectAll();
             CbMarque.ItemsSource = marqueRepository.SelectAll();
             CbMagasin.ItemsSource = magasinRepository.SelectAll();
            // LoadData();
 
-        }
-
-        private void LoadData()
-        {
-            DataGridStock.ItemsSource = new ObservableCollection<PieceMagasin>(_stockService.GetAllLazyLoad(x=>x.BonEntree, x=>x.Piece,w=>w.Magasin));
         }
 
         private void CbCategorie_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -52,16 +47,11 @@ namespace GM.UI.Views
 
         private void CbSousCategorie_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            try
-            {
-                CbType.SelectedIndex = -1;
-                var item = CbSousCategorie.SelectedItem as SousCategorie;
-                if (item != null) CbType.ItemsSource = _typeRepository.Find(x => x.SousCategorieId == item.Id);
-            }
-            catch (Exception)
-            {
-
-            }
+            if (CbSousCategorie.SelectedIndex ==-1)return;
+            CbType.SelectedIndex = -1;
+            var item = CbSousCategorie.SelectedItem as SousCategorie;
+            if (item != null) CbType.ItemsSource = _typeRepository.Find(x => x.SousCategorieId == item.Id);
+           
         }
 
         private void CbType_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -95,29 +85,39 @@ namespace GM.UI.Views
             var categorie = CbCategorie.SelectedItem as Categorie;
             var sousCategorie = CbSousCategorie.SelectedItem as SousCategorie;
             var marque = CbMarque.SelectedItem as Marque;
-            var type = CbType.SelectedItem as Entity.Models.Type;
+            var type = CbType.SelectedItem as Type;
             var article = CbArticle.SelectedItem as Article;
             var magasin = CbMagasin.SelectedItem as Magasin;
-            if (sousCategorie != null && categorie != null && marque != null && magasin != null && type != null &&
-                article != null)
+            if (sousCategorie == null || categorie == null || marque == null || magasin == null || type == null ||
+                article == null) return;
+            var result = PieceMagasins(categorie, sousCategorie, type, marque, article, magasin);
+            if (ConvertToStockVm(result, itemSourceView)) return;
+            DataGridStock.ItemsSource = itemSourceView;
+        }
+
+        private static bool ConvertToStockVm(IEnumerable<PieceMagasin> result, ObservableCollection<StockModelView> itemSourceView)
+        {
+            var pieceMagasins = result as PieceMagasin[] ?? result.ToArray();
+            if (!pieceMagasins.Any()) return true;
+            foreach (var pieceMagasin in pieceMagasins)
             {
-               var result = new ObservableCollection<PieceMagasin>(_stockService.GetAllLazyLoad(x => x.BonEntree, x => x.Piece, w => w.Magasin))
-                .Where(x=>x.Article.Categorie.Id== categorie.Id
-                && x.Article.SousCategorie.Id == sousCategorie.Id
-                &&x.Article.Type.Id == type.Id
-                &&x.Article.Marque.Id == marque.Id
-                &&x.Article.Libelle ==article.Libelle
-                &&x.MagasinId == magasin.Id);
+                itemSourceView.Add(AutoMapper.Mapper.Map<StockModelView>(pieceMagasin));
+            }
+            return false;
+        }
 
-                var pieceMagasins = result as PieceMagasin[] ?? result.ToArray();
-                if (!pieceMagasins.Any()) return;
-                foreach (var pieceMagasin in pieceMagasins)
-                {
-                    itemSourceView.Add( AutoMapper.Mapper.Map<StockModelView>(pieceMagasin));
-
-                }
-                DataGridStock.ItemsSource = itemSourceView;
-            } 
+        private static IEnumerable<PieceMagasin> PieceMagasins(Categorie categorie, SousCategorie sousCategorie, Type type, Marque marque,
+            Article article, Magasin magasin)
+        {
+            var result = new ObservableCollection<PieceMagasin>(_stockService.GetAllLazyLoad(x => x.BonEntree, x => x.Piece,
+                w => w.Magasin))
+                .Where(x => x.Article.Categorie.Id == categorie.Id
+                            && x.Article.SousCategorie.Id == sousCategorie.Id
+                            && x.Article.Type.Id == type.Id
+                            && x.Article.Marque.Id == marque.Id
+                            && x.Article.Libelle == article.Libelle
+                            && x.MagasinId == magasin.Id);
+            return result;
         }
     }
 }

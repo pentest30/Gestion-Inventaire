@@ -38,19 +38,23 @@ namespace GM.UI
                 container.RegisterInstance(new Repository<BonSortieLigne>());
             }
             AutoMapper.Mapper.CreateMap<Piece, Piece>()
-               .ForMember(x => x.Id, o => o.Ignore())
-               .ForMember(x => x.NInventaire, o => o.Ignore());
+                .ForMember(x => x.Id, o => o.Ignore())
+                .ForMember(x => x.NInventaire, o => o.Ignore());
             AutoMapper.Mapper.CreateMap<Piece, PieceMagasin>()
-               // .ForMember(x => x.ArticleId, o => o.MapFrom(p => p.ArticleId))
+                // .ForMember(x => x.ArticleId, o => o.MapFrom(p => p.ArticleId))
                 .ForMember(x => x.PieceId, o => o.MapFrom(p => p.Id))
-              //  .ForMember(x => x.MagasinId, o => o.MapFrom(p => p.MagasinId))
+                //  .ForMember(x => x.MagasinId, o => o.MapFrom(p => p.MagasinId))
                 .ForMember(x => x.Date, o => o.MapFrom(p => p.DateEntree));
             //   .ForMember(x => x.BonEntreeId, o => o.MapFrom(p => p.BonEntreeId));
             AutoMapper.Mapper.CreateMap<PieceMagasin, StockModelView>()
                 .ForMember(x => x.NBon, o => o.MapFrom(p => p.BonEntree.NBon))
                 .ForMember(x => x.Date, o => o.MapFrom(p => p.Date))
-                .ForMember(x => x.Inventaire, o => o.MapFrom(p => p.Piece.NInventaire));
-
+                .ForMember(x => x.Inventaire, o => o.MapFrom(p => p.Piece.NInventaire))
+                .ForMember(x => x.Model, o => o.MapFrom(p => p.Article.Libelle))
+                .ForMember(x => x.Categorie, o => o.MapFrom(p => p.Article.Categorie.Libelle))
+                .ForMember(x => x.SousCategorie, o => o.MapFrom(p => p.Article.SousCategorie.Libelle))
+                .ForMember(x => x.Type, o => o.MapFrom(p => p.Article.Type.Libelle))
+                .ForMember(x => x.Marque, o => o.MapFrom(p => p.Article.Marque.Libelle));
         }
     }
 }

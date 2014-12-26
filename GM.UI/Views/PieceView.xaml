@@ -9,6 +9,8 @@
              xmlns:bsFilter="http://schemas.bolapansoft.com/xaml/Controls/ItemsFilter"
              xmlns:local="clr-namespace:GM.UI"
              xmlns:uiControls="clr-namespace:UIControls;assembly=UIControls"
+             xmlns:extendedGridControl="clr-namespace:ExtendedGrid.ExtendedGridControl;assembly=ExtendedGrid"
+             xmlns:extendedColumn="clr-namespace:ExtendedGrid.ExtendedColumn;assembly=ExtendedGrid"
              x:Class="GM.UI.Views.PieceView"
              mc:Ignorable="d" >
     
@@ -194,27 +196,25 @@
                 <RowDefinition Height="30"/>
                 <RowDefinition />
             </Grid.RowDefinitions>
-            <bsFilter:FilterDataGrid
+            <extendedGridControl:ExtendedDataGrid
                 
                 IsReadOnly="True"
                 Grid.Column="0"
                 Grid.Row="0"
                 Grid.RowSpan="5" SelectionMode="Extended"
-                    IsEnabled="{Binding Visibility, Converter={StaticResource Visible2Enable}, ElementName=AddButton}" 
+                   
                     AutoGenerateColumns="False" 
                     CanUserAddRows="False" 
-                    Name="DataGrid">
-                <bsFilter:FilterDataGrid.DataContext>
-                    <models:Piece/>
-                </bsFilter:FilterDataGrid.DataContext>
-                <bsFilter:FilterDataGrid.Columns>
-                    <DataGridTextColumn Width="*" Header="N° d'inventaire" Binding="{Binding NInventaire}"/>
-                    <DataGridTextColumn Width="*" Header="Article" Binding="{Binding Article.Libelle}"/>
-                    <DataGridTextColumn Width="*" Header="Magasin" Binding="{Binding Magasin.Libelle}"/>
-                    <DataGridTextColumn Width="*" Header="N° Bon d'entrée" Binding="{Binding BonEntree.NBon}"/>
-                    <DataGridTextColumn Width="*" Header="Date d'entrée" Binding="{Binding DateEntree ,StringFormat=d}"/>
-                </bsFilter:FilterDataGrid.Columns>
-            </bsFilter:FilterDataGrid>
+                    x:Name="DataGrid">
+
+                <extendedGridControl:ExtendedDataGrid.Columns>
+                    <extendedColumn:ExtendedDataGridTextColumn Width="*" Header="N° d'inventaire" Binding="{Binding NInventaire}"/>
+                    <extendedColumn:ExtendedDataGridTextColumn Width="*" Header="Article" Binding="{Binding Article.Libelle}"/>
+                    <extendedColumn:ExtendedDataGridTextColumn Width="*" Header="Magasin" Binding="{Binding Magasin.Libelle}"/>
+                    <extendedColumn:ExtendedDataGridTextColumn Width="*" Header="N° Bon d'entrée" Binding="{Binding BonEntree.NBon}"/>
+                    <extendedColumn:ExtendedDataGridTextColumn Width="*" Header="Date d'entrée" Binding="{Binding DateEntree ,StringFormat=d}"/>
+                </extendedGridControl:ExtendedDataGrid.Columns>
+            </extendedGridControl:ExtendedDataGrid>
             <Button  FontSize="10"
                     Visibility="Visible" 
                          x:Name="AddButton" 

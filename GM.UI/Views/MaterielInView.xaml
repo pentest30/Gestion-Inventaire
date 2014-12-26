@@ -104,7 +104,7 @@
           
             <extendedDataGrid:ExtendedDataGrid.Columns>
                <extendedColumn:ExtendedDataGridTextColumn AllowAutoFilter="True" Width="*" Header="N° d'inventaire" Binding="{Binding Path=Inventaire}"/>
-                <extendedColumn:ExtendedDataGridTextColumn AllowAutoFilter="True" Width="*" Header="Date d'entrée" Binding="{Binding Path=Date}"/>
+                <extendedColumn:ExtendedDataGridTextColumn AllowAutoFilter="True" Width="*" Header="Date d'entrée" Binding="{Binding Path=Date, StringFormat=d}"/>
                 <extendedColumn:ExtendedDataGridTextColumn Width="*" Header="N° de bon d'entré" Binding="{Binding Path= NBon}"/>
             </extendedDataGrid:ExtendedDataGrid.Columns>
         </extendedDataGrid:ExtendedDataGrid>
