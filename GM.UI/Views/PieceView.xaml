@@ -53,7 +53,7 @@
                 <TextBlock Grid.Row="0" Grid.Column="2" Text="Sous catégorie:" VerticalAlignment="Center"/>
                 <TextBlock Grid.Row="1" Grid.Column="0" Text="Type:" VerticalAlignment="Center"/>
                 <TextBlock Grid.Row="2" Grid.Column="0" Text="Marque:" VerticalAlignment="Center"/>
-                <TextBlock Grid.Row="2" Grid.Column="2" Text="Article:" VerticalAlignment="Center"/>
+                <TextBlock Grid.Row="2" Grid.Column="2" Text="Modél:" VerticalAlignment="Center"/>
                 <helpers:AutoFilteredComboBox 
                      IsEnabled="{Binding Visibility, Converter={StaticResource Visible2Disable}, ElementName=AddButton}" 
 			
@@ -82,7 +82,7 @@
             x:Name="CbType" 
             Grid.Column="1"
                     Grid.ColumnSpan="3"
-                    SelectedValue="{Binding Article.TypeId}"
+                    SelectedValue="{Binding Article.TypeArticleId}"
                 SelectionChanged="CbType_OnSelectionChanged"
             Grid.Row="1" 
             IsEnabled="{Binding Visibility, Converter={StaticResource Visible2Disable}, ElementName=AddButton}" 
@@ -209,7 +209,7 @@
 
                 <extendedGridControl:ExtendedDataGrid.Columns>
                     <extendedColumn:ExtendedDataGridTextColumn Width="*" Header="N° d'inventaire" Binding="{Binding NInventaire}"/>
-                    <extendedColumn:ExtendedDataGridTextColumn Width="*" Header="Article" Binding="{Binding Article.Libelle}"/>
+                    <extendedColumn:ExtendedDataGridTextColumn Width="*" Header="Modél" Binding="{Binding Article.Libelle}"/>
                     <extendedColumn:ExtendedDataGridTextColumn Width="*" Header="Magasin" Binding="{Binding Magasin.Libelle}"/>
                     <extendedColumn:ExtendedDataGridTextColumn Width="*" Header="N° Bon d'entrée" Binding="{Binding BonEntree.NBon}"/>
                     <extendedColumn:ExtendedDataGridTextColumn Width="*" Header="Date d'entrée" Binding="{Binding DateEntree ,StringFormat=d}"/>

@@ -1,6 +1,6 @@
 using System.Data.Entity;
 using GM.Entity.Models;
-using Type = GM.Entity.Models.Type;
+using Type = GM.Entity.Models.TypeArticle;
 
 namespace DAL
 {

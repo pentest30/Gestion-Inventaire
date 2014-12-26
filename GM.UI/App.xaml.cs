@@ -17,10 +17,9 @@ namespace GM.UI
             using (var db = new GmStoreContext())
             {
                 var container = new UnityContainer();
-
-                container.RegisterInstance(new ArticleService());
-                container.RegisterInstance(new PieceService());
                 container.RegisterInstance(new StockService());
+                container.RegisterInstance(new ArticleService(container.Resolve<StockService>()));
+                container.RegisterInstance(new PieceService());
                 container.RegisterInstance(new EntityFactory<Departement>(db));
                 container.RegisterInstance(new Repository<Departement>());
                 container.RegisterInstance(new Repository<Service>());
@@ -36,6 +35,7 @@ namespace GM.UI
                 container.RegisterInstance(new Repository<BonEntreeLigne>());
                 container.RegisterInstance(new Repository<BonSortie>());
                 container.RegisterInstance(new Repository<BonSortieLigne>());
+                container.RegisterInstance(new Repository<TypeArticle>());
             }
             AutoMapper.Mapper.CreateMap<Piece, Piece>()
                 .ForMember(x => x.Id, o => o.Ignore())
@@ -53,7 +53,7 @@ namespace GM.UI
                 .ForMember(x => x.Model, o => o.MapFrom(p => p.Article.Libelle))
                 .ForMember(x => x.Categorie, o => o.MapFrom(p => p.Article.Categorie.Libelle))
                 .ForMember(x => x.SousCategorie, o => o.MapFrom(p => p.Article.SousCategorie.Libelle))
-                .ForMember(x => x.Type, o => o.MapFrom(p => p.Article.Type.Libelle))
+                .ForMember(x => x.Type, o => o.MapFrom(p => p.Article.TypeArticle.Libelle))
                 .ForMember(x => x.Marque, o => o.MapFrom(p => p.Article.Marque.Libelle));
         }
     }

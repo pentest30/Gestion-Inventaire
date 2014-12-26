@@ -23,7 +23,8 @@ namespace GM.UI.Views
         //private readonly Repository<Article> _articleRepository;
         private readonly ArticleService _articleService;
         private readonly Repository<SousCategorie> _sousCategorieRepository;
-        private readonly Repository<Entity.Models.Type> _typeRepository;
+        private readonly Repository<TypeArticle> _typeRepository;
+
         public ArticleView()
         {
             InitializeComponent();
@@ -33,16 +34,15 @@ namespace GM.UI.Views
             var marqueRepository = container.Resolve<Repository<Marque>>();
             var categorieRepository = container.Resolve<Repository<Categorie>>();
             _sousCategorieRepository = container.Resolve<Repository<SousCategorie>>();
-            _typeRepository = container.Resolve<Repository<Entity.Models.Type>>();
-           
-            DataGrid.ItemsSource =(_articleService.ListWithCount().Any())? _articleService.ListWithCount(): new List<Article>();
+            _typeRepository = container.Resolve<Repository<TypeArticle>>();
+            DataGrid.ItemsSource = (_articleService.ArticleStatistics().Any())
+                ? _articleService.ArticleStatistics()
+                : new List<Article>();
             CbCategorie.ItemsSource = categorieRepository.SelectAll();
             CbMaruqe.ItemsSource = marqueRepository.SelectAll();
-           
-            
         }
 
-      
+
         private void BtnImageLoader_OnClick(object sender, RoutedEventArgs e)
         {
             var dlg = new OpenFileDialog();
@@ -103,7 +103,7 @@ namespace GM.UI.Views
             }
 
             AddButton.Visibility = Visibility.Visible;
-            DataGrid.ItemsSource = new ObservableCollection<Article>(_articleService.ListWithCount());
+            DataGrid.ItemsSource = new ObservableCollection<Article>(_articleService.ArticleStatistics());
             var binding = new Binding { ElementName = "DataGrid", Path = new PropertyPath("SelectedItem") };
             Grid.SetBinding(DataContextProperty, binding);
             UpdateButton.Visibility = Visibility.Visible;
@@ -156,15 +156,10 @@ namespace GM.UI.Views
 
         private void CbSousCategorie_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            try
-            {
-                var item = CbSousCategorie.SelectedItem as SousCategorie;
-                if (item != null) CbType.ItemsSource = _typeRepository.Find(x => x.SousCategorieId == item.Id);
-            }
-            catch (Exception)
-            {
-                
-            }
+            if (CbSousCategorie.SelectedIndex == -1) return;
+            var item = CbSousCategorie.SelectedItem as SousCategorie;
+            if (item != null) CbType.ItemsSource = _typeRepository.Find(x => x.SousCategorieId == item.Id);
+
         }
     }
 }

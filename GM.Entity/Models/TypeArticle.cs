@@ -1,6 +1,9 @@
-﻿namespace GM.Entity.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace GM.Entity.Models
 {
-    public class Type
+    [Table("Types")]
+    public class TypeArticle
     {
         public int Id { get; set; }
         public string Libelle { get; set; }

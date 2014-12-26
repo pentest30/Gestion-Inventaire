@@ -77,7 +77,7 @@
 				Grid.Column="1" 
 				Grid.Row="2" 
 				DisplayMemberPath="Libelle"
-				SelectedValue="{Binding TypeId}" 
+				SelectedValue="{Binding TypeArticleId}" 
 				SelectedValuePath="Id"/>
                     <TextBlock Grid.Column="2" VerticalAlignment="Center" Grid.Row="2" Text="Marque:"/>
                     <helpers1:AutoFilteredComboBox Margin="2" IsEnabled="{Binding Visibility, Converter={StaticResource Visible2Disable}, ElementName=AddButton}"

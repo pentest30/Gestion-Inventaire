@@ -7,7 +7,6 @@ using System.Windows.Data;
 using BLL;
 using GM.Entity.Models;
 using Microsoft.Practices.Unity;
-using Type = GM.Entity.Models.Type;
 
 namespace GM.UI.Views
 {
@@ -16,25 +15,25 @@ namespace GM.UI.Views
     /// </summary>
     public partial class TypeView
     {
-        private readonly EntityFactory<Type> _factory;
+        private readonly EntityFactory<TypeArticle> _factory;
         private readonly Repository<SousCategorie> _sousCategorieRepository;
-        private readonly Repository<Type> _typeRepository;
+        private readonly Repository<TypeArticle> _typeRepository;
         public TypeView()
         {
             InitializeComponent();
             var container = new UnityContainer();
             _sousCategorieRepository = container.Resolve<Repository<SousCategorie>>();
             var departmentRepository = container.Resolve<Repository<Categorie>>();
-            _typeRepository = container.Resolve<Repository<Type>>();
-            _factory = container.Resolve<EntityFactory<Type>>();
+            _typeRepository = container.Resolve<Repository<TypeArticle>>();
+            _factory = container.Resolve<EntityFactory<TypeArticle>>();
             CbDepartement.ItemsSource = departmentRepository.SelectAll();
-            DataGrid.ItemsSource = new ObservableCollection<Type>(_typeRepository.GetAllLazyLoad(x => x.Categorie, x => x.SousCategorie));
+            DataGrid.ItemsSource = new ObservableCollection<TypeArticle>(_typeRepository.GetAllLazyLoad(x => x.Categorie, x => x.SousCategorie));
         }
 
         private void AddButton_OnClick(object sender, RoutedEventArgs e)
         {
             AddButton.Visibility = Visibility.Hidden;
-            var list = DataGrid.ItemsSource.OfType<Type>().ToList();
+            var list = DataGrid.ItemsSource.OfType<TypeArticle>().ToList();
             list.Add(_factory.Create());
             Grid.DataContext = list.Last();  
         }
@@ -54,11 +53,11 @@ namespace GM.UI.Views
 
         private void SaveButton_OnClick(object sender, RoutedEventArgs e)
         {
-            var item = (Type)Grid.DataContext;
+            var item = (TypeArticle)Grid.DataContext;
             if (item.Id <= 0)
             {
                 _typeRepository.Insert(item);
-                ((ObservableCollection<Type>)DataGrid.ItemsSource).Add(item);
+                ((ObservableCollection<TypeArticle>)DataGrid.ItemsSource).Add(item);
 
             }
             else
@@ -77,7 +76,7 @@ namespace GM.UI.Views
             }
 
             AddButton.Visibility = Visibility.Visible;
-            DataGrid.ItemsSource = new ObservableCollection<Type>(_typeRepository.GetAllLazyLoad(x => x.Categorie, x => x.SousCategorie));
+            DataGrid.ItemsSource = new ObservableCollection<TypeArticle>(_typeRepository.GetAllLazyLoad(x => x.Categorie, x => x.SousCategorie));
             var binding = new Binding { ElementName = "DataGrid", Path = new PropertyPath("SelectedItem") };
             Grid.SetBinding(DataContextProperty, binding);
             UpdateButton.Visibility = Visibility.Visible;
@@ -105,10 +104,10 @@ namespace GM.UI.Views
             var result = MessageBox.Show("Est vous sure!", "Warning", MessageBoxButton.YesNo,
                 MessageBoxImage.Warning);
             if (!result.ToString().Equals("Yes")) return;
-            var item = DataGrid.SelectedItem as Type;
+            var item = DataGrid.SelectedItem as TypeArticle;
             if (item == null) return;
             _sousCategorieRepository.Delete(item.Id);
-            ((ObservableCollection<Type>)DataGrid.ItemsSource).Remove(item);
+            ((ObservableCollection<TypeArticle>)DataGrid.ItemsSource).Remove(item);
             _typeRepository.Save();
         }
 

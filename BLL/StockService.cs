@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data.Entity;
-using System.Data.Entity.Core.Objects;
 using System.Linq;
 using System.Linq.Expressions;
 using DAL;
@@ -72,6 +72,20 @@ namespace BLL
        public PieceMagasin Create()
        {
            return _factory.Create();
+       }
+      
+
+       public  IEnumerable<PieceMagasin> PieceMagasins(Categorie categorie, SousCategorie sousCategorie, GM.Entity.Models.TypeArticle type, Marque marque,Article article, Magasin magasin)
+       {
+           var result = new ObservableCollection<PieceMagasin>(GetAllLazyLoad(x => x.BonEntree, x => x.Piece,
+               w => w.Magasin))
+               .Where(x => x.Article.Categorie.Id == categorie.Id
+                           && x.Article.SousCategorie.Id == sousCategorie.Id
+                           && x.Article.TypeArticle.Id == type.Id
+                           && x.Article.Marque.Id == marque.Id
+                           && x.Article.Libelle == article.Libelle
+                           && x.MagasinId == magasin.Id);
+           return result;
        }
    }
 }

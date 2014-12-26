@@ -13,7 +13,7 @@
         <converters:Visible2NDisable x:Key="Visible2Disable"/>
     </UserControl.Resources>
 
-    <GroupBox Margin="10" BorderThickness="1" BorderBrush="Gray"  Header="Sous catégories: ">
+    <GroupBox Margin="10" BorderThickness="1" BorderBrush="Gray"  Header="Types: ">
         <Grid  Margin="5">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -50,11 +50,12 @@
                 <ComboBox IsEnabled="{Binding Visibility, Converter={StaticResource Visible2Disable}, ElementName=AddButton}"
                           Name="CbDepartement" 
                           Grid.Column="1" 
-                          Grid.Row="1" 
-                          SelectionChanged="CbDepartement_OnSelectionChanged"
+                          Grid.Row="1"
                           DisplayMemberPath="Libelle"
                           SelectedValue="{Binding Path=CategorieId}" 
-                          SelectedValuePath="Id"/>
+                          SelectedValuePath="Id">
+                    <ComboBox.SelectionChanged>CbDepartement_OnSelectionChanged</ComboBox.SelectionChanged>
+                </ComboBox>
                 <TextBlock VerticalAlignment="Center" Grid.Row="2" Grid.Column="0" Text="Sous catégorie * :"/>
                 <ComboBox IsEnabled="{Binding Visibility, Converter={StaticResource Visible2Disable}, ElementName=AddButton}"
                           Name="CbSousCategorie" 

@@ -66,7 +66,7 @@
     <Compile Include="Models\Service.cs" />
     <Compile Include="Models\SousCategorie.cs" />
     <Compile Include="Models\SousService.cs" />
-    <Compile Include="Models\Type.cs" />
+    <Compile Include="Models\TypeArticle.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

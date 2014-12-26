@@ -13,30 +13,37 @@ namespace BLL
    {
        // static Repository<Article> _articleRepository;
        readonly static UnityContainer Container = new UnityContainer();
-       private static EntityFactory<Article> _factory; 
+       private static EntityFactory<Article> _factory;
+       private static  StockService _stockService;
        private  static GmStoreContext _db;
-       public ArticleService()
+       public ArticleService(StockService stockService)
        {
            _db = ContextSingleton.Instance;
            Container.RegisterInstance(new EntityFactory<Article>(_db));
            _factory = Container.Resolve<EntityFactory<Article>>();
            Container.RegisterInstance(new Repository<Article>());
+           _stockService = stockService;
            //_articleRepository = Container.Resolve<Repository<Article>>();
        }
 
-      public  IEnumerable<Article> ListWithCount()
+      public  IEnumerable<Article> ArticleStatistics()
        {
 
           if (SelectAll().Any())
           {
               foreach (var article in SelectAll())
               {
-                  var qnt = 0;
+                  var qnt = 0; 
+                  var qntTotle=0;
                   var ligne = article.BonEntreeLignes.FirstOrDefault(x => x.ArticleId == article.Id);
+                  var newArticle = article;
+                  var stock = _stockService.Find(x => x.ArticleId == newArticle.Id);
                   if (ligne != null)
                   {
                       qnt += Convert.ToInt32(ligne.Qnt);
-                      article.QntMagsin = qnt;
+                      qntTotle +=Convert.ToInt32(stock.Count());
+                      article.QntTotal = qnt;
+                      article.QntMagsin = qntTotle;
                   }
 
                   yield return article;
