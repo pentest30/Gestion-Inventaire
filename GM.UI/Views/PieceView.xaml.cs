@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
@@ -19,7 +18,7 @@ namespace GM.UI.Views
     {
         private readonly ArticleService _articleService;
         private readonly Repository<SousCategorie> _sousCategorieRepository;
-        private readonly Repository<Entity.Models.TypeArticle> _typeRepository;
+        private readonly Repository<TypeArticle> _typeRepository;
         public static PieceService PieceService;
         public static StockService StockService;
         private readonly Repository<BonEntreeLigne> _beLigneRepository;
@@ -38,7 +37,7 @@ namespace GM.UI.Views
             var categorieRepository = container.Resolve<Repository<Categorie>>();
             var marqueRepository = container.Resolve<Repository<Marque>>();
             _sousCategorieRepository = container.Resolve<Repository<SousCategorie>>();
-            _typeRepository = container.Resolve<Repository<Entity.Models.TypeArticle>>();
+            _typeRepository = container.Resolve<Repository<TypeArticle>>();
             CbCategorie.ItemsSource = categorieRepository.SelectAll();
             CbMagasin.ItemsSource = magasinRepository.SelectAll();
             CbBEntree.ItemsSource = beRepository.SelectAll();
@@ -154,16 +153,7 @@ namespace GM.UI.Views
             LoadData();
         }
 
-        private void CbType_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (CbType.SelectedIndex == -1) return;
-            var type = CbType.SelectedItem as Entity.Models.TypeArticle;
-            var categorie = CbCategorie.SelectedItem as Categorie;
-            var sousCategorie = CbSousCategorie.SelectedItem as SousCategorie;
-            if (type != null && categorie != null && sousCategorie != null)
-                CbArticle.ItemsSource = _articleService.Find(x => x.TypeArticleId == type.Id).ToList();
-        }
-
+      
         private void CbCategorie_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (CbCategorie.SelectedIndex == -1) return;
@@ -186,7 +176,7 @@ namespace GM.UI.Views
             var sousCategorie = CbSousCategorie.SelectedItem as SousCategorie;
             //var marque = CbMagasin.SelectedItem as Marque;
             if (sousCategorie != null && categorie != null)
-                CbType.ItemsSource = _typeRepository.Find(x => x.CategorieId == categorie.Id
+                CbArticle.ItemsSource = _articleService.Find(x => x.CategorieId == categorie.Id
                                                                && x.SousCategorieId == sousCategorie.Id);
         }
 
@@ -242,8 +232,7 @@ namespace GM.UI.Views
                 DataGrid.ItemsSource = new ObservableCollection<Piece>(PieceService.Find(
                     x => x.Article.Libelle.Contains(TxtSearch.Text)
                     || x.Article.SousCategorie.Libelle.Contains(TxtSearch.Text) 
-                    || x.Article.TypeArticle.Libelle.Contains(TxtSearch.Text)
-                    || x.Article.Marque.Libelle.Contains(TxtSearch.Text)));
+                  || x.Article.Marque.Libelle.Contains(TxtSearch.Text)));
             }
             catch (Exception)
             {

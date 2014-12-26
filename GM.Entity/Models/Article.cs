@@ -10,8 +10,8 @@ namespace GM.Entity.Models
         public string Libelle { get; set; }
         public int? CategorieId { get; set; }
         public int? SousCategorieId { get; set; }
-        [Column("TypeId")]
-        public int? TypeArticleId { get; set; }
+        //[Column("TypeId")]
+        ////public int? TypeArticleId { get; set; }
         public int? MarqueId { get; set; }
         public byte[] Image { get; set; }
         public string Discription { get; set; }
@@ -22,7 +22,7 @@ namespace GM.Entity.Models
         public string Code { get; set; }
         public virtual Categorie Categorie { get; set; }
         public virtual Marque Marque { get; set; }
-        public virtual TypeArticle TypeArticle { get; set; }
+       // public virtual TypeArticle TypeArticle { get; set; }
         public virtual ICollection<BonEntreeLigne> BonEntreeLignes { get; set; }
       
         public virtual SousCategorie SousCategorie { get; set; }

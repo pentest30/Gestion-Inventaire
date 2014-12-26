@@ -23,24 +23,23 @@ namespace GM.UI.Views
         //private readonly Repository<Article> _articleRepository;
         private readonly ArticleService _articleService;
         private readonly Repository<SousCategorie> _sousCategorieRepository;
-        private readonly Repository<TypeArticle> _typeRepository;
-
         public ArticleView()
         {
             InitializeComponent();
             var container = new UnityContainer();
             _articleService = container.Resolve<ArticleService>();
-            //_articleRepository = container.Resolve<Repository<Article>>();
+            
             var marqueRepository = container.Resolve<Repository<Marque>>();
             var categorieRepository = container.Resolve<Repository<Categorie>>();
             _sousCategorieRepository = container.Resolve<Repository<SousCategorie>>();
-            _typeRepository = container.Resolve<Repository<TypeArticle>>();
-            DataGrid.ItemsSource = (_articleService.ArticleStatistics().Any())
+          DataGrid.ItemsSource = (_articleService.ArticleStatistics().Any())
                 ? _articleService.ArticleStatistics()
                 : new List<Article>();
             CbCategorie.ItemsSource = categorieRepository.SelectAll();
             CbMaruqe.ItemsSource = marqueRepository.SelectAll();
         }
+
+      
 
 
         private void BtnImageLoader_OnClick(object sender, RoutedEventArgs e)
@@ -154,12 +153,6 @@ namespace GM.UI.Views
             }
         }
 
-        private void CbSousCategorie_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (CbSousCategorie.SelectedIndex == -1) return;
-            var item = CbSousCategorie.SelectedItem as SousCategorie;
-            if (item != null) CbType.ItemsSource = _typeRepository.Find(x => x.SousCategorieId == item.Id);
-
-        }
+       
     }
 }

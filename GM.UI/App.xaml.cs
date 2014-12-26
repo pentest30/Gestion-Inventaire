@@ -53,7 +53,7 @@ namespace GM.UI
                 .ForMember(x => x.Model, o => o.MapFrom(p => p.Article.Libelle))
                 .ForMember(x => x.Categorie, o => o.MapFrom(p => p.Article.Categorie.Libelle))
                 .ForMember(x => x.SousCategorie, o => o.MapFrom(p => p.Article.SousCategorie.Libelle))
-                .ForMember(x => x.Type, o => o.MapFrom(p => p.Article.TypeArticle.Libelle))
+                //.ForMember(x => x.Type, o => o.MapFrom(p => p.Article.TypeArticle.Libelle))
                 .ForMember(x => x.Marque, o => o.MapFrom(p => p.Article.Marque.Libelle));
         }
     }

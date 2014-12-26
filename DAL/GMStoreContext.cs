@@ -1,6 +1,5 @@
 using System.Data.Entity;
 using GM.Entity.Models;
-using Type = GM.Entity.Models.TypeArticle;
 
 namespace DAL
 {
@@ -37,7 +36,7 @@ namespace DAL
         public DbSet<BonSortieLigne> BonSortieLignes { get; set; }
         public DbSet<CommandeInterne> CommandeInternes { get; set; }
         public DbSet<CommandeLigne> CommandeLignes { get; set; }
-        public DbSet<Type> Types { get; set; }
+        public DbSet<TypeArticle> Types { get; set; }
 
 
 

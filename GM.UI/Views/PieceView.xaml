@@ -5,13 +5,10 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:helpers="clr-namespace:WPF.Core.Helpers;assembly=WPF.Core"
              xmlns:converters="clr-namespace:GM.UI.Converters"
-             xmlns:models="clr-namespace:GM.Entity.Models;assembly=GM.Entity"
-             xmlns:bsFilter="http://schemas.bolapansoft.com/xaml/Controls/ItemsFilter"
+                xmlns:bsFilter="http://schemas.bolapansoft.com/xaml/Controls/ItemsFilter"
              xmlns:local="clr-namespace:GM.UI"
-             xmlns:uiControls="clr-namespace:UIControls;assembly=UIControls"
-             xmlns:extendedGridControl="clr-namespace:ExtendedGrid.ExtendedGridControl;assembly=ExtendedGrid"
-             xmlns:extendedColumn="clr-namespace:ExtendedGrid.ExtendedColumn;assembly=ExtendedGrid"
-             x:Class="GM.UI.Views.PieceView"
+             xmlns:uiControls="clr-namespace:UIControls;assembly=UIControls"    
+            x:Class="GM.UI.Views.PieceView"
              mc:Ignorable="d" >
     
     <UserControl.Resources>
@@ -39,7 +36,7 @@
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="30"/>
-                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="0"/>
                     <RowDefinition Height="30"/>
                     <RowDefinition Height="30"/>
                     <RowDefinition Height="30"/>
@@ -51,7 +48,7 @@
                 
                 <TextBlock  Text="Catégorie:" VerticalAlignment="Center"/>
                 <TextBlock Grid.Row="0" Grid.Column="2" Text="Sous catégorie:" VerticalAlignment="Center"/>
-                <TextBlock Grid.Row="1" Grid.Column="0" Text="Type:" VerticalAlignment="Center"/>
+              
                 <TextBlock Grid.Row="2" Grid.Column="0" Text="Marque:" VerticalAlignment="Center"/>
                 <TextBlock Grid.Row="2" Grid.Column="2" Text="Modél:" VerticalAlignment="Center"/>
                 <helpers:AutoFilteredComboBox 
@@ -78,19 +75,7 @@
             SelectedValuePath="Id" 
                     SelectionChanged="CbSousCategorie_OnSelectionChanged"
            />
-                <helpers:AutoFilteredComboBox 
-            x:Name="CbType" 
-            Grid.Column="1"
-                    Grid.ColumnSpan="3"
-                    SelectedValue="{Binding Article.TypeArticleId}"
-                SelectionChanged="CbType_OnSelectionChanged"
-            Grid.Row="1" 
-            IsEnabled="{Binding Visibility, Converter={StaticResource Visible2Disable}, ElementName=AddButton}" 
-			
-                    Margin="2" 
-            DisplayMemberPath="Libelle" 
-            SelectedValuePath="Id" 
-            />
+               
                 <helpers:AutoFilteredComboBox 
             x:Name="CbMarque" 
             Grid.Column="1" 
@@ -196,7 +181,7 @@
                 <RowDefinition Height="30"/>
                 <RowDefinition />
             </Grid.RowDefinitions>
-            <extendedGridControl:ExtendedDataGrid
+            <bsFilter:FilterDataGrid
                 
                 IsReadOnly="True"
                 Grid.Column="0"
@@ -207,15 +192,15 @@
                     CanUserAddRows="False" 
                     x:Name="DataGrid">
 
-                <extendedGridControl:ExtendedDataGrid.Columns>
-                    <extendedColumn:ExtendedDataGridTextColumn Width="*" Header="N° d'inventaire" Binding="{Binding NInventaire}"/>
-                    <extendedColumn:ExtendedDataGridTextColumn Width="*" Header="Modél" Binding="{Binding Article.Libelle}"/>
-                    <extendedColumn:ExtendedDataGridTextColumn Width="*" Header="Magasin" Binding="{Binding Magasin.Libelle}"/>
-                    <extendedColumn:ExtendedDataGridTextColumn Width="*" Header="N° Bon d'entrée" Binding="{Binding BonEntree.NBon}"/>
-                    <extendedColumn:ExtendedDataGridTextColumn Width="*" Header="Date d'entrée" Binding="{Binding DateEntree ,StringFormat=d}"/>
-                </extendedGridControl:ExtendedDataGrid.Columns>
-            </extendedGridControl:ExtendedDataGrid>
-            <Button  FontSize="10"
+                <bsFilter:FilterDataGrid.Columns>
+                    <DataGridTextColumn Width="*" Header="N° d'inventaire" Binding="{Binding NInventaire}"/>
+                    <DataGridTextColumn Width="*" Header="Modél" Binding="{Binding Article.Libelle}"/>
+                    <DataGridTextColumn Width="*" Header="Magasin" Binding="{Binding Magasin.Libelle}"/>
+                    <DataGridTextColumn Width="*" Header="N° Bon d'entrée" Binding="{Binding BonEntree.NBon}"/>
+                    <DataGridTextColumn Width="*" Header="Date d'entrée" Binding="{Binding DateEntree ,StringFormat=d}"/>
+                </bsFilter:FilterDataGrid.Columns>
+            </bsFilter:FilterDataGrid>
+            <Button  
                     Visibility="Visible" 
                          x:Name="AddButton" 
                         Click="AddButton_OnClick"

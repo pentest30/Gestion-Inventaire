@@ -6,6 +6,7 @@
              xmlns:converters="clr-namespace:GM.UI.Converters"
             xmlns:extendedDataGrid="clr-namespace:ExtendedGrid.ExtendedGridControl;assembly=ExtendedGrid"
              xmlns:extendedColumn="clr-namespace:ExtendedGrid.ExtendedColumn;assembly=ExtendedGrid"
+     xmlns:bsFilter="http://schemas.bolapansoft.com/xaml/Controls/ItemsFilter"
     xmlns:helpers1="clr-namespace:WPF.Core.Helpers;assembly=WPF.Core"
     xmlns:Models="clr-namespace:GM.Entity.Models;assembly=GM.Entity"
     x:Class="GM.UI.Views.ArticleView"
@@ -22,14 +23,14 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition />
         </Grid.RowDefinitions>
-        <Grid DockPanel.Dock="Top" x:Name="Grid">
+        <Grid DockPanel.Dock="Top" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="3*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
            
             <GroupBox BorderBrush="Gray" Header="Articles:" Margin="10" >
-                <Grid Margin="10" DataContext="{Binding ElementName=DataGrid ,Path=SelectedItem}" >
+                <Grid x:Name="Grid" Margin="10" DataContext="{Binding ElementName=DataGrid ,Path=SelectedItem}" >
                     <Grid.RowDefinitions>
                         <RowDefinition Height="30"/>
                         <RowDefinition Height="30"/>
@@ -71,20 +72,14 @@
 						DisplayMemberPath="Libelle"
 						SelectedValue="{Binding SousCategorieId}" 
 						SelectedValuePath="Id"
-						SelectionChanged="CbSousCategorie_OnSelectionChanged"/>
-                    <TextBlock Grid.Column="0" VerticalAlignment="Center" Grid.Row="2" Text="Type:"/>
-                    <helpers1:AutoFilteredComboBox Margin="2" 
-						IsEnabled="{Binding Visibility, Converter={StaticResource Visible2Disable}, ElementName=AddButton}"
-						x:Name="CbType" 
-						Grid.Column="1" 
-						Grid.Row="2" 
-						DisplayMemberPath="Libelle"
-						SelectedValue="{Binding TypeArticleId}" 
-						SelectedValuePath="Id"/>
-                    <TextBlock Grid.Column="2" VerticalAlignment="Center" Grid.Row="2" Text="Marque:"/>
+						/>
+                  
+                    
+                    <TextBlock Grid.Column="0" VerticalAlignment="Center" Grid.Row="2" Text="Marque:"/>
                     <helpers1:AutoFilteredComboBox Margin="2" IsEnabled="{Binding Visibility, Converter={StaticResource Visible2Disable}, ElementName=AddButton}"
 						x:Name="CbMaruqe" 
-						Grid.Column="3" 
+						Grid.Column="1" 
+                                                   Grid.ColumnSpan="3"
 						Grid.Row="2" 
 						DisplayMemberPath="Libelle"
 						SelectedValue="{Binding MarqueId}" 
@@ -147,7 +142,7 @@
                 <RowDefinition Height="30"/>
                 <RowDefinition />
             </Grid.RowDefinitions>
-            <extendedDataGrid:ExtendedDataGrid
+            <bsFilter:FilterDataGrid
 				Grid.Column="0"
 				Grid.Row="0"
 				Grid.RowSpan="4"
@@ -155,17 +150,15 @@
 				CanUserAddRows="False" 
 				IsReadOnly="True"
 				x:Name="DataGrid">
-                <extendedDataGrid:ExtendedDataGrid.DataContext>
-                    <Models:Article/>
-                </extendedDataGrid:ExtendedDataGrid.DataContext>
 
-                <extendedDataGrid:ExtendedDataGrid.Columns>
-                    <extendedColumn:ExtendedDataGridTextColumn Width="*" Header="Code" Binding="{Binding Code}"/>
-                    <extendedColumn:ExtendedDataGridTextColumn Width="*" Header="Libelle" Binding="{Binding Libelle}"/>
-                    <extendedColumn:ExtendedDataGridTextColumn Width="*" Header="Marque" Binding="{Binding Marque.Libelle}"/>
-                    <extendedColumn:ExtendedDataGridTextColumn Width="*" Header="Qnt totale" Binding="{Binding QntTotal}"/>
-                </extendedDataGrid:ExtendedDataGrid.Columns>
-            </extendedDataGrid:ExtendedDataGrid>
+
+                <DataGrid.Columns>
+                    <DataGridTextColumn Width="*" Header="Code" Binding="{Binding Code}"/>
+                    <DataGridTextColumn Width="*" Header="Libelle" Binding="{Binding Libelle}"/>
+                    <DataGridTextColumn Width="*" Header="Marque" Binding="{Binding Marque.Libelle}"/>
+                    <DataGridTextColumn Width="*" Header="Qnt totale" Binding="{Binding QntTotal}"/>
+                </DataGrid.Columns>
+            </bsFilter:FilterDataGrid>
             <Button  
 				Visibility="Visible" 
 				x:Name="AddButton" 
