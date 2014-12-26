@@ -75,7 +75,7 @@ namespace BLL
        }
       
 
-       public  IEnumerable<PieceMagasin> PieceMagasins(Categorie categorie, SousCategorie sousCategorie, TypeArticle type, Marque marque,Article article, Magasin magasin)
+       public  IEnumerable<PieceMagasin> PieceMagasins(Categorie categorie, SousCategorie sousCategorie, Marque marque,Article article, Magasin magasin)
        {
            var result = new ObservableCollection<PieceMagasin>(GetAllLazyLoad(x => x.BonEntree, x => x.Piece,
                w => w.Magasin))

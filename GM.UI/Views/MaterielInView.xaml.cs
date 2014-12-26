@@ -45,14 +45,7 @@ namespace GM.UI.Views
                 CbSousCategorie.ItemsSource = _sousCategorieRepository.Find(x => x.CategorieId == categorie.Id);
         }
 
-        private void CbSousCategorie_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (CbSousCategorie.SelectedIndex ==-1)return;
-            CbType.SelectedIndex = -1;
-            var item = CbSousCategorie.SelectedItem as SousCategorie;
-            if (item != null) CbType.ItemsSource = _typeRepository.Find(x => x.SousCategorieId == item.Id);
-           
-        }
+      
 
         private void CbType_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -85,12 +78,11 @@ namespace GM.UI.Views
             var categorie = CbCategorie.SelectedItem as Categorie;
             var sousCategorie = CbSousCategorie.SelectedItem as SousCategorie;
             var marque = CbMarque.SelectedItem as Marque;
-            var type = CbType.SelectedItem as TypeArticle;
+            //var type = CbType.SelectedItem as TypeArticle;
             var article = CbArticle.SelectedItem as Article;
             var magasin = CbMagasin.SelectedItem as Magasin;
-            if (sousCategorie == null || categorie == null || marque == null || magasin == null || type == null ||
-                article == null) return;
-            var result =_stockService. PieceMagasins(categorie, sousCategorie, type, marque, article, magasin);
+            if (sousCategorie == null || categorie == null || marque == null || magasin == null ||  article == null) return;
+            var result =_stockService. PieceMagasins(categorie, sousCategorie, marque, article, magasin);
             if (ConvertToStockVm(result, itemSourceView)) return;
             DataGridStock.ItemsSource = itemSourceView;
         }
@@ -101,6 +93,15 @@ namespace GM.UI.Views
             foreach (var pieceMagasin in pieceMagasins)itemSourceView.Add(AutoMapper.Mapper.Map<StockModelView>(pieceMagasin));
             return false;
         }
-       
+
+        private void CbDepartement_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            
+        }
+
+        private void CbService_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            
+        }
     }
 }
