@@ -53,8 +53,9 @@
                           Grid.Row="1"
                           DisplayMemberPath="Libelle"
                           SelectedValue="{Binding Path=CategorieId}" 
+                          SelectionChanged="CbDepartement_OnSelectionChanged"
                           SelectedValuePath="Id">
-                    <ComboBox.SelectionChanged>CbDepartement_OnSelectionChanged</ComboBox.SelectionChanged>
+                
                 </ComboBox>
                 <TextBlock VerticalAlignment="Center" Grid.Row="2" Grid.Column="0" Text="Sous catégorie * :"/>
                 <ComboBox IsEnabled="{Binding Visibility, Converter={StaticResource Visible2Disable}, ElementName=AddButton}"

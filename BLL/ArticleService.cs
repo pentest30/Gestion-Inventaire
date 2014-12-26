@@ -31,7 +31,7 @@ namespace BLL
 
           if (SelectAll().Any())
           {
-              foreach (var article in SelectAll())
+              foreach (var article in GetAllLazyLoad(x=>x.TypeArticle))
               {
                   var qnt = 0; 
                   var qntTotle=0;

@@ -75,13 +75,12 @@ namespace BLL
        }
       
 
-       public  IEnumerable<PieceMagasin> PieceMagasins(Categorie categorie, SousCategorie sousCategorie, GM.Entity.Models.TypeArticle type, Marque marque,Article article, Magasin magasin)
+       public  IEnumerable<PieceMagasin> PieceMagasins(Categorie categorie, SousCategorie sousCategorie, TypeArticle type, Marque marque,Article article, Magasin magasin)
        {
            var result = new ObservableCollection<PieceMagasin>(GetAllLazyLoad(x => x.BonEntree, x => x.Piece,
                w => w.Magasin))
                .Where(x => x.Article.Categorie.Id == categorie.Id
                            && x.Article.SousCategorie.Id == sousCategorie.Id
-                           && x.Article.TypeArticle.Id == type.Id
                            && x.Article.Marque.Id == marque.Id
                            && x.Article.Libelle == article.Libelle
                            && x.MagasinId == magasin.Id);

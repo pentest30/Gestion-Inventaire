@@ -7,6 +7,7 @@
             xmlns:extendedDataGrid="clr-namespace:ExtendedGrid.ExtendedGridControl;assembly=ExtendedGrid"
              xmlns:extendedColumn="clr-namespace:ExtendedGrid.ExtendedColumn;assembly=ExtendedGrid"
     xmlns:helpers1="clr-namespace:WPF.Core.Helpers;assembly=WPF.Core"
+    xmlns:Models="clr-namespace:GM.Entity.Models;assembly=GM.Entity"
     x:Class="GM.UI.Views.ArticleView"
              mc:Ignorable="d" 
              >
@@ -16,18 +17,19 @@
         <converters:Visible2NDisable x:Key="Visible2Disable"/>
     </UserControl.Resources>
 
- <Grid>
-     <Grid.RowDefinitions>
-         <RowDefinition Height="Auto"/>
-         <RowDefinition />
-     </Grid.RowDefinitions>
-        <Grid DataContext="{Binding ElementName=DataGrid ,Path=SelectedItem}" DockPanel.Dock="Top" x:Name="Grid">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid DockPanel.Dock="Top" x:Name="Grid">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="3*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
+           
             <GroupBox BorderBrush="Gray" Header="Articles:" Margin="10" >
-                <Grid Margin="10" >
+                <Grid Margin="10" DataContext="{Binding ElementName=DataGrid ,Path=SelectedItem}" >
                     <Grid.RowDefinitions>
                         <RowDefinition Height="30"/>
                         <RowDefinition Height="30"/>
@@ -43,84 +45,84 @@
                     </Grid.ColumnDefinitions>
                     <TextBlock VerticalAlignment="Center" Text="Code d'article:"/>
                     <TextBox CharacterCasing="Upper"  
-				IsEnabled="{Binding Visibility, Converter={StaticResource Visible2Disable}, ElementName=AddButton}" 
-				Grid.Row="0" Grid.Column="1" 
-				Text="{Binding Code}"/>
-                    <TextBlock VerticalAlignment="Center" Grid.Column="2" Grid.Row="0" Text="Nom d'article:"/>
+						IsEnabled="{Binding Visibility, Converter={StaticResource Visible2Disable}, ElementName=AddButton}" 
+						Grid.Row="0" Grid.Column="1" 
+						Text="{Binding Code}"/>
+                    <TextBlock VerticalAlignment="Center" Grid.Column="2" Grid.Row="0" Text="Modèl:"/>
                     <TextBox CharacterCasing="Upper"  
-				IsEnabled="{Binding Visibility, Converter={StaticResource Visible2Disable}, ElementName=AddButton}" 
-				Grid.Row="0" Grid.Column="3" 
-				Text="{Binding Libelle}"/>
+						IsEnabled="{Binding Visibility, Converter={StaticResource Visible2Disable}, ElementName=AddButton}" 
+						Grid.Row="0" Grid.Column="3" 
+						Text="{Binding Libelle}"/>
                     <TextBlock VerticalAlignment="Center" Grid.Column="0" Grid.Row="1" Text="Catégorie:"/>
                     <ComboBox SelectionChanged="CbCategorie_OnSelectionChanged" IsEnabled="{Binding Visibility, Converter={StaticResource Visible2Disable}, ElementName=AddButton}"
-				x:Name="CbCategorie" 
-				Grid.Column="1" 
-				Grid.Row="1" 
-				DisplayMemberPath="Libelle"
-				SelectedValue="{Binding CategorieId}" 
-				SelectedValuePath="Id"/>
+						x:Name="CbCategorie" 
+						Grid.Column="1" 
+						Grid.Row="1" 
+						DisplayMemberPath="Libelle"
+						SelectedValue="{Binding CategorieId}" 
+						SelectedValuePath="Id"/>
 
                     <TextBlock VerticalAlignment="Center" Grid.Column="2" Grid.Row="1" Text="Sous catégorie:"/>
                     <helpers1:AutoFilteredComboBox Margin="2" 
-                                                   IsEnabled="{Binding Visibility, Converter={StaticResource Visible2Disable}, ElementName=AddButton}"
-				x:Name="CbSousCategorie" 
-				Grid.Column="3" 
-				Grid.Row="1" 
-				DisplayMemberPath="Libelle"
-				SelectedValue="{Binding SousCategorieId}" 
-				SelectedValuePath="Id"
-                                                   SelectionChanged="CbSousCategorie_OnSelectionChanged"/>
+						IsEnabled="{Binding Visibility, Converter={StaticResource Visible2Disable}, ElementName=AddButton}"
+						x:Name="CbSousCategorie" 
+						Grid.Column="3" 
+						Grid.Row="1" 
+						DisplayMemberPath="Libelle"
+						SelectedValue="{Binding SousCategorieId}" 
+						SelectedValuePath="Id"
+						SelectionChanged="CbSousCategorie_OnSelectionChanged"/>
                     <TextBlock Grid.Column="0" VerticalAlignment="Center" Grid.Row="2" Text="Type:"/>
                     <helpers1:AutoFilteredComboBox Margin="2" 
-                                                   IsEnabled="{Binding Visibility, Converter={StaticResource Visible2Disable}, ElementName=AddButton}"
-				x:Name="CbType" 
-				Grid.Column="1" 
-				Grid.Row="2" 
-				DisplayMemberPath="Libelle"
-				SelectedValue="{Binding TypeArticleId}" 
-				SelectedValuePath="Id"/>
+						IsEnabled="{Binding Visibility, Converter={StaticResource Visible2Disable}, ElementName=AddButton}"
+						x:Name="CbType" 
+						Grid.Column="1" 
+						Grid.Row="2" 
+						DisplayMemberPath="Libelle"
+						SelectedValue="{Binding TypeArticleId}" 
+						SelectedValuePath="Id"/>
                     <TextBlock Grid.Column="2" VerticalAlignment="Center" Grid.Row="2" Text="Marque:"/>
                     <helpers1:AutoFilteredComboBox Margin="2" IsEnabled="{Binding Visibility, Converter={StaticResource Visible2Disable}, ElementName=AddButton}"
-				x:Name="CbMaruqe" 
-				Grid.Column="3" 
-				Grid.Row="2" 
-				DisplayMemberPath="Libelle"
-				SelectedValue="{Binding MarqueId}" 
-				SelectedValuePath="Id"/>
+						x:Name="CbMaruqe" 
+						Grid.Column="3" 
+						Grid.Row="2" 
+						DisplayMemberPath="Libelle"
+						SelectedValue="{Binding MarqueId}" 
+						SelectedValuePath="Id"/>
                     <TextBlock Grid.Column="0" VerticalAlignment="Center" Grid.Row="3" Text="Poids:"/>
                     <TextBox helpers1:TextBoxMaskBehavior.Mask="Decimal"
-				IsEnabled="{Binding Visibility, Converter={StaticResource Visible2Disable}, ElementName=AddButton}" 
-				Grid.Row="3" 
-				Grid.Column="1" 
-                        Margin="2"
-				Text="{Binding Poids}"/>
+						IsEnabled="{Binding Visibility, Converter={StaticResource Visible2Disable}, ElementName=AddButton}" 
+						Grid.Row="3" 
+						Grid.Column="1" 
+						Margin="2"
+						Text="{Binding Poids}"/>
                     <TextBlock Grid.Column="2" Grid.Row="3" VerticalAlignment="Center" Text="Qnt Totale:"/>
                     <TextBox helpers1:TextBoxMaskBehavior.Mask="Integer" 
-				IsEnabled="False" 
-				Grid.Row="3"
-                        Margin="2"
-				Grid.Column="3" 
-				Text="{Binding QntTotal}"/>
+						IsEnabled="False" 
+						Grid.Row="3"
+						Margin="2"
+						Grid.Column="3" 
+						Text="{Binding QntTotal}"/>
                     <TextBlock Grid.Column="0" VerticalAlignment="Center" Grid.Row="4" Text="Qnt Magasins:"/>
                     <TextBlock Grid.Column="2" VerticalAlignment="Center" Grid.Row="4" Text="Qnt Minimale:"/>
                     <TextBox helpers1:TextBoxMaskBehavior.Mask="Integer"
-				IsEnabled="False" 
-				Grid.Row="4" 
-                        Margin="2"
-				Grid.Column="1"
+						IsEnabled="False" 
+						Grid.Row="4" 
+						Margin="2"
+						Grid.Column="1"
 				
-                            Foreground="Red"
-				Text="{Binding QntMagsin}"/>
-                    
+						Foreground="Red"
+						Text="{Binding QntMagsin}"/>
+
                     <TextBox helpers1:TextBoxMaskBehavior.Mask="Integer"
 				           
-				            Grid.Row="4" 
-                                    Margin="2"
-				            Grid.Column="3"
-                             IsEnabled="{Binding Visibility, Converter={StaticResource Visible2Disable}, ElementName=AddButton}" 
+						Grid.Row="4" 
+						Margin="2"
+						Grid.Column="3"
+						IsEnabled="{Binding Visibility, Converter={StaticResource Visible2Disable}, ElementName=AddButton}" 
 				
-                            Foreground="Red"
-				Text="{Binding  QntMin}"/>
+						Foreground="Red"
+						Text="{Binding QntMin}"/>
                 </Grid>
             </GroupBox>
             <Grid Grid.Column="1" Margin="20">
@@ -129,72 +131,76 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <Border Grid.Row="0" BorderBrush="Gray" BorderThickness="1">
-                    <Image Height="150" MaxHeight="150" Width="200" Source="{Binding Image}" Name="Image" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
+                    <Image Height="150" MaxHeight="150" Width="200" Source="{Binding Image}" x:Name="Image" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
                 </Border>
-                <Button IsEnabled="{Binding Visibility, Converter={StaticResource Visible2Disable}, ElementName=AddButton}" Click="BtnImageLoader_OnClick" Name="BtnImageLoader" Content="Nouvelle image ..." Grid.Row="1" Height="25"/>
+                <Button IsEnabled="{Binding Visibility, Converter={StaticResource Visible2Disable}, ElementName=AddButton}" Click="BtnImageLoader_OnClick" x:Name="BtnImageLoader" Content="Nouvelle image ..." Grid.Row="1" Height="25"/>
             </Grid>
         </Grid>
-     <Grid Grid.Row="1" Margin="10" >
-           <Grid.ColumnDefinitions>
-               <ColumnDefinition/>
-               <ColumnDefinition Width="150"/>
-           </Grid.ColumnDefinitions>
-         <Grid.RowDefinitions>
-             <RowDefinition Height="30"/>
-             <RowDefinition Height="30"/>
-             <RowDefinition Height="30"/>
+        <Grid Grid.Row="1" Margin="10" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="150"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
                 <RowDefinition />
             </Grid.RowDefinitions>
             <extendedDataGrid:ExtendedDataGrid
-                Grid.Column="0"
-                Grid.Row="0"
-                Grid.RowSpan="4"
-                    AutoGenerateColumns="False" 
-                    CanUserAddRows="False" 
-                    Name="DataGrid">
-                
+				Grid.Column="0"
+				Grid.Row="0"
+				Grid.RowSpan="4"
+				AutoGenerateColumns="False" 
+				CanUserAddRows="False" 
+				IsReadOnly="True"
+				x:Name="DataGrid">
+                <extendedDataGrid:ExtendedDataGrid.DataContext>
+                    <Models:Article/>
+                </extendedDataGrid:ExtendedDataGrid.DataContext>
+
                 <extendedDataGrid:ExtendedDataGrid.Columns>
                     <extendedColumn:ExtendedDataGridTextColumn Width="*" Header="Code" Binding="{Binding Code}"/>
                     <extendedColumn:ExtendedDataGridTextColumn Width="*" Header="Libelle" Binding="{Binding Libelle}"/>
                     <extendedColumn:ExtendedDataGridTextColumn Width="*" Header="Marque" Binding="{Binding Marque.Libelle}"/>
-                   <extendedColumn:ExtendedDataGridTextColumn Width="*" Header="Qnt totale" Binding="{Binding QntTotal}"/>
+                    <extendedColumn:ExtendedDataGridTextColumn Width="*" Header="Qnt totale" Binding="{Binding QntTotal}"/>
                 </extendedDataGrid:ExtendedDataGrid.Columns>
             </extendedDataGrid:ExtendedDataGrid>
             <Button  
-                    Visibility="Visible" 
-                         x:Name="AddButton" 
-                        Click="AddButton_OnClick"
+				Visibility="Visible" 
+				x:Name="AddButton" 
+				Click="AddButton_OnClick"
                         
-                         Margin="5,0,0,0" 
-                         Content="Ajouter"
-                         Grid.Row="0" Grid.Column="1" />
+				Margin="5,0,0,0" 
+				Content="Ajouter"
+				Grid.Row="0" Grid.Column="1" />
             <Button  
-                    Click="UpdateButton_OnClick"
-                        x:Name="UpdateButton"  
-                        Margin="5,0,0,0" 
-                        Content="Modifier" 
-                        Grid.Row="1" Grid.Column="1"/>
+				Click="UpdateButton_OnClick"
+				x:Name="UpdateButton"  
+				Margin="5,0,0,0" 
+				Content="Modifier" 
+				Grid.Row="1" Grid.Column="1"/>
             <Button  
                      
-                        Visibility="{Binding Visibility, Converter={StaticResource Nan2Visible}, ElementName=AddButton}" 
-                        x:Name="SaveButton"  
-                        Margin="5,0,0,0" 
-                        Click="SaveButton_OnClick"
-                        Content="Enregistrer" 
-                         Grid.Row="0" Grid.Column="1"/>
+				Visibility="{Binding Visibility, Converter={StaticResource Nan2Visible}, ElementName=AddButton}" 
+				x:Name="SaveButton"  
+				Margin="5,0,0,0" 
+				Click="SaveButton_OnClick"
+				Content="Enregistrer" 
+				Grid.Row="0" Grid.Column="1"/>
             <Button 
-                        x:Name="BackButton"  
-                        Visibility="{Binding Visibility, Converter={StaticResource Nan2Visible}, ElementName=AddButton}" 
-                        Margin="5,0,0,0" 
-                        Content="Annuler" 
-                    Click="BackButton_OnClick"
-                         Grid.Row="1" Grid.Column="1"/>
+				x:Name="BackButton"  
+				Visibility="{Binding Visibility, Converter={StaticResource Nan2Visible}, ElementName=AddButton}" 
+				Margin="5,0,0,0" 
+				Content="Annuler" 
+				Click="BackButton_OnClick"
+				Grid.Row="1" Grid.Column="1"/>
             <Button
-                       x:Name="DeleteButton" 
-                    Click="DeleteButton_OnClick"
-                        Margin="5,0,0,0" 
-                        Content="Supprimer" 
-                        Grid.Row="2" Grid.Column="1"/>
+				x:Name="DeleteButton" 
+				Click="DeleteButton_OnClick"
+				Margin="5,0,0,0" 
+				Content="Supprimer" 
+				Grid.Row="2" Grid.Column="1"/>
 
         </Grid>
     </Grid>
