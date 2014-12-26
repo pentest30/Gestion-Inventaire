@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
@@ -234,8 +235,20 @@ namespace GM.UI.Views
         }
 
 
-    
-
-
+        private void TxtSearch_OnTextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                DataGrid.ItemsSource = new ObservableCollection<Piece>(PieceService.Find(
+                    x => x.Article.Libelle.Contains(TxtSearch.Text)
+                    || x.Article.SousCategorie.Libelle.Contains(TxtSearch.Text) 
+                    || x.Article.Type.Libelle.Contains(TxtSearch.Text)
+                    || x.Article.Marque.Libelle.Contains(TxtSearch.Text)));
+            }
+            catch (Exception)
+            {
+                
+            }
+        }
     }
 }

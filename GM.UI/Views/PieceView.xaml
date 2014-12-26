@@ -8,6 +8,7 @@
              xmlns:models="clr-namespace:GM.Entity.Models;assembly=GM.Entity"
              xmlns:bsFilter="http://schemas.bolapansoft.com/xaml/Controls/ItemsFilter"
              xmlns:local="clr-namespace:GM.UI"
+             xmlns:uiControls="clr-namespace:UIControls;assembly=UIControls"
              x:Class="GM.UI.Views.PieceView"
              mc:Ignorable="d" >
     
@@ -21,10 +22,12 @@
   <Grid>
       
       <Grid.RowDefinitions>
+          <RowDefinition Height="30"></RowDefinition>
           <RowDefinition Height="Auto"/>
           <RowDefinition/>
       </Grid.RowDefinitions>
-        <GroupBox Header="Nouveau stock:" BorderBrush="Gray" Margin="10" DataContext="{Binding ElementName=DataGrid ,Path=SelectedItem}">
+        <uiControls:SearchTextBox Margin="5"   CharacterCasing="Upper"  Name="TxtSearch"  TextChanged="TxtSearch_OnTextChanged"  />
+        <GroupBox Grid.Row="1" Header="Nouveau stock:" BorderBrush="Gray" Margin="5" DataContext="{Binding ElementName=DataGrid ,Path=SelectedItem}">
             <Grid Margin="10" Name="Grid">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto"/>
@@ -165,7 +168,8 @@
                        VerticalAlignment="Center"/>
                 <TextBox Grid.Column="3" 
                          Foreground="Red"
-                     Grid.Row="5" 
+                         IsEnabled="{Binding Visibility, Converter={StaticResource Visible2Disable}, ElementName=AddButton}" 
+                         Grid.Row="5" 
                          Text="{Binding Periode}"
                      helpers:TextBoxMaskBehavior.Mask="Integer"/>
                 <Separator  Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="6"/>
@@ -178,7 +182,7 @@
 
             </Grid>
         </GroupBox>
-        <Grid Grid.Row="1" Margin="10" >
+        <Grid Grid.Row="2" Margin="10" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition Width="150"/>
