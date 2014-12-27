@@ -51,6 +51,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>D:\wpf\datagrid auto filter\ExtendedGrid.dll</HintPath>
     </Reference>
+    <Reference Include="ImagePackage">
+      <HintPath>D:\wpf\datagrid auto filter\ImagePackage.dll</HintPath>
+    </Reference>
     <Reference Include="ItemsFilter">
       <HintPath>..\..\GMG.ST\GMG.UI1\bin\Debug\ItemsFilter.dll</HintPath>
     </Reference>

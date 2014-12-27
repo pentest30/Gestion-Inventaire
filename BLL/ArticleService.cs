@@ -37,7 +37,7 @@ namespace BLL
                   var qntTotle=0;
                   var ligne = article.BonEntreeLignes.FirstOrDefault(x => x.ArticleId == article.Id);
                   var newArticle = article;
-                  var stock = _stockService.Find(x => x.ArticleId == newArticle.Id);
+                  var stock = _stockService.Find(x => x.ArticleId == newArticle.Id &&x.Disponibilite);
                   if (ligne != null)
                   {
                       qnt += Convert.ToInt32(ligne.Qnt);

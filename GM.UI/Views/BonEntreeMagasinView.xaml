@@ -145,7 +145,8 @@
                             <models:BonEntreeLigne/>
                         </bsFilter:FilterDataGrid.DataContext>
                         <bsFilter:FilterDataGrid.Columns>
-                            <DataGridTextColumn Width="*" Header="Article" Binding="{Binding Path=Article.Libelle}"/>
+                    <DataGridTextColumn Width="*" Header="Matériel" Binding="{Binding Path=Article.SousCategorie.Libelle}"/>
+                    <DataGridTextColumn Width="*" Header="Modél" Binding="{Binding Path=Article.Libelle}"/>
                             <DataGridTextColumn Width="*" Header="Qnt" Binding="{Binding Path=Qnt}"/>
                         </bsFilter:FilterDataGrid.Columns>
                     </bsFilter:FilterDataGrid>

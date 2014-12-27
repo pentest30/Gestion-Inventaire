@@ -83,7 +83,8 @@ namespace BLL
                            && x.Article.SousCategorie.Id == sousCategorie.Id
                            && x.Article.Marque.Id == marque.Id
                            && x.Article.Libelle == article.Libelle
-                           && x.MagasinId == magasin.Id);
+                           && x.MagasinId == magasin.Id
+                           &&x.Disponibilite);
            return result;
        }
    }

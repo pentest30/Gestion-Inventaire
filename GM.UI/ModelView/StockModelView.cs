@@ -13,6 +13,7 @@ namespace GM.UI.ModelView
        public string SousCategorie { get; set; }
        public string Type { get; set; }
        public string Marque { get; set; }
+       public long PieceId { get; set; }
 
 
 

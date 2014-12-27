@@ -43,7 +43,7 @@ namespace GM.UI.Views
 
         private void CbDepartement_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (CbService.SelectedIndex == -1) return;
+            if (CbDepartement.SelectedIndex == -1) return;
             var item = CbDepartement.SelectedItem as Departement;
             if (item != null) CbService.ItemsSource = _serviceRepository.Find(x => x.DepartementId == item.Id);
 

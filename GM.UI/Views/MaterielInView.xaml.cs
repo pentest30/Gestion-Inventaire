@@ -1,11 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
 using BLL;
 using GM.Entity.Models;
 using GM.UI.ModelView;
 using Microsoft.Practices.Unity;
+using WPF.Core.Helpers;
 
 namespace GM.UI.Views
 {
@@ -14,13 +18,26 @@ namespace GM.UI.Views
     /// </summary>
     public partial class MaterielInView
     {
+       
         private static  StockService _stockService;
         private readonly Repository<SousCategorie> _sousCategorieRepository;
         private readonly ArticleService _articleService;
         readonly Repository<Service> _serviceRepository;
+        readonly Repository<PieceEmployee> _pieceEmployeeRepository;
+        Categorie _categorie ;
+        SousCategorie _sousCategorie;
+        Marque _marque ;
+        //var type = CbType.SelectedItem as TypeArticle;
+        Article _article ;
+        Magasin _magasin ;
         public MaterielInView()
         {
             InitializeComponent();
+            _categorie = new Categorie();
+            _sousCategorie = new SousCategorie();
+            _marque = new Marque();
+            _article = new Article();
+            _magasin = new Magasin();
             var container = new UnityContainer();
             _articleService = container.Resolve<ArticleService>();
             _stockService= container.Resolve<StockService>();
@@ -31,14 +48,16 @@ namespace GM.UI.Views
             _serviceRepository=container.Resolve<Repository<Service>>();
             var magasinRepository = container.Resolve<Repository<Magasin>>();
             var departementRepository = container.Resolve<Repository<Departement>>();
+            _pieceEmployeeRepository = container.Resolve<Repository<PieceEmployee>>();
             CbCategorie.ItemsSource = categorieRepository.SelectAll();
             CbMarque.ItemsSource = marqueRepository.SelectAll();
             CbMagasin.ItemsSource = magasinRepository.SelectAll();
             CbBonSortie.ItemsSource = beRepository.SelectAll();
             CbDepartement.ItemsSource = departementRepository.SelectAll();
-            // LoadData();
 
         }
+
+       
 
         private void CbCategorie_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -48,7 +67,6 @@ namespace GM.UI.Views
             if (categorie != null)
                 CbSousCategorie.ItemsSource = _sousCategorieRepository.Find(x => x.CategorieId == categorie.Id);
         }
-
 
         private void CbMaruqe_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -73,14 +91,14 @@ namespace GM.UI.Views
         {
             if (CbMagasin.SelectedIndex == -1) return;
             var itemSourceView = new ObservableCollection<StockModelView>();
-            var categorie = CbCategorie.SelectedItem as Categorie;
-            var sousCategorie = CbSousCategorie.SelectedItem as SousCategorie;
-            var marque = CbMarque.SelectedItem as Marque;
+             _categorie = CbCategorie.SelectedItem as Categorie;
+             _sousCategorie = CbSousCategorie.SelectedItem as SousCategorie;
+             _marque = CbMarque.SelectedItem as Marque;
             //var type = CbType.SelectedItem as TypeArticle;
-            var article = CbArticle.SelectedItem as Article;
-            var magasin = CbMagasin.SelectedItem as Magasin;
-            if (sousCategorie == null || categorie == null || marque == null || magasin == null ||  article == null) return;
-            var result =_stockService. PieceMagasins(categorie, sousCategorie, marque, article, magasin);
+             _article = CbArticle.SelectedItem as Article;
+             _magasin = CbMagasin.SelectedItem as Magasin;
+            if (_sousCategorie == null || _categorie == null || _marque == null || _magasin == null ||  _article == null) return;
+            var result =_stockService. PieceMagasins(_categorie, _sousCategorie, _marque, _article, _magasin);
             if (ConvertToStockVm(result, itemSourceView)) return;
             DataGridStock.ItemsSource = itemSourceView;
         }
@@ -102,6 +120,59 @@ namespace GM.UI.Views
         private void CbService_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             
+        }
+
+        private void SaveBtn_OnClick(object sender, RoutedEventArgs e)
+        {
+            var departemet = CbDepartement.SelectedItem as Departement;
+            var service = CbService.SelectedItem as Service;
+            var sousService = CbSousService.SelectedItem as SousService;
+            var bSortie = CbBonSortie.SelectedItem as BonSortie;
+            var items = DataGridStock.SelectedItems;
+            if (departemet == null || service == null || bSortie == null || items.Count == 0)
+            {
+                MessageBox.Show("");
+                return;
+            }
+         
+            ProgressBar.Minimum = 0;
+            ProgressBar.Maximum = items.Count;
+            var pBar = new PBar(ProgressBar);
+            ProgressBar.Visibility = Visibility.Visible;
+            DoWork(items, bSortie, departemet, service, sousService, pBar);
+            var tmp = _stockService.PieceMagasins(_categorie, _sousCategorie, _marque, _article, _magasin);
+            var itemSourceView = new ObservableCollection<StockModelView>();
+            ConvertToStockVm(tmp, itemSourceView);
+            DataGridStock.ItemsSource = itemSourceView;
+            DataGridDist.ItemsSource = new ObservableCollection<PieceEmployee>(_pieceEmployeeRepository.Find(w=>w.BonSortieId==bSortie.Id &&w.ServiceId ==service.Id));
+            ProgressBar.Visibility = Visibility.Collapsed;
+
+        }
+
+        private void DoWork(IList items, BonSortie bSortie, Departement departemet, Service service, SousService sousService,
+           PBar pBar)
+        {
+            foreach (var item in items.OfType<StockModelView>())
+            {
+                var stock = _stockService.SelectById(item.Id);
+
+                var p = new PieceEmployee
+                {
+                    PieceId = item.PieceId,
+                    Date = DateTime.Now,
+                    BonSortieId = bSortie.Id,
+                    DepartementId = departemet.Id,
+                    ServiceId = service.Id,
+                };
+                if (sousService != null) p.SousServiceId = sousService.Id;
+                _pieceEmployeeRepository.Insert(p);
+                _pieceEmployeeRepository.Save();
+                stock.Disponibilite = false;
+                _stockService.Update(stock);
+                _stockService.Save();
+
+                pBar.IncPB();
+            }
         }
     }
 }

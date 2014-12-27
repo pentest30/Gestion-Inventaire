@@ -11,6 +11,7 @@ namespace GM.Entity.Models
         public long? BonEntreeId { get; set; }
         public long? ArticleId { get; set; }
         //public string PieceNInventaire { get; set; }
+        public bool Disponibilite { get; set; }
 
         public DateTime Date { get; set; }
         public Article Article { get; set; }

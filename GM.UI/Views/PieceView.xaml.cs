@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
@@ -18,11 +19,11 @@ namespace GM.UI.Views
     {
         private readonly ArticleService _articleService;
         private readonly Repository<SousCategorie> _sousCategorieRepository;
-       
         public static PieceService PieceService;
         public static StockService StockService;
         private readonly Repository<BonEntreeLigne> _beLigneRepository;
 
+        private static  Repository<PieceEmployee> _pServiRepository;
 
         public PieceView()
         {
@@ -31,13 +32,19 @@ namespace GM.UI.Views
             _articleService = container.Resolve<ArticleService>();
             PieceService = container.Resolve<PieceService>();
             StockService = container.Resolve<StockService>();
+            _pServiRepository = container.Resolve<Repository<PieceEmployee>>();
             var beRepository = container.Resolve<Repository<BonEntree>>();
             _beLigneRepository = container.Resolve<Repository<BonEntreeLigne>>();
             var magasinRepository = container.Resolve<Repository<Magasin>>();
             var categorieRepository = container.Resolve<Repository<Categorie>>();
             var marqueRepository = container.Resolve<Repository<Marque>>();
             _sousCategorieRepository = container.Resolve<Repository<SousCategorie>>();
-        
+            Init(categorieRepository, magasinRepository, beRepository, marqueRepository);
+        }
+
+        private void Init(Repository<Categorie> categorieRepository, Repository<Magasin> magasinRepository, Repository<BonEntree> beRepository,
+            Repository<Marque> marqueRepository)
+        {
             CbCategorie.ItemsSource = categorieRepository.SelectAll();
             CbMagasin.ItemsSource = magasinRepository.SelectAll();
             CbBEntree.ItemsSource = beRepository.SelectAll();
@@ -96,6 +103,7 @@ namespace GM.UI.Views
             {
                 PieceService.Save();
                 var stcok = Mapper.Map<PieceMagasin>(item);
+                stcok.Disponibilite = true;
                 StockService.Insert(stcok);
                 StockService.Save();
             }
@@ -137,23 +145,34 @@ namespace GM.UI.Views
             var items = DataGrid.SelectedItems;
             if (items == null) return;
 
+            DeleteDetailsPieces(items);
+            LoadData();
+        }
+
+        private static void DeleteDetailsPieces(IEnumerable items)
+        {
             foreach (var item in items.OfType<Piece>())
             {
-                if (item==null)continue;
+                if (item == null) continue;
                 var piece = item;
                 var stock = StockService.Find(x => x.PieceId == piece.Id).FirstOrDefault();
+                var pieceUses = _pServiRepository.Find(x=>x.PieceId==piece.Id).FirstOrDefault();
                 if (stock != null)
                 {
                     StockService.Delete(stock.Id);
                     StockService.Save();
                 }
+                if (pieceUses!= null)
+                {
+                    _pServiRepository.Delete(pieceUses.Id);
+                    _pServiRepository.Save();
+                }
                 PieceService.Delete(item.Id);
                 PieceService.Save();
             }
-            LoadData();
         }
 
-      
+
         private void CbCategorie_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (CbCategorie.SelectedIndex == -1) return;

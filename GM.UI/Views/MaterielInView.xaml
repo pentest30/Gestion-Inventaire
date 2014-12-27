@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="GM.UI.Views.MaterielInView"
+﻿<UserControl
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -7,6 +7,7 @@
              xmlns:extendedColumn="clr-namespace:ExtendedGrid.ExtendedColumn;assembly=ExtendedGrid"
              xmlns:converters="clr-namespace:GM.UI.Converters"
              xmlns:helpers="clr-namespace:WPF.Core.Helpers;assembly=WPF.Core"
+             xmlns:Models="clr-namespace:GM.Entity.Models;assembly=GM.Entity" x:Class="GM.UI.Views.MaterielInView"
              mc:Ignorable="d" >
     <UserControl.Resources>
         <converters:Nan2Visible x:Key="Nan2Visible"/>
@@ -21,6 +22,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
+            <RowDefinition Height="25"/>
         </Grid.RowDefinitions>
         <GroupBox Margin="5" Header="Paramètres de recherche:" BorderBrush="Gray">
             <Grid Margin="5">
@@ -38,68 +40,79 @@
                 </Grid.RowDefinitions>
                 <TextBlock VerticalAlignment="Center" Text="Catégorie:"/>
                 <TextBlock VerticalAlignment="Center" Grid.Row="0" Grid.Column="2" Text="Sous catégorie:"/>
-               
+
                 <TextBlock VerticalAlignment="Center" Grid.Row="1" Grid.Column="0" Text="Marque:"/>
                 <TextBlock VerticalAlignment="Center" Grid.Row="2" Grid.Column="0" Text="Article:" HorizontalAlignment="Left" Width="54"/>
                 <TextBlock VerticalAlignment="Center" Grid.Row="2" Grid.Column="2" Text="Magasin:"/>
                 <ComboBox SelectionChanged="CbCategorie_OnSelectionChanged" 
-				x:Name="CbCategorie" 
-				Grid.Column="1" 
-				Grid.Row="0" 
-				DisplayMemberPath="Libelle"
-				SelectedValuePath="Id"/>
+					x:Name="CbCategorie" 
+					Grid.Column="1" 
+					Grid.Row="0" 
+					DisplayMemberPath="Libelle"
+					SelectedValuePath="Id"/>
                 <helpers:AutoFilteredComboBox Margin="2"
                                          
-                x:Name="CbSousCategorie" 
-				Grid.Column="3" 
-				Grid.Row="0" 
-				DisplayMemberPath="Libelle"
+					x:Name="CbSousCategorie" 
+					Grid.Column="3" 
+					Grid.Row="0" 
+					DisplayMemberPath="Libelle"
 				
-				SelectedValuePath="Id"
+					SelectedValuePath="Id"
                />
-              
+
                 <helpers:AutoFilteredComboBox Margin="2" 
-				x:Name="CbMarque" 
-				Grid.Column="1"
-                Grid.ColumnSpan="3"
+					x:Name="CbMarque" 
+					Grid.Column="1"
+					Grid.ColumnSpan="3"
                                              
-				Grid.Row="1" 
-				DisplayMemberPath="Libelle"
-                 SelectionChanged="CbMaruqe_OnSelectionChanged"
-				SelectedValuePath="Id"/>
+					Grid.Row="1" 
+					DisplayMemberPath="Libelle"
+					SelectionChanged="CbMaruqe_OnSelectionChanged"
+					SelectedValuePath="Id"/>
                 <helpers:AutoFilteredComboBox 
-            x:Name="CbArticle" 
-            Grid.Column="1" 
-            Grid.Row="2"
-            Margin="2" 
-            DisplayMemberPath="Libelle" 
-            SelectedValuePath="Id" 
-                    IsEnabled="{Binding Visibility, Converter={StaticResource Visible2Disable}, ElementName=AddButton}" 
-			SelectionChanged="CbArticle_OnSelectionChanged" />
+					x:Name="CbArticle" 
+					Grid.Column="1" 
+					Grid.Row="2"
+					Margin="2" 
+					DisplayMemberPath="Libelle" 
+					SelectedValuePath="Id" 
+					IsEnabled="{Binding Visibility, Converter={StaticResource Visible2Disable}, ElementName=AddButton}" 
+					SelectionChanged="CbArticle_OnSelectionChanged" />
                 <helpers:AutoFilteredComboBox 
-                Margin="0,2,2,2"
-               x:Name="CbMagasin"
-                    Grid.Column="3" Grid.Row="2" 
-                DisplayMemberPath="Libelle" 
-                SelectedValuePath="Id" 
-                SelectionChanged="CbMagasin_OnSelectionChanged" />
+					Margin="0,2,2,2"
+					x:Name="CbMagasin"
+					Grid.Column="3" Grid.Row="2" 
+					DisplayMemberPath="Libelle"
+                    
+					SelectedValuePath="Id" 
+					SelectionChanged="CbMagasin_OnSelectionChanged" />
             </Grid>
         </GroupBox>
         <extendedDataGrid:ExtendedDataGrid
-            Margin="5"
-                Grid.Column="0"
-               IsReadOnly="True"
-                Grid.Row="1"
-                    IsEnabled="{Binding Visibility, Converter={StaticResource Visible2Enable}, ElementName=AddButton}" 
-                     AutoGenerateColumns="False"
-                    CanUserAddRows="False" 
-                    Name="DataGridStock">
-          
+			Margin="5"
+			Grid.Column="0"
+			IsReadOnly="True"
+			SelectionMode="Extended"
+			AllowDrop="True"
+			Grid.Row="1"
+			IsEnabled="{Binding Visibility, Converter={StaticResource Visible2Enable}, ElementName=AddButton}" 
+			AutoGenerateColumns="False"
+			CanUserAddRows="False" 
+			x:Name="DataGridStock">
+
             <extendedDataGrid:ExtendedDataGrid.Columns>
-               <extendedColumn:ExtendedDataGridTextColumn AllowAutoFilter="True" Width="*" Header="N° d'inventaire" Binding="{Binding Path=Inventaire}"/>
-                <extendedColumn:ExtendedDataGridTextColumn AllowAutoFilter="True" Width="*" Header="Date d'entrée" Binding="{Binding Path=Date, StringFormat=d}"/>
-               
+                <extendedColumn:ExtendedDataGridTextColumn AllowAutoFilter="True" Width="*" Header="N° d'inventaire" Binding="{Binding Inventaire}"/>
+                <extendedColumn:ExtendedDataGridTextColumn AllowAutoFilter="True" Width="*" Header="Date d'entrée" Binding="{Binding Date, StringFormat=d}"/>
+
             </extendedDataGrid:ExtendedDataGrid.Columns>
+            <extendedDataGrid:ExtendedDataGrid.FooterDataTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Total:" FontWeight="Bold"/>
+                        <TextBlock Margin="3,0,0,0" Foreground="OrangeRed"  Text="{Binding Items.Count, ElementName=DataGridStock}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </extendedDataGrid:ExtendedDataGrid.FooterDataTemplate>
         </extendedDataGrid:ExtendedDataGrid>
 
         <Grid Grid.Row="0" Grid.RowSpan="2" Grid.Column="1">
@@ -126,27 +139,37 @@
                     <TextBlock Grid.Row="0" Grid.Column="2" Text="Service:" VerticalAlignment="Center"/>
                     <TextBlock Grid.Row="1" Grid.Column="0" Text="Sous service:" VerticalAlignment="Center"/>
                     <TextBlock Grid.Row="1" Grid.Column="2" Text="N° Bon de sortie:" VerticalAlignment="Center"/>
-                    <helpers:AutoFilteredComboBox  SelectionChanged="CbDepartement_OnSelectionChanged" Name="CbDepartement"  Grid.Row="0"
-                                                  Grid.Column="1" Margin="2" DisplayMemberPath="Libelle"  SelectedValuePath="Id" SelectedValue="{Binding Path=DepartementId}"/>
-                    <helpers:AutoFilteredComboBox Name="CbService" Grid.Column="3" Grid.Row="0" Margin="2" SelectionChanged="CbService_OnSelectionChanged" DisplayMemberPath="Libelle" SelectedValuePath="Id" SelectedValue="{Binding Path=ServiceId}"/>
-                    <helpers:AutoFilteredComboBox Name="CbSousService" Grid.Column="1" Grid.Row="1" Margin="2" DisplayMemberPath="Libelle" SelectedValuePath="Id" SelectedValue="{Binding Path=SousServiceId}"/>
-                    <helpers:AutoFilteredComboBox Name="CbBonSortie" Grid.Column="3" Grid.Row="1" Margin="2" DisplayMemberPath="Libelle" SelectedValuePath="Id" SelectedValue="{Binding Path=BonSortieId}"/>
-                    <Separator  BorderBrush="Gray" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3"></Separator>
-                    <Button Grid.Column="3" Grid.Row="3" VerticalAlignment="Stretch"  HorizontalAlignment="Right" Width="100" Content="Enregistrer" Margin="2"/>
+                    <helpers:AutoFilteredComboBox  SelectionChanged="CbDepartement_OnSelectionChanged" x:Name="CbDepartement"  Grid.Row="0"
+						Grid.Column="1" Margin="2" DisplayMemberPath="Libelle"  SelectedValuePath="Id" SelectedValue="{Binding DepartementId}"/>
+                    <helpers:AutoFilteredComboBox x:Name="CbService" Grid.Column="3" Grid.Row="0" Margin="2" SelectionChanged="CbService_OnSelectionChanged" DisplayMemberPath="Libelle" SelectedValuePath="Id" SelectedValue="{Binding ServiceId}"/>
+                    <helpers:AutoFilteredComboBox x:Name="CbSousService" Grid.Column="1" Grid.Row="1" Margin="2" DisplayMemberPath="Libelle" SelectedValuePath="Id" SelectedValue="{Binding SousServiceId}"/>
+                    <helpers:AutoFilteredComboBox x:Name="CbBonSortie" Grid.Column="3" Grid.Row="1" Margin="2" DisplayMemberPath="NBon" SelectedValuePath="Id" SelectedValue="{Binding BonSortieId}"/>
+                    <Separator  BorderBrush="Gray" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3"/>
+                    <Button x:Name="SaveBtn" Grid.Column="3" Grid.Row="3" VerticalAlignment="Stretch" Click="SaveBtn_OnClick" HorizontalAlignment="Right" Width="100" Content="Enregistrer" Margin="2"/>
 
                 </Grid>
-                
+
             </GroupBox>
-               <extendedDataGrid:ExtendedDataGrid Grid.Row="2" Margin="5" Theme="Office2007Silver">
-                
+            <extendedDataGrid:ExtendedDataGrid AutoGenerateColumns="False"  x:Name="DataGridDist" Grid.Row="2" Margin="5" Theme="Office2007Silver" CanUserReorderRows="False">
+
                 <extendedDataGrid:ExtendedDataGrid.Columns>
-                    <extendedColumn:ExtendedDataGridTextColumn Width="*" Header="N°" Binding="{Binding NBon}"/>
-                    <extendedColumn:ExtendedDataGridTextColumn Width="*" Header="Date" Binding="{Binding DateEntree}"/>
-                    <extendedColumn:ExtendedDataGridTextColumn Width="*" Header="Etat" Binding="{Binding Etat}"/>
+                    <extendedColumn:ExtendedDataGridTextColumn Width="*" Header="N°" Binding="{Binding Path=Piece.NInventaire}"/>
+                    <extendedColumn:ExtendedDataGridTextColumn Width="*" Header="Date" Binding="{Binding Date}"/>
                 </extendedDataGrid:ExtendedDataGrid.Columns>
+                <extendedDataGrid:ExtendedDataGrid.FooterDataTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Total:" FontWeight="Bold"/>
+                            <TextBlock Margin="3,0,0,0" Foreground="OrangeRed"  Text="{Binding Items.Count, ElementName=CbDepartement}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </extendedDataGrid:ExtendedDataGrid.FooterDataTemplate>
+                <extendedDataGrid:ExtendedDataGrid.DataContext>
+                    <Models:PieceEmployee/>
+                </extendedDataGrid:ExtendedDataGrid.DataContext>
             </extendedDataGrid:ExtendedDataGrid>
         </Grid>
-
+        <ProgressBar x:Name="ProgressBar" Grid.Row="2" Grid.Column="1" Margin="2" Visibility="Collapsed"/>
 
 
     </Grid>

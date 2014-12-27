@@ -69,6 +69,7 @@ namespace GM.UI.Views
             PieceView.PieceService.Insert(nouveauPeice);
             PieceView.PieceService.Save();
             var stcok = Mapper.Map<PieceMagasin>(nouveauPeice);
+            stcok.Disponibilite = true;
             PieceView.StockService.Insert(stcok);
             PieceView.StockService.Save();
         }

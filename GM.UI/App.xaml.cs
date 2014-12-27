@@ -47,6 +47,7 @@ namespace GM.UI
                 .ForMember(x => x.Date, o => o.MapFrom(p => p.DateEntree));
             //   .ForMember(x => x.BonEntreeId, o => o.MapFrom(p => p.BonEntreeId));
             AutoMapper.Mapper.CreateMap<PieceMagasin, StockModelView>()
+               
                 .ForMember(x => x.NBon, o => o.MapFrom(p => p.BonEntree.NBon))
                 .ForMember(x => x.Date, o => o.MapFrom(p => p.Date))
                 .ForMember(x => x.Inventaire, o => o.MapFrom(p => p.Piece.NInventaire))
