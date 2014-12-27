@@ -31,6 +31,8 @@ namespace GM.Entity.Models
         public Article Article { get; set; }
         [NotMapped]
         public ICollection<IMovement> Movements { get; set; }
+
+        //public ICollection<HistoriqueInventaire> HistoriqueInventaires { get; set; }
         
     }
 }

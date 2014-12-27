@@ -39,20 +39,14 @@ namespace GM.UI.Views
 
         public BonEntreeLigneFrm.UpdateDg UpdateDataDg { get; set; }
 
-      
+
 
         private void CbDepartement_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            if (CbService.SelectedIndex == -1) return;
+            var item = CbDepartement.SelectedItem as Departement;
+            if (item != null) CbService.ItemsSource = _serviceRepository.Find(x => x.DepartementId == item.Id);
 
-            try
-            {
-                var item = CbDepartement.SelectedItem as Departement;
-                if (item != null) CbService.ItemsSource = _serviceRepository.Find(x => x.DepartementId == item.Id);
-            }
-            catch (Exception)
-            {
-                
-            }
         }
 
         private void AddUpdateBtn_OnClick(object sender, RoutedEventArgs e)

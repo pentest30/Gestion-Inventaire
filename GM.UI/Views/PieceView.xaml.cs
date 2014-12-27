@@ -18,7 +18,7 @@ namespace GM.UI.Views
     {
         private readonly ArticleService _articleService;
         private readonly Repository<SousCategorie> _sousCategorieRepository;
-        private readonly Repository<TypeArticle> _typeRepository;
+       
         public static PieceService PieceService;
         public static StockService StockService;
         private readonly Repository<BonEntreeLigne> _beLigneRepository;
@@ -37,7 +37,7 @@ namespace GM.UI.Views
             var categorieRepository = container.Resolve<Repository<Categorie>>();
             var marqueRepository = container.Resolve<Repository<Marque>>();
             _sousCategorieRepository = container.Resolve<Repository<SousCategorie>>();
-            _typeRepository = container.Resolve<Repository<TypeArticle>>();
+        
             CbCategorie.ItemsSource = categorieRepository.SelectAll();
             CbMagasin.ItemsSource = magasinRepository.SelectAll();
             CbBEntree.ItemsSource = beRepository.SelectAll();
@@ -234,9 +234,9 @@ namespace GM.UI.Views
                     || x.Article.SousCategorie.Libelle.Contains(TxtSearch.Text) 
                   || x.Article.Marque.Libelle.Contains(TxtSearch.Text)));
             }
-            catch (Exception)
+            catch (Exception exception)
             {
-                
+                MessageBox.Show(exception.Message);
             }
         }
     }

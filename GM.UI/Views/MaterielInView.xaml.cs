@@ -16,8 +16,8 @@ namespace GM.UI.Views
     {
         private static  StockService _stockService;
         private readonly Repository<SousCategorie> _sousCategorieRepository;
-        private readonly Repository<TypeArticle> _typeRepository;
         private readonly ArticleService _articleService;
+        readonly Repository<Service> _serviceRepository;
         public MaterielInView()
         {
             InitializeComponent();
@@ -27,12 +27,16 @@ namespace GM.UI.Views
             var marqueRepository = container.Resolve<Repository<Marque>>();
             var categorieRepository = container.Resolve<Repository<Categorie>>();
             _sousCategorieRepository = container.Resolve<Repository<SousCategorie>>();
-            _typeRepository = container.Resolve<Repository<TypeArticle>>();
+            var beRepository =container.Resolve<Repository<BonSortie>>();
+            _serviceRepository=container.Resolve<Repository<Service>>();
             var magasinRepository = container.Resolve<Repository<Magasin>>();
+            var departementRepository = container.Resolve<Repository<Departement>>();
             CbCategorie.ItemsSource = categorieRepository.SelectAll();
             CbMarque.ItemsSource = marqueRepository.SelectAll();
             CbMagasin.ItemsSource = magasinRepository.SelectAll();
-           // LoadData();
+            CbBonSortie.ItemsSource = beRepository.SelectAll();
+            CbDepartement.ItemsSource = departementRepository.SelectAll();
+            // LoadData();
 
         }
 
@@ -45,12 +49,6 @@ namespace GM.UI.Views
                 CbSousCategorie.ItemsSource = _sousCategorieRepository.Find(x => x.CategorieId == categorie.Id);
         }
 
-      
-
-        private void CbType_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            CbArticle.SelectedIndex = -1;
-        }
 
         private void CbMaruqe_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -96,7 +94,9 @@ namespace GM.UI.Views
 
         private void CbDepartement_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            
+            if (CbDepartement.SelectedIndex == -1) return;
+            var item = CbDepartement.SelectedItem as Departement;
+            if (item != null) CbService.ItemsSource = _serviceRepository.Find(x => x.DepartementId == item.Id);
         }
 
         private void CbService_OnSelectionChanged(object sender, SelectionChangedEventArgs e)

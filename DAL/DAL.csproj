@@ -56,49 +56,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GMStoreContext.cs" />
-    <Compile Include="Migrations\201412241631536_mg4.cs" />
-    <Compile Include="Migrations\201412241631536_mg4.Designer.cs">
-      <DependentUpon>201412241631536_mg4.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201412241838472_lf4.cs" />
-    <Compile Include="Migrations\201412241838472_lf4.Designer.cs">
-      <DependentUpon>201412241838472_lf4.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201412251519068_lk2.cs" />
-    <Compile Include="Migrations\201412251519068_lk2.Designer.cs">
-      <DependentUpon>201412251519068_lk2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201412251613116_mk3.cs" />
-    <Compile Include="Migrations\201412251613116_mk3.Designer.cs">
-      <DependentUpon>201412251613116_mk3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201412251711573_mk.cs" />
-    <Compile Include="Migrations\201412251711573_mk.Designer.cs">
-      <DependentUpon>201412251711573_mk.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201412251712553_mk31.cs" />
-    <Compile Include="Migrations\201412251712553_mk31.Designer.cs">
-      <DependentUpon>201412251712553_mk31.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201412251848403_mk32.cs" />
-    <Compile Include="Migrations\201412251848403_mk32.Designer.cs">
-      <DependentUpon>201412251848403_mk32.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201412251849143_mk4.cs" />
-    <Compile Include="Migrations\201412251849143_mk4.Designer.cs">
-      <DependentUpon>201412251849143_mk4.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201412251943167_mk5.cs" />
-    <Compile Include="Migrations\201412251943167_mk5.Designer.cs">
-      <DependentUpon>201412251943167_mk5.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201412261748077_fh54.cs" />
-    <Compile Include="Migrations\201412261748077_fh54.Designer.cs">
-      <DependentUpon>201412261748077_fh54.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201412261829286_fh5.cs" />
-    <Compile Include="Migrations\201412261829286_fh5.Designer.cs">
-      <DependentUpon>201412261829286_fh5.cs</DependentUpon>
+    <Compile Include="Migrations\201412271250007_update1.cs" />
+    <Compile Include="Migrations\201412271250007_update1.Designer.cs">
+      <DependentUpon>201412271250007_update1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -117,38 +77,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201412241631536_mg4.resx">
-      <DependentUpon>201412241631536_mg4.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201412241838472_lf4.resx">
-      <DependentUpon>201412241838472_lf4.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201412251519068_lk2.resx">
-      <DependentUpon>201412251519068_lk2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201412251613116_mk3.resx">
-      <DependentUpon>201412251613116_mk3.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201412251711573_mk.resx">
-      <DependentUpon>201412251711573_mk.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201412251712553_mk31.resx">
-      <DependentUpon>201412251712553_mk31.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201412251848403_mk32.resx">
-      <DependentUpon>201412251848403_mk32.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201412251849143_mk4.resx">
-      <DependentUpon>201412251849143_mk4.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201412251943167_mk5.resx">
-      <DependentUpon>201412251943167_mk5.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201412261748077_fh54.resx">
-      <DependentUpon>201412261748077_fh54.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201412261829286_fh5.resx">
-      <DependentUpon>201412261829286_fh5.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201412271250007_update1.resx">
+      <DependentUpon>201412271250007_update1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

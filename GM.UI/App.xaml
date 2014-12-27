@@ -44,7 +44,7 @@
                 <ResourceDictionary Source="pack://application:,,,/WPFOfficeTheme;component/themes/Expander_new.xaml" />
 
                 <!--<ResourceDictionary Source="pack://application:,,,/WPFOfficeTheme;component/themes/DataGrid.xaml"/>-->
-                <ResourceDictionary Source="pack://application:,,,/WPFOfficeTheme;component/themes/TabControl.xaml"/>
+                <!--<ResourceDictionary Source="pack://application:,,,/WPFOfficeTheme;component/themes/TabControl.xaml"/>-->
                 <ResourceDictionary Source="pack://application:,,,/WPFOfficeTheme;component/themes/ListView.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/WPFOfficeTheme;component/themes/TextBlockStyle.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/WPFOfficeTheme;component/themes/DatePicker.xaml" />
