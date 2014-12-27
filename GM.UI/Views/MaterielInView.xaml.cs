@@ -174,5 +174,13 @@ namespace GM.UI.Views
                 pBar.IncPB();
             }
         }
+
+        private void CbBonSortie_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (CbBonSortie.SelectedIndex==-1)return;
+            var service = CbService.SelectedItem as Service;
+            var bSortie = CbBonSortie.SelectedItem as BonSortie;
+            DataGridDist.ItemsSource = new ObservableCollection<PieceEmployee>(_pieceEmployeeRepository.Find(w => w.BonSortieId == bSortie.Id && w.ServiceId == service.Id));
+        }
     }
 }

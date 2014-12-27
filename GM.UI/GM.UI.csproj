@@ -166,6 +166,9 @@
     <Compile Include="Views\SousServiceView.xaml.cs">
       <DependentUpon>SousServiceView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\StockView.xaml.cs">
+      <DependentUpon>StockView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\TypeView.xaml.cs">
       <DependentUpon>TypeView.xaml</DependentUpon>
     </Compile>
@@ -254,6 +257,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\SousServiceView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\StockView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

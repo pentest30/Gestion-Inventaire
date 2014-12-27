@@ -48,7 +48,8 @@
                             <xPlorerBar:XPlorerItem ItemText="Nouveau stock" Click="ButtonBase_OnClick"/>
                             <xPlorerBar:XPlorerItem ItemText="Commandes Internes" Click="ButtonBase_OnClick"/>
                             <xPlorerBar:XPlorerItem ItemText="Bons de sortie" Click="ButtonBase_OnClick"/>
-                            <xPlorerBar:XPlorerItem ItemText="Piece service" Click="ButtonBase_OnClick"/>
+                            <xPlorerBar:XPlorerItem ItemText="Distribution du matériels" Click="ButtonBase_OnClick"/>
+                            <xPlorerBar:XPlorerItem ItemText="Le stock" Click="ButtonBase_OnClick"/>
                         </StackPanel>
                     </xPlorerBar:XPlorerSection>
                 </xPlorerBar:XPlorerBar>

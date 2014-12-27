@@ -143,14 +143,14 @@
 						Grid.Column="1" Margin="2" DisplayMemberPath="Libelle"  SelectedValuePath="Id" SelectedValue="{Binding DepartementId}"/>
                     <helpers:AutoFilteredComboBox x:Name="CbService" Grid.Column="3" Grid.Row="0" Margin="2" SelectionChanged="CbService_OnSelectionChanged" DisplayMemberPath="Libelle" SelectedValuePath="Id" SelectedValue="{Binding ServiceId}"/>
                     <helpers:AutoFilteredComboBox x:Name="CbSousService" Grid.Column="1" Grid.Row="1" Margin="2" DisplayMemberPath="Libelle" SelectedValuePath="Id" SelectedValue="{Binding SousServiceId}"/>
-                    <helpers:AutoFilteredComboBox x:Name="CbBonSortie" Grid.Column="3" Grid.Row="1" Margin="2" DisplayMemberPath="NBon" SelectedValuePath="Id" SelectedValue="{Binding BonSortieId}"/>
+                    <helpers:AutoFilteredComboBox SelectionChanged="CbBonSortie_OnSelectionChanged" x:Name="CbBonSortie" Grid.Column="3" Grid.Row="1" Margin="2" DisplayMemberPath="NBon" SelectedValuePath="Id" SelectedValue="{Binding BonSortieId}"/>
                     <Separator  BorderBrush="Gray" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3"/>
                     <Button x:Name="SaveBtn" Grid.Column="3" Grid.Row="3" VerticalAlignment="Stretch" Click="SaveBtn_OnClick" HorizontalAlignment="Right" Width="100" Content="Enregistrer" Margin="2"/>
 
                 </Grid>
 
             </GroupBox>
-            <extendedDataGrid:ExtendedDataGrid AutoGenerateColumns="False"  x:Name="DataGridDist" Grid.Row="2" Margin="5" Theme="Office2007Silver" CanUserReorderRows="False">
+            <extendedDataGrid:ExtendedDataGrid AutoGenerateColumns="False"  x:Name="DataGridDist" Grid.Row="2" Margin="5" Theme="Office2007Silver" CanUserAddRows="False">
 
                 <extendedDataGrid:ExtendedDataGrid.Columns>
                     <extendedColumn:ExtendedDataGridTextColumn Width="*" Header="N°" Binding="{Binding Path=Piece.NInventaire}"/>
@@ -160,7 +160,7 @@
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="Total:" FontWeight="Bold"/>
-                            <TextBlock Margin="3,0,0,0" Foreground="OrangeRed"  Text="{Binding Items.Count, ElementName=CbDepartement}"/>
+                            <TextBlock Margin="3,0,0,0" Foreground="OrangeRed"  Text="{Binding Items.Count, ElementName=DataGridDist}"/>
                         </StackPanel>
                     </DataTemplate>
                 </extendedDataGrid:ExtendedDataGrid.FooterDataTemplate>

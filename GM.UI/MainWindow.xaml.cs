@@ -45,7 +45,7 @@ namespace GM.UI
                         break;
                     case "Articles": ContentControl.Content = new ArticleView();
                         break;
-                    case "Piece service": ContentControl.Content = new MaterielInView();
+                    case "Distribution du matériels": ContentControl.Content = new MaterielInView();
                         break;
                     case "Bons d'entrées": ContentControl.Content = new BonEntreeMagasinView();
                    
@@ -58,6 +58,8 @@ namespace GM.UI
                         break;
                     case "Types": ContentControl.Content = new TypeView();
                         break;
+                   
+                        
                 }
             }
             catch (Exception exception)
