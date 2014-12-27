@@ -24,10 +24,10 @@
             Name="CbMagasin" 
             DisplayMemberPath="Libelle" 
             SelectedValue="Id"
-           
             SelectionChanged="CbMagasin_OnSelectionChanged"/>
 
         <extendedGridControl:ExtendedDataGrid
+            FontSize="12"
 			Margin="5"
 			Grid.Column="0"
             Grid.ColumnSpan="2"
@@ -51,7 +51,7 @@
             </extendedGridControl:ExtendedDataGrid.Columns>
             <extendedGridControl:ExtendedDataGrid.FooterDataTemplate>
                 <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
+                    <StackPanel  Orientation="Horizontal">
                         <TextBlock Text="Total:" FontWeight="Bold"/>
                         <TextBlock Margin="3,0,0,0" Foreground="OrangeRed"  Text="{Binding Items.Count, ElementName=DataGridStock}"/>
                     </StackPanel>
