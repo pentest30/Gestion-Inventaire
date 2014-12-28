@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
 using BLL;
 using GM.Entity.Models;
@@ -42,6 +43,11 @@ namespace GM.UI.Views
             if (!result.Any()) return;
             foreach (var pieceMagasin in result) itemsView.Add(AutoMapper.Mapper.Map<StockModelView>(pieceMagasin));
             DataGridStock.ItemsSource = itemsView;
+        }
+
+        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }

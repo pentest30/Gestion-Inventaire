@@ -14,7 +14,6 @@
     
     <UserControl.Resources>
        <views:StockView x:Key="StockView"/>
-        <views:PieceSrviceView x:Key="PieceSrviceView/"></views:PieceSrviceView>
         <converters:Nan2Visible x:Key="Nan2Visible"/>
         <converters:Visible2Enable x:Key="Visible2Enable"/>
         <converters:Visible2NDisable x:Key="Visible2Disable"/>

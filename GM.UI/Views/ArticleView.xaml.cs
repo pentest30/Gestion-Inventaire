@@ -9,6 +9,7 @@ using System.Windows.Data;
 using System.Windows.Media.Imaging;
 using BLL;
 using GM.Entity.Models;
+using GM.UI.ModelView;
 using Microsoft.Practices.Unity;
 using OpenFileDialog = Microsoft.Win32.OpenFileDialog;
 
@@ -153,6 +154,13 @@ namespace GM.UI.Views
             }
         }
 
-       
+
+        private void PrintBtn_OnClick(object sender, RoutedEventArgs e)
+        {
+            var list = DataGrid.ItemsSource.OfType<Article>().OrderBy(x=>x.Libelle)
+                .Select(AutoMapper.Mapper.Map<ArticleViewModel>).ToList();
+            var frm = new ReportFrm(list);
+            frm.ShowDialog();
+        }
     }
 }

@@ -39,7 +39,7 @@ namespace GM.UI
             }
             AutoMapper.Mapper.CreateMap<Piece, Piece>()
                 .ForMember(x => x.Id, o => o.Ignore())
-                .ForMember(x => x.NInventaire, o => o.MapFrom(x=>x.NInventaire));
+                .ForMember(x => x.NInventaire, o => o.MapFrom(x => x.NInventaire));
             AutoMapper.Mapper.CreateMap<Piece, PieceMagasin>()
                 // .ForMember(x => x.ArticleId, o => o.MapFrom(p => p.ArticleId))
                 .ForMember(x => x.PieceId, o => o.MapFrom(p => p.Id))
@@ -47,7 +47,7 @@ namespace GM.UI
                 .ForMember(x => x.Date, o => o.MapFrom(p => p.DateEntree));
             //   .ForMember(x => x.BonEntreeId, o => o.MapFrom(p => p.BonEntreeId));
             AutoMapper.Mapper.CreateMap<PieceMagasin, StockModelView>()
-                 .ForMember(x => x.Etat, o => o.MapFrom(p => p.Piece.EtatPiece))
+                .ForMember(x => x.Etat, o => o.MapFrom(p => p.Piece.EtatPiece))
                 .ForMember(x => x.NBon, o => o.MapFrom(p => p.BonEntree.NBon))
                 .ForMember(x => x.Date, o => o.MapFrom(p => p.Date))
                 .ForMember(x => x.Inventaire, o => o.MapFrom(p => p.Piece.NInventaire))
@@ -68,6 +68,10 @@ namespace GM.UI
                 .ForMember(x => x.Departement, o => o.MapFrom(p => p.Departement.Libelle))
                 .ForMember(x => x.Service, o => o.MapFrom(p => p.Service.Libelle))
                 .ForMember(x => x.SousService, o => o.MapFrom(p => p.SousService.Libelle));
+            AutoMapper.Mapper.CreateMap<Article, ArticleViewModel>()
+                .ForMember(x => x.Model, o => o.MapFrom(p => p.Libelle))
+                .ForMember(x => x.Qnt, o => o.MapFrom(p => p.QntMagsin))
+                .ForMember(x => x.SousCategorie, o => o.MapFrom(p => p.SousCategorie.Libelle));
         }
     }
 }

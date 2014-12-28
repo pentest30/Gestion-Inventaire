@@ -12,6 +12,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition/>
+            <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
@@ -31,11 +32,12 @@
             FontSize="12"
 			Margin="5"
 			Grid.Column="0"
-            Grid.ColumnSpan="2"
+            Grid.ColumnSpan="3"
 			IsReadOnly="True"
 			SelectionMode="Extended"
 			AllowDrop="True"
 			Grid.Row="1"
+            
 			AutoGenerateColumns="False"
 			CanUserAddRows="False" 
 			x:Name="DataGridStock">
@@ -60,6 +62,6 @@
                 <modelView:StockModelView/>
             </extendedGridControl:ExtendedDataGrid.DataContext>
         </extendedGridControl:ExtendedDataGrid>
-
+        <Button Click="ButtonBase_OnClick" Grid.Row="0" Grid.Column="2" Width="80" Content="Imprission"/>
     </Grid>
 </UserControl>

@@ -143,12 +143,13 @@
                 <RowDefinition Height="30"/>
                 <RowDefinition Height="30"/>
                 <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
                 <RowDefinition />
             </Grid.RowDefinitions>
             <extendedDataGrid:ExtendedDataGrid
 				Grid.Column="0"
 				Grid.Row="0"
-				Grid.RowSpan="4"
+				Grid.RowSpan="5"
 				AutoGenerateColumns="False" 
 				CanUserAddRows="False" 
 				IsReadOnly="True"
@@ -198,6 +199,7 @@
 				Margin="5,0,0,0" 
 				Content="Supprimer" 
 				Grid.Row="2" Grid.Column="1"/>
+            <Button Margin="5,0,0,0" Name="PrintBtn" Click="PrintBtn_OnClick"  Content="Imprission" Grid.Column="1" Grid.Row="3"/>
 
         </Grid>
     </Grid>
