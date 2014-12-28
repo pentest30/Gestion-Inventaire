@@ -24,7 +24,7 @@ namespace GM.UI.Views
         private IEnumerable LoadData()
         {
             var items = _repository.GetAllLazyLoad(x => x.Piece, x => x.Piece.Article, x => x.Service,  x => x.SousService,
-                x => x.BonSortie, x => x.Departement);
+                x => x.BonSortie, x => x.Departement).Where(x=>x.Utilisation);
             if (!items.Any()) yield break;
             foreach (var pieceEmployee in items)
             {

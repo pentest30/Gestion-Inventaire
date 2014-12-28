@@ -37,7 +37,7 @@ namespace DAL
         public DbSet<CommandeInterne> CommandeInternes { get; set; }
         public DbSet<CommandeLigne> CommandeLignes { get; set; }
         public DbSet<TypeArticle> Types { get; set; }
-        public DbSet<HistoriqueInventaire> HistoriqueInventaires { get; set; }
+       
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             //modelBuilder.Entity<Piece>()

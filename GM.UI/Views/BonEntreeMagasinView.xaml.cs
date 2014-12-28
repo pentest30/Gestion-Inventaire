@@ -33,7 +33,6 @@ namespace GM.UI.Views
 
         private void UpdateDG(long id)
         {
-            
             DataGridLignes.ItemsSource = _beLigneRepository.Find(x => x.BonEntreeId ==id);
         }
 
@@ -43,6 +42,13 @@ namespace GM.UI.Views
             DeleteButton.Visibility = Visibility.Hidden;
             var list = DataGrid.ItemsSource.OfType<BonEntree>().ToList();
             list.Add(_factory.Create());
+            var lastOrDefault = _beRepository.SelectAll().OrderBy(x => x.NBon).LastOrDefault();
+            if (lastOrDefault != null)
+                list.Last().NBon = lastOrDefault.NBon+1;
+            else
+            {
+                list.Last().NBon = 1;
+            }
             Grid.DataContext = list.Last();  
         }
 

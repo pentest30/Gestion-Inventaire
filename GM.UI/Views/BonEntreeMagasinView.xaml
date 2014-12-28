@@ -37,11 +37,11 @@
                
 
                 <TextBlock VerticalAlignment="Center" Text="N° de Bon:"/>
-                <TextBox IsEnabled="{Binding Visibility, Converter={StaticResource Visible2Disable}, ElementName=AddButton}" Text="{Binding NBon}" helper1:TextBoxMaskBehavior.Mask="Integer" Grid.Column="1" Grid.Row="0"/>
+                <TextBox Margin="2" IsEnabled="{Binding Visibility, Converter={StaticResource Visible2Disable}, ElementName=AddButton}" Text="{Binding NBon}" helper1:TextBoxMaskBehavior.Mask="Integer" Grid.Column="1" Grid.Row="0"/>
                 <TextBlock VerticalAlignment="Center" Grid.Column="2" Grid.Row="0" Text="Date d'entrée:"/>
                 <DatePicker Margin="2" IsEnabled="{Binding Visibility, Converter={StaticResource Visible2Disable}, ElementName=AddButton}" Grid.Column="3" Grid.Row="0" SelectedDate="{Binding DateEntree}"/>
                 <TextBlock VerticalAlignment="Center" Text="Magasin:" Grid.Column="0" Grid.Row="1" />
-                <ComboBox IsEnabled="{Binding Visibility, Converter={StaticResource Visible2Disable}, ElementName=AddButton}" Name="CbMagasin" Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="1" DisplayMemberPath="Libelle" SelectedValuePath="Id" SelectedValue="{Binding Path=MagasinId}"/>
+                <ComboBox Margin="2" IsEnabled="{Binding Visibility, Converter={StaticResource Visible2Disable}, ElementName=AddButton}" Name="CbMagasin" Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="1" DisplayMemberPath="Libelle" SelectedValuePath="Id" SelectedValue="{Binding Path=MagasinId}"/>
             </Grid>
         </GroupBox>
         <Grid Grid.Row="1" Margin="5">

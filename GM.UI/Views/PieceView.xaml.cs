@@ -23,7 +23,7 @@ namespace GM.UI.Views
         public static StockService StockService;
         private readonly IRepository<BonEntreeLigne> _beLigneRepository;
         private static  IRepository<PieceEmployee> _pServiRepository;
-        public static  IRepository<HistoriqueInventaire> HistoriqueRepository; 
+        
         public PieceView()
         {
             InitializeComponent();
@@ -38,7 +38,7 @@ namespace GM.UI.Views
             var categorieRepository = container.Resolve<Repository<Categorie>>();
             var marqueRepository = container.Resolve<Repository<Marque>>();
             _sousCategorieRepository = container.Resolve<Repository<SousCategorie>>();
-            HistoriqueRepository = container.Resolve<Repository<HistoriqueInventaire>>();
+          
             Init(categorieRepository, magasinRepository, beRepository, marqueRepository);
         }
 
@@ -106,16 +106,7 @@ namespace GM.UI.Views
                 stcok.Disponibilite = true;
                 StockService.Insert(stcok);
                 StockService.Save();
-                var firstOrDefault = StockService.Find(x => x == stcok).FirstOrDefault();
-                if (firstOrDefault != null)
-                {
-                    var stockId = firstOrDefault.Id;
-                    var historique = new HistoriqueInventaire();
-                    historique.PieceMagasinId = stockId;
-                    historique.PieceId = item.Id;
-                    HistoriqueRepository.Insert(historique);
-                    HistoriqueRepository.Save();
-                }
+              
             }
             catch (Exception ex)
             {
@@ -166,13 +157,8 @@ namespace GM.UI.Views
                 if (item == null) continue;
                 var piece = item;
                 var stock = StockService.Find(x => x.PieceId == piece.Id).FirstOrDefault();
-                var pieceUses = _pServiRepository.Find(x=>x.PieceId==piece.Id).FirstOrDefault();
-                var hsitorique = HistoriqueRepository.Find(x => x.PieceId == piece.Id && x.PieceMagasinId == stock.Id).FirstOrDefault();
-                if (hsitorique != null)
-                {
-                    HistoriqueRepository.Delete(hsitorique.Id);
-                    HistoriqueRepository.Save();
-                }
+                var pieceUses = _pServiRepository.Find(x=>x.PieceId == piece.Id).FirstOrDefault();
+               
                 if (stock != null)
                 {
                     StockService.Delete(stock.Id);

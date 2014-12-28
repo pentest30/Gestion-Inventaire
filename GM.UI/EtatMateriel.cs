@@ -1,7 +1,4 @@
-﻿
-
-using System.Collections.Generic;
-
+﻿using System.Collections.Generic;
 namespace GM.UI
 {
     public class EtatMateriel
@@ -18,12 +15,12 @@ namespace GM.UI
                 new EtatMateriel
                 {
                     Id = 2,
-                    Etat = "Défectueux"
+                    Etat = "En panne"
                 },
                 new EtatMateriel
                 {
                     Id = 3,
-                    Etat = "Réformé"
+                    Etat = "Réforme"
                 },
                 new EtatMateriel
                 {

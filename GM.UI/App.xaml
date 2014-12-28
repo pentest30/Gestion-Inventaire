@@ -23,7 +23,8 @@
             </Style>
 
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/Resources/WindowStyleChrome.xaml"/>
+                <ResourceDictionary Source="/PresentationFramework.Luna;V3.0.0.0;31bf3856ad364e35;component\themes/luna.normalcolor.xaml" />
+                <!--<ResourceDictionary Source="/Resources/WindowStyleChrome.xaml"/>
 
                 <ResourceDictionary Source="pack://application:,,,/WPFOfficeTheme;component/themes/ResizeGripStyle.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/WPFOfficeTheme;component/themes/StatusBarStyle.xaml"/>
@@ -43,11 +44,11 @@
                 <ResourceDictionary Source="pack://application:,,,/WPFOfficeTheme;component/themes/GridSplitter.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/WPFOfficeTheme;component/themes/Expander_new.xaml" />
 
-                <!--<ResourceDictionary Source="pack://application:,,,/WPFOfficeTheme;component/themes/DataGrid.xaml"/>-->
-                <!--<ResourceDictionary Source="pack://application:,,,/WPFOfficeTheme;component/themes/TabControl.xaml"/>-->
+                --><!--<ResourceDictionary Source="pack://application:,,,/WPFOfficeTheme;component/themes/DataGrid.xaml"/>-->
+                <!--<ResourceDictionary Source="pack://application:,,,/WPFOfficeTheme;component/themes/TabControl.xaml"/>--><!--
                 <ResourceDictionary Source="pack://application:,,,/WPFOfficeTheme;component/themes/ListView.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/WPFOfficeTheme;component/themes/TextBlockStyle.xaml"/>
-                <ResourceDictionary Source="pack://application:,,,/WPFOfficeTheme;component/themes/DatePicker.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/WPFOfficeTheme;component/themes/DatePicker.xaml" />-->
 
                 <!--<ResourceDictionary Source="/VIBlend.WPF.Theme.Office2010Blue;component/RepeatButton.xaml"/>
                 <ResourceDictionary Source="/VIBlend.WPF.Theme.Office2010Blue;component/Button.xaml"/>

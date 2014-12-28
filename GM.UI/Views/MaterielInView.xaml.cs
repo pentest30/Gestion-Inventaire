@@ -164,6 +164,7 @@ namespace GM.UI.Views
                     BonSortieId = bSortie.Id,
                     DepartementId = departemet.Id,
                     ServiceId = service.Id,
+                    Utilisation = true
                 };
                 if (sousService != null) p.SousServiceId = sousService.Id;
                 _pieceEmployeeRepository.Insert(p);

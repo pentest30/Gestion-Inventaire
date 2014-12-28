@@ -33,17 +33,17 @@
                     <RowDefinition Height="30"/>
                 </Grid.RowDefinitions>
                 <TextBlock VerticalAlignment="Center" Text="N°:"/>
-                <TextBox IsEnabled="{Binding Visibility, Converter={StaticResource Visible2Disable}, ElementName=AddButton}" Text="{Binding Libelle}" helper1:TextBoxMaskBehavior.Mask="Integer" Grid.Column="1" Grid.Row="0"/>
+                <TextBox Margin="2" IsEnabled="{Binding Visibility, Converter={StaticResource Visible2Disable}, ElementName=AddButton}" Text="{Binding Libelle}" helper1:TextBoxMaskBehavior.Mask="Integer" Grid.Column="1" Grid.Row="0"/>
                 <TextBlock VerticalAlignment="Center" Grid.Column="2" Grid.Row="0" Text="Date de commande:"/>
                 <DatePicker Margin="2" IsEnabled="{Binding Visibility, Converter={StaticResource Visible2Disable}, ElementName=AddButton}" Grid.Column="3" Grid.Row="0" SelectedDate="{Binding Path=DateCommnde, StringFormat=d}"/>
                 <TextBlock VerticalAlignment="Center" Text="Département:" Grid.Column="0" Grid.Row="1" />
-                <ComboBox IsEnabled="{Binding Visibility, Converter={StaticResource Visible2Disable}, ElementName=AddButton}" 
+                <ComboBox Margin="2" IsEnabled="{Binding Visibility, Converter={StaticResource Visible2Disable}, ElementName=AddButton}" 
                           Name="CbDepartement" Grid.Column="1"  
                           Grid.Row="1" DisplayMemberPath="Libelle"
                           SelectedValuePath="Id" SelectedValue="{Binding Path=DepartementId}"
                           SelectionChanged="CbDepartement_OnSelectionChanged"/>
                 <TextBlock VerticalAlignment="Center" Text="Service:" Grid.Column="2" Grid.Row="1" />
-                <ComboBox IsEnabled="{Binding Visibility, Converter={StaticResource Visible2Disable}, ElementName=AddButton}" Name="CbService" Grid.Column="3"  Grid.Row="1" DisplayMemberPath="Libelle" SelectedValuePath="Id" SelectedValue="{Binding Path=ServiceId}"/>
+                <ComboBox Margin="2" IsEnabled="{Binding Visibility, Converter={StaticResource Visible2Disable}, ElementName=AddButton}" Name="CbService" Grid.Column="3"  Grid.Row="1" DisplayMemberPath="Libelle" SelectedValuePath="Id" SelectedValue="{Binding Path=ServiceId}"/>
 
             </Grid>
         </GroupBox>

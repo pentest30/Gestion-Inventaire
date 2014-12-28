@@ -15,7 +15,7 @@ namespace GM.UI.Views
     {
         private readonly Piece _piece  ;
         private readonly int _qnt;
-        private int nr=0;
+        private int _nr;
         public BonEntreeLigneFrm.UpdateDg Update;
         public MulitStockFrm(int qnt , Piece piece)
         {
@@ -54,19 +54,20 @@ namespace GM.UI.Views
                     {
                         try
                         {
-                            if (i == 0) nr = Convert.ToInt32(nouveauPeice.NInventaire.Split('/')[0]) + 1;
-                            else nr ++;
-                            nouveauPeice.NInventaire = nr +"/"+ nouveauPeice.NInventaire.Split('/')[1];
+                            if (i == 0) _nr = Convert.ToInt32(nouveauPeice.NInventaire.Split('/')[0]) + 1;
+                            else _nr ++;
+                            nouveauPeice.NInventaire = _nr +"/"+ nouveauPeice.NInventaire.Split('/')[1];
                         }
                         catch (Exception)
                         {
+                            continue;
                         }
                     }
                     else if (!string.IsNullOrEmpty(nouveauPeice.NInventaire))
                     {
-                        if (i == 0) nr = Convert.ToInt32(nouveauPeice.NInventaire) + 1;
-                        else nr++;
-                        nouveauPeice.NInventaire = nr.ToString(CultureInfo.InvariantCulture);
+                        if (i == 0) _nr = Convert.ToInt32(nouveauPeice.NInventaire) + 1;
+                        else _nr++;
+                        nouveauPeice.NInventaire = _nr.ToString(CultureInfo.InvariantCulture);
                     }
                  
                     SavePiece(nouveauPeice);
@@ -101,16 +102,6 @@ namespace GM.UI.Views
             PieceView.StockService.Insert(stcok);
             PieceView.StockService.Save();
 
-            var firstOrDefault = PieceView.StockService.Find(x => x == stcok).FirstOrDefault();
-            if (firstOrDefault != null)
-            {
-                var stockId = firstOrDefault.Id;
-                var historique = new HistoriqueInventaire();
-                historique.PieceMagasinId = stockId;
-                historique.PieceId = nouveauPeice.Id;
-                PieceView.HistoriqueRepository.Insert(historique);
-                PieceView.HistoriqueRepository.Save();
-            }
         }
     }
 }

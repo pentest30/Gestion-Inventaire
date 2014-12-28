@@ -19,6 +19,7 @@
         </Grid.RowDefinitions>
         <TextBlock Text="Magasin:" VerticalAlignment="Center"/>
         <ComboBox
+            Margin="2"
             Grid.Row="0"
             Grid.Column="1"
             Name="CbMagasin" 
@@ -46,9 +47,7 @@
                 <extendedColumn:ExtendedDataGridTextColumn AllowAutoFilter="True" Width="*" Header="Classe" Binding="{Binding Path=SousCategorie}"/>
                 <extendedColumn:ExtendedDataGridTextColumn AllowAutoFilter="True" Width="*" Header="Marquer" Binding="{Binding Path=Marque}"/>
                 <extendedColumn:ExtendedDataGridTextColumn AllowAutoFilter="True" Width="*" Header="Modèl" Binding="{Binding Path=Model}"/>
-                <extendedColumn:ExtendedDataGridCheckBoxColumn AllowAutoFilter="True" Width="*" Header="Diponibilité" Binding="{Binding Path=Disponibilite}"/>
-
-            </extendedGridControl:ExtendedDataGrid.Columns>
+               </extendedGridControl:ExtendedDataGrid.Columns>
             <extendedGridControl:ExtendedDataGrid.FooterDataTemplate>
                 <DataTemplate>
                     <StackPanel  Orientation="Horizontal">

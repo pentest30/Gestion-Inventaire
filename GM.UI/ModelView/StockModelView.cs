@@ -15,6 +15,7 @@ namespace GM.UI.ModelView
        public string Marque { get; set; }
        public long PieceId { get; set; }
        public bool Disponibilite { get; set; }
+       public string Etat { get; set; }
 
 
 

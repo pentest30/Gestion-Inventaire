@@ -13,7 +13,7 @@ namespace GM.Entity.Models
        
         public int? ServiceId { get; set; }
         public int? SousServiceId { get; set; }
-        public string Discription { get; set; }
+        public bool Utilisation { get; set; }
         public string Etat { get; set; }
         public  Departement Departement { get; set; }
         public  SousService SousService { get; set; }
