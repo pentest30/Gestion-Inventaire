@@ -255,11 +255,9 @@
             </Grid>
 
         </TabItem>
-        <TabItem Header="Détails de l'invantaire" >
+        <TabItem Header="Stock" >
             <ContentControl Content="{StaticResource StockView}"/>
         </TabItem>
-        <TabItem Header="Matériels en utilisation">
-            <ContentControl Content="{StaticResource PieceSrviceView/}"/>
-        </TabItem>
+       
     </TabControl>
  </UserControl>

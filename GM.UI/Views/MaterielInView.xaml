@@ -22,7 +22,7 @@
             <RowDefinition/>
             <RowDefinition Height="25"/>
         </Grid.RowDefinitions>
-        <GroupBox Margin="5" Header="Paramètres de recherche:" BorderBrush="Gray">
+        <GroupBox Margin="5" Header="Source:" BorderBrush="Gray">
             <Grid Margin="5">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>

@@ -35,7 +35,7 @@ namespace GM.UI.Views
         {
             var result =
                 StockService.GetAllLazyLoad(x => x.Article, x => x.Piece, x => x.Magasin)
-                    .Where(x => x.MagasinId == magasin.Id)
+                    .Where(x => x.MagasinId == magasin.Id && x.Disponibilite)
                     .ToList();
             var itemsView = new ObservableCollection<StockModelView>();
 

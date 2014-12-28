@@ -58,6 +58,9 @@ namespace GM.UI
                         break;
                     case "Types": ContentControl.Content = new TypeView();
                         break;
+                    case "Matériels en utilisations": ContentControl.Content = new PieceSrviceView();
+                        break;
+                        
                    
                         
                 }
