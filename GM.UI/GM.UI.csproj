@@ -109,6 +109,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="EtatMateriel.cs" />
+    <Compile Include="ModelView\HorsStockView.cs" />
     <Compile Include="ModelView\StockModelView.cs" />
     <Compile Include="Resources\WindowStyleChrome.xaml.cs">
       <DependentUpon>WindowStyleChrome.xaml</DependentUpon>
@@ -153,6 +154,9 @@
     </Compile>
     <Compile Include="Views\MulitStockFrm.xaml.cs">
       <DependentUpon>MulitStockFrm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PieceSrviceView.xaml.cs">
+      <DependentUpon>PieceSrviceView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\PieceView.xaml.cs">
       <DependentUpon>PieceView.xaml</DependentUpon>
@@ -241,6 +245,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\MulitStockFrm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PieceSrviceView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

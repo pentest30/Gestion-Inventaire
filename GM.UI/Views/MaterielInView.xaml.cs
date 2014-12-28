@@ -149,8 +149,9 @@ namespace GM.UI.Views
 
         }
 
-        private void DoWork(IList items, BonSortie bSortie, Departement departemet, Service service, SousService sousService,
-           PBar pBar)
+        private void DoWork(IList items, BonSortie bSortie, Departement departemet, Service service,
+            SousService sousService,
+            PBar pBar)
         {
             foreach (var item in items.OfType<StockModelView>())
             {
@@ -170,7 +171,6 @@ namespace GM.UI.Views
                 stock.Disponibilite = false;
                 _stockService.Update(stock);
                 _stockService.Save();
-
                 pBar.IncPB();
             }
         }
@@ -180,7 +180,12 @@ namespace GM.UI.Views
             if (CbBonSortie.SelectedIndex==-1)return;
             var service = CbService.SelectedItem as Service;
             var bSortie = CbBonSortie.SelectedItem as BonSortie;
-            DataGridDist.ItemsSource = new ObservableCollection<PieceEmployee>(_pieceEmployeeRepository.Find(w => w.BonSortieId == bSortie.Id && w.ServiceId == service.Id));
+            DataGridDist.ItemsSource = new ObservableCollection<PieceEmployee>(_pieceEmployeeRepository.Find(w => service != null && (bSortie != null && (w.BonSortieId == bSortie.Id && w.ServiceId == service.Id))));
+        }
+
+        private void CbSousCategorie_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            CbArticle.SelectedIndex = -1;
         }
     }
 }

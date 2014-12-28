@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using System.Linq;
 using System.Windows;
 using AutoMapper;
 using GM.Entity.Models;
@@ -14,6 +15,7 @@ namespace GM.UI.Views
     {
         private readonly Piece _piece  ;
         private readonly int _qnt;
+        private int nr=0;
         public BonEntreeLigneFrm.UpdateDg Update;
         public MulitStockFrm(int qnt , Piece piece)
         {
@@ -44,7 +46,33 @@ namespace GM.UI.Views
             }
             else if (CbArticle.Text == ChoixInventaire.SuiverInventaireExistant.ToString())
             {
-                
+                ProgressBar.Visibility = Visibility.Visible;
+                for (var i = 0; i < Convert.ToInt32(TextBox.Text); i++)
+                {
+                    var nouveauPeice = NouveauPeice();
+                    if (!string.IsNullOrEmpty(nouveauPeice.NInventaire) && nouveauPeice.NInventaire.Contains("/"))
+                    {
+                        try
+                        {
+                            if (i == 0) nr = Convert.ToInt32(nouveauPeice.NInventaire.Split('/')[0]) + 1;
+                            else nr ++;
+                            nouveauPeice.NInventaire = nr +"/"+ nouveauPeice.NInventaire.Split('/')[1];
+                        }
+                        catch (Exception)
+                        {
+                        }
+                    }
+                    else if (!string.IsNullOrEmpty(nouveauPeice.NInventaire))
+                    {
+                        if (i == 0) nr = Convert.ToInt32(nouveauPeice.NInventaire) + 1;
+                        else nr++;
+                        nouveauPeice.NInventaire = nr.ToString(CultureInfo.InvariantCulture);
+                    }
+                 
+                    SavePiece(nouveauPeice);
+                    pBar.IncPB();
+                }
+
             }
             else
             {
@@ -72,6 +100,17 @@ namespace GM.UI.Views
             stcok.Disponibilite = true;
             PieceView.StockService.Insert(stcok);
             PieceView.StockService.Save();
+
+            var firstOrDefault = PieceView.StockService.Find(x => x == stcok).FirstOrDefault();
+            if (firstOrDefault != null)
+            {
+                var stockId = firstOrDefault.Id;
+                var historique = new HistoriqueInventaire();
+                historique.PieceMagasinId = stockId;
+                historique.PieceId = nouveauPeice.Id;
+                PieceView.HistoriqueRepository.Insert(historique);
+                PieceView.HistoriqueRepository.Save();
+            }
         }
     }
 }

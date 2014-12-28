@@ -28,9 +28,17 @@ namespace GM.UI.Views
             if (CbMagasin.SelectedIndex ==-1)return;
             var magasin = CbMagasin.SelectedItem as Magasin;
             if (magasin== null)return;
-            var result = StockService.GetAllLazyLoad(x=>x.Article,x=>x.Piece,x=>x.Magasin).Where(x=>x.MagasinId==magasin.Id).ToList();
+            GetData(magasin);
+        }
+
+        private void GetData(Magasin magasin)
+        {
+            var result =
+                StockService.GetAllLazyLoad(x => x.Article, x => x.Piece, x => x.Magasin)
+                    .Where(x => x.MagasinId == magasin.Id)
+                    .ToList();
             var itemsView = new ObservableCollection<StockModelView>();
-          
+
             if (!result.Any()) return;
             foreach (var pieceMagasin in result) itemsView.Add(AutoMapper.Mapper.Map<StockModelView>(pieceMagasin));
             DataGridStock.ItemsSource = itemsView;

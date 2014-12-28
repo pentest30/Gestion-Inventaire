@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GM.Entity.Models
 {
-    public sealed class Piece 
+    public  class Piece 
     {
         [Required]
         //[Column("Article_Id")]
@@ -14,7 +14,7 @@ namespace GM.Entity.Models
         public long Id { get; set; }
         public string NInventaire { get; set; }
         public string EtatPiece { get; set; }
-        public string EtatStock { get; set; }
+         public string EtatStock { get; set; }
 
         public DateTime? DateFabrication { get; set; }
         public string Fabriquant { get; set; }
@@ -28,7 +28,7 @@ namespace GM.Entity.Models
         public Magasin Magasin { get; set; }
         public BonEntree BonEntree { get; set; }
 
-        public Article Article { get; set; }
+        public  Article Article { get; set; }
         [NotMapped]
         public ICollection<IMovement> Movements { get; set; }
 

@@ -147,7 +147,7 @@
                     <models:BonSortieLigne/>
                 </bsFilter:FilterDataGrid.DataContext>
                 <bsFilter:FilterDataGrid.Columns>
-                    <DataGridTextColumn Width="*" Header="Type" Binding="{Binding Path=Article.Type.Libelle}"/>
+                    <DataGridTextColumn Width="*" Header="Type" Binding="{Binding Path=Article.SousCategorie.Libelle}"/>
                     <DataGridTextColumn Width="*" Header="Article" Binding="{Binding Path=Article.Libelle}"/>
                     <DataGridTextColumn Width="*" Header="Qnt" Binding="{Binding Path=Qnt}"/>
                     <DataGridTextColumn Width="*" Header="Département" Binding="{Binding Path=Departement.Libelle}"/>

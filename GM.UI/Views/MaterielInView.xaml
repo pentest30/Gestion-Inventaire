@@ -7,12 +7,10 @@
              xmlns:extendedColumn="clr-namespace:ExtendedGrid.ExtendedColumn;assembly=ExtendedGrid"
              xmlns:converters="clr-namespace:GM.UI.Converters"
              xmlns:helpers="clr-namespace:WPF.Core.Helpers;assembly=WPF.Core"
-             xmlns:Models="clr-namespace:GM.Entity.Models;assembly=GM.Entity" x:Class="GM.UI.Views.MaterielInView"
+             xmlns:models="clr-namespace:GM.Entity.Models;assembly=GM.Entity" x:Class="GM.UI.Views.MaterielInView"
              mc:Ignorable="d" >
     <UserControl.Resources>
-        <converters:Nan2Visible x:Key="Nan2Visible"/>
         <converters:Visible2Enable x:Key="Visible2Enable"/>
-        <converters:Visible2NDisable x:Key="Visible2Disable"/>
     </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -56,6 +54,7 @@
 					Grid.Column="3" 
 					Grid.Row="0" 
 					DisplayMemberPath="Libelle"
+                                              SelectionChanged="CbSousCategorie_OnSelectionChanged"
 				
 					SelectedValuePath="Id"
                />
@@ -75,9 +74,8 @@
 					Grid.Row="2"
 					Margin="2" 
 					DisplayMemberPath="Libelle" 
-					SelectedValuePath="Id" 
-					IsEnabled="{Binding Visibility, Converter={StaticResource Visible2Disable}, ElementName=AddButton}" 
-					SelectionChanged="CbArticle_OnSelectionChanged" />
+					SelectedValuePath="Id"
+                    SelectionChanged="CbArticle_OnSelectionChanged" />
                 <helpers:AutoFilteredComboBox 
 					Margin="0,2,2,2"
 					x:Name="CbMagasin"
@@ -154,7 +152,7 @@
 
                 <extendedDataGrid:ExtendedDataGrid.Columns>
                     <extendedColumn:ExtendedDataGridTextColumn Width="*" Header="N°" Binding="{Binding Path=Piece.NInventaire}"/>
-                    <extendedColumn:ExtendedDataGridTextColumn Width="*" Header="Date" Binding="{Binding Date}"/>
+                    <extendedColumn:ExtendedDataGridTextColumn Width="*" Header="Date" Binding="{Binding Date,StringFormat=d}"/>
                 </extendedDataGrid:ExtendedDataGrid.Columns>
                 <extendedDataGrid:ExtendedDataGrid.FooterDataTemplate>
                     <DataTemplate>
@@ -165,7 +163,7 @@
                     </DataTemplate>
                 </extendedDataGrid:ExtendedDataGrid.FooterDataTemplate>
                 <extendedDataGrid:ExtendedDataGrid.DataContext>
-                    <Models:PieceEmployee/>
+                    <models:PieceEmployee/>
                 </extendedDataGrid:ExtendedDataGrid.DataContext>
             </extendedDataGrid:ExtendedDataGrid>
         </Grid>

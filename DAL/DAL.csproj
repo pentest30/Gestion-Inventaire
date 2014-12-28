@@ -60,6 +60,22 @@
     <Compile Include="Migrations\201412271524323_update2.Designer.cs">
       <DependentUpon>201412271524323_update2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201412281146057_ezfc.cs" />
+    <Compile Include="Migrations\201412281146057_ezfc.Designer.cs">
+      <DependentUpon>201412281146057_ezfc.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201412281156013_ezfc1.cs" />
+    <Compile Include="Migrations\201412281156013_ezfc1.Designer.cs">
+      <DependentUpon>201412281156013_ezfc1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201412281156521_ezfc2.cs" />
+    <Compile Include="Migrations\201412281156521_ezfc2.Designer.cs">
+      <DependentUpon>201412281156521_ezfc2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201412281158494_ezfc3.cs" />
+    <Compile Include="Migrations\201412281158494_ezfc3.Designer.cs">
+      <DependentUpon>201412281158494_ezfc3.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -79,6 +95,18 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201412271524323_update2.resx">
       <DependentUpon>201412271524323_update2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201412281146057_ezfc.resx">
+      <DependentUpon>201412281146057_ezfc.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201412281156013_ezfc1.resx">
+      <DependentUpon>201412281156013_ezfc1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201412281156521_ezfc2.resx">
+      <DependentUpon>201412281156521_ezfc2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201412281158494_ezfc3.resx">
+      <DependentUpon>201412281158494_ezfc3.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

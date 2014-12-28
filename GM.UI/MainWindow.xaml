@@ -22,20 +22,19 @@
 
                     <xPlorerBar:XPlorerSection  IsExpanded="True" IsPrimary="{Binding ElementName=chPrimary, Path=IsChecked}" Header="Paramètres">
                         <StackPanel>
-                            <xPlorerBar:XPlorerItem ItemText="Départements" Click="ButtonBase_OnClick"/>
-                            <xPlorerBar:XPlorerItem ItemText="Services" Click="ButtonBase_OnClick"/>
-                            <xPlorerBar:XPlorerItem ItemText="Sous services" Click="ButtonBase_OnClick"/>
-                            <xPlorerBar:XPlorerItem ItemText="Magasins" Click="ButtonBase_OnClick"/>
-                            <xPlorerBar:XPlorerItem ItemText="Catégories" Click="ButtonBase_OnClick"/>
+                             <xPlorerBar:XPlorerItem ItemText="Catégories" Click="ButtonBase_OnClick"/>
                             <xPlorerBar:XPlorerItem ItemText="Sous catégories" Click="ButtonBase_OnClick"/>
-                            <xPlorerBar:XPlorerItem ItemText="Types" Click="ButtonBase_OnClick"/>
+                            
                             <xPlorerBar:XPlorerItem ItemText="Marques" Click="ButtonBase_OnClick"/>
 
                         </StackPanel>
                     </xPlorerBar:XPlorerSection>
                     <xPlorerBar:XPlorerSection Header="Structure" >
                         <StackPanel>
-                           <xPlorerBar:XPlorerItem ItemText="Employés" />
+                            <xPlorerBar:XPlorerItem ItemText="Départements" Click="ButtonBase_OnClick"/>
+                            <xPlorerBar:XPlorerItem ItemText="Services" Click="ButtonBase_OnClick"/>
+                            <xPlorerBar:XPlorerItem ItemText="Sous services" Click="ButtonBase_OnClick"/>
+                            <xPlorerBar:XPlorerItem ItemText="Magasins" Click="ButtonBase_OnClick"/>
                             <xPlorerBar:XPlorerItem ItemText="Articles" Click="ButtonBase_OnClick"/>
                             
                         </StackPanel>

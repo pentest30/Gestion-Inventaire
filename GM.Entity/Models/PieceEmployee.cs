@@ -1,5 +1,4 @@
 using System;
-using System.Security.AccessControl;
 
 namespace GM.Entity.Models
 {
@@ -16,10 +15,10 @@ namespace GM.Entity.Models
         public int? SousServiceId { get; set; }
         public string Discription { get; set; }
         public string Etat { get; set; }
-        public Departement Departement { get; set; }
-        public virtual SousService SousService { get; set; }
-        public virtual Piece Piece { get; set; }
-        public virtual Service Service { get; set; }
+        public  Departement Departement { get; set; }
+        public  SousService SousService { get; set; }
+        public  Piece Piece { get; set; }
+        public  Service Service { get; set; }
         public BonSortie BonSortie { get; set; }
     }
 }

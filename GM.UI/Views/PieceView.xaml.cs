@@ -18,13 +18,12 @@ namespace GM.UI.Views
     public partial class PieceView
     {
         private readonly ArticleService _articleService;
-        private readonly Repository<SousCategorie> _sousCategorieRepository;
+        private readonly IRepository<SousCategorie> _sousCategorieRepository;
         public static PieceService PieceService;
         public static StockService StockService;
-        private readonly Repository<BonEntreeLigne> _beLigneRepository;
-
-        private static  Repository<PieceEmployee> _pServiRepository;
-
+        private readonly IRepository<BonEntreeLigne> _beLigneRepository;
+        private static  IRepository<PieceEmployee> _pServiRepository;
+        public static  IRepository<HistoriqueInventaire> HistoriqueRepository; 
         public PieceView()
         {
             InitializeComponent();
@@ -39,6 +38,7 @@ namespace GM.UI.Views
             var categorieRepository = container.Resolve<Repository<Categorie>>();
             var marqueRepository = container.Resolve<Repository<Marque>>();
             _sousCategorieRepository = container.Resolve<Repository<SousCategorie>>();
+            HistoriqueRepository = container.Resolve<Repository<HistoriqueInventaire>>();
             Init(categorieRepository, magasinRepository, beRepository, marqueRepository);
         }
 
@@ -106,6 +106,16 @@ namespace GM.UI.Views
                 stcok.Disponibilite = true;
                 StockService.Insert(stcok);
                 StockService.Save();
+                var firstOrDefault = StockService.Find(x => x == stcok).FirstOrDefault();
+                if (firstOrDefault != null)
+                {
+                    var stockId = firstOrDefault.Id;
+                    var historique = new HistoriqueInventaire();
+                    historique.PieceMagasinId = stockId;
+                    historique.PieceId = item.Id;
+                    HistoriqueRepository.Insert(historique);
+                    HistoriqueRepository.Save();
+                }
             }
             catch (Exception ex)
             {
@@ -157,6 +167,12 @@ namespace GM.UI.Views
                 var piece = item;
                 var stock = StockService.Find(x => x.PieceId == piece.Id).FirstOrDefault();
                 var pieceUses = _pServiRepository.Find(x=>x.PieceId==piece.Id).FirstOrDefault();
+                var hsitorique = HistoriqueRepository.Find(x => x.PieceId == piece.Id && x.PieceMagasinId == stock.Id).FirstOrDefault();
+                if (hsitorique != null)
+                {
+                    HistoriqueRepository.Delete(hsitorique.Id);
+                    HistoriqueRepository.Save();
+                }
                 if (stock != null)
                 {
                     StockService.Delete(stock.Id);
@@ -167,6 +183,7 @@ namespace GM.UI.Views
                     _pServiRepository.Delete(pieceUses.Id);
                     _pServiRepository.Save();
                 }
+              
                 PieceService.Delete(item.Id);
                 PieceService.Save();
             }
@@ -193,7 +210,6 @@ namespace GM.UI.Views
 
             var categorie = CbCategorie.SelectedItem as Categorie;
             var sousCategorie = CbSousCategorie.SelectedItem as SousCategorie;
-            //var marque = CbMagasin.SelectedItem as Marque;
             if (sousCategorie != null && categorie != null)
                 CbArticle.ItemsSource = _articleService.Find(x => x.CategorieId == categorie.Id
                                                                && x.SousCategorieId == sousCategorie.Id);
@@ -224,7 +240,7 @@ namespace GM.UI.Views
             var ligne =  _beLigneRepository.Find(x => x.BonEntreeId == item.BonEntreeId && x.ArticleId == item.ArticleId).FirstOrDefault();
             var countStock = StockService.Find(x => x.ArticleId == item.ArticleId && x.BonEntreeId == item.BonEntreeId).Count();
             if (ligne == null) return;
-            var qnt = ligne.Qnt - (countStock+1)>=0 ?ligne.Qnt - (countStock+1):0;
+            var qnt = ligne.Qnt - (countStock)>=0 ?ligne.Qnt - (countStock):0;
             var frm = new MulitStockFrm(Convert.ToInt32(qnt), item);
             try
             {
@@ -250,6 +266,7 @@ namespace GM.UI.Views
             {
                 DataGrid.ItemsSource = new ObservableCollection<Piece>(PieceService.Find(
                     x => x.Article.Libelle.Contains(TxtSearch.Text)
+                        ||x.NInventaire.StartsWith(TxtSearch.Text)
                     || x.Article.SousCategorie.Libelle.Contains(TxtSearch.Text) 
                   || x.Article.Marque.Libelle.Contains(TxtSearch.Text)));
             }
