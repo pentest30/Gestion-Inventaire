@@ -1,11 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using BLL;
+using DAL.Migrations;
 using GM.Entity.Models;
+using GM.UI.ModelView;
+using GM.UI.Views.ReportUserControls;
+using GM.UI.Views.ReportUserCOntrols;
 using Microsoft.Practices.Unity;
 
 namespace GM.UI.Views
@@ -154,7 +159,7 @@ namespace GM.UI.Views
 
         private void UpdateDG(long id)
         {
-            DataGridLignes.ItemsSource = _bsLigneRepository.GetAllLazyLoad(x=>x.Departement, x=>x.Service , x=>x.Article).Where(x=>x.BonSortieId ==id).ToList();
+            DataGridLignes.ItemsSource = _bsLigneRepository.GetAllLazyLoad(x => x.BonSortie, x => x.Departement, x => x.Service, x => x.Article).Where(x => x.BonSortieId == id).ToList();
         }
 
         private void DeleteBeLignesButton_OnClick(object sender, RoutedEventArgs e)
@@ -165,6 +170,21 @@ namespace GM.UI.Views
         private void BtnModifierBeLigne_OnClick(object sender, RoutedEventArgs e)
         {
             
+        }
+
+        private void BtnPrint_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (DataGrid.SelectedIndex < 0)
+            {
+                MessageBox.Show("Selectionner un champ", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+            var list =DataGridLignes.ItemsSource.OfType<BonSortieLigne>().OrderBy(x => x.Article.Libelle);
+            var result = AutoMapper.Mapper.Map<IList<BonSortieReportView>>(list);
+            var frm = new ReportFrm();
+            var ucReport = new BonSortieReportUc(result);
+            frm.ContentControl.Content = ucReport;
+            frm.ShowDialog();
         }
     }
 }

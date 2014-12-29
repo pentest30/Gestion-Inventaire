@@ -19,7 +19,7 @@ namespace BLL
        public ArticleService(StockService stockService)
        {
            _db = ContextSingleton.Instance;
-           Container.RegisterInstance(new EntityFactory<Article>(_db));
+           Container.RegisterInstance(new EntityFactory<Article>());
            _factory = Container.Resolve<EntityFactory<Article>>();
            Container.RegisterInstance(new Repository<Article>());
            _stockService = stockService;

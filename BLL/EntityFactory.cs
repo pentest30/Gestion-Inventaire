@@ -7,9 +7,9 @@ namespace BLL
     {
         private static Repository<T> _repository;
         private readonly GmStoreContext _context;
-        public EntityFactory(GmStoreContext context)
+        public EntityFactory()
         {
-            _context = context;
+            _context = ContextSingleton.Instance;
             //_repository = repository;
         }
         public  T Create()

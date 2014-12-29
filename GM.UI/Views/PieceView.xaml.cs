@@ -23,6 +23,7 @@ namespace GM.UI.Views
         public static StockService StockService;
         private readonly IRepository<BonEntreeLigne> _beLigneRepository;
         private static  IRepository<PieceEmployee> _pServiRepository;
+        private static IRepository<Reformet> _reformeRepository;
         
         public PieceView()
         {
@@ -38,7 +39,7 @@ namespace GM.UI.Views
             var categorieRepository = container.Resolve<Repository<Categorie>>();
             var marqueRepository = container.Resolve<Repository<Marque>>();
             _sousCategorieRepository = container.Resolve<Repository<SousCategorie>>();
-          
+            _reformeRepository = container.Resolve<Repository<Reformet>>();
             Init(categorieRepository, magasinRepository, beRepository, marqueRepository);
         }
 
@@ -259,6 +260,60 @@ namespace GM.UI.Views
             catch (Exception exception)
             {
                 MessageBox.Show(exception.Message);
+            }
+        }
+
+        private void ReformeBtn_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (DataGrid.SelectedIndex < 0)
+            {
+                MessageBox.Show("Selectionner un champ svp", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+            var result = MessageBox.Show("Est vous sure!", "Warning", MessageBoxButton.YesNo,
+              MessageBoxImage.Warning);
+            if (!result.ToString().Equals("Yes")) return;
+            var piece = DataGrid.SelectedItem as Piece;
+            var reforme = Mapper.Map<Reformet>(piece);
+            reforme.Date = DateTime.Now.Date;
+            _reformeRepository.Insert(reforme);
+            _reformeRepository.Save();
+            var etat = new EtatMateriel();
+            if (piece != null)
+            {
+                UpdateUtilisationPiece(piece);
+                piece.EtatPiece = etat.EtatMateriels[2].Etat;
+                PieceService.Update(piece);
+                PieceService.Save();
+                UpdateStockPiece(piece);
+                MessageBox.Show("Reforme terminé correctement");
+            }
+            
+            
+        }
+
+        private static void UpdateStockPiece(Piece piece)
+        {
+            var stock = StockService.Find(x => x.PieceId == piece.Id).FirstOrDefault();
+            if (stock != null)
+            {
+                if (stock.Disponibilite)
+                {
+                    stock.Disponibilite = false;
+                    StockService.Update(stock);
+                    StockService.Save();
+                }
+            }
+        }
+
+        private static void UpdateUtilisationPiece(Piece piece)
+        {
+            var ut = _pServiRepository.Find(x => x.PieceId == piece.Id).FirstOrDefault();
+            if (ut != null)
+            {
+                ut.Utilisation = false;
+                _pServiRepository.Update(ut);
+                _pServiRepository.Save();
             }
         }
     }

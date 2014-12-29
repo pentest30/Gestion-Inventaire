@@ -54,6 +54,7 @@
                 <RowDefinition Height="30"/>
                 <RowDefinition Height="30"/>
                 <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
                 <RowDefinition />
             </Grid.RowDefinitions>
             <bsFilter:FilterDataGrid
@@ -61,7 +62,7 @@
                 Grid.Row="0"
                 SelectedCellsChanged="DataGrid_OnSelectedCellsChanged"
                
-                Grid.RowSpan="6"
+                Grid.RowSpan="7"
                     IsEnabled="{Binding Visibility, Converter={StaticResource Visible2Enable}, ElementName=AddButton}" 
                     AutoGenerateColumns="False" 
                     CanUserAddRows="False" 
@@ -119,6 +120,7 @@
                      Margin="5,0,0,0" 
                     Name="LBonAddBtn"
                     Click="LBonAddBtn_OnClick"/>
+            <Button  Margin="5,0,0,0"  Grid.Row="4" Grid.Column="1" Content="Imprission" Name="BtnPrint" Click="BtnPrint_OnClick"/>
         </Grid>
 
 

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using BLL;
 using GM.Entity.Models;
@@ -21,15 +22,16 @@ namespace GM.UI.Views
             DataGridStock.ItemsSource = LoadData();
         }
 
-        private IEnumerable LoadData()
+        private ICollection<HorsStockView> LoadData()
         {
+            var result =new Collection<HorsStockView>();
             var items = _repository.GetAllLazyLoad(x => x.Piece, x => x.Piece.Article, x => x.Service,  x => x.SousService,
                 x => x.BonSortie, x => x.Departement).Where(x=>x.Utilisation);
-            if (!items.Any()) yield break;
             foreach (var pieceEmployee in items)
             {
-                yield return AutoMapper.Mapper.Map<HorsStockView>(pieceEmployee);
+                result.Add( AutoMapper.Mapper.Map<HorsStockView>(pieceEmployee));
             }
+            return result;
         }
     }
 }

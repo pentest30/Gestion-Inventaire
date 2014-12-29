@@ -8,7 +8,6 @@
              xmlns:extendedColumn="clr-namespace:ExtendedGrid.ExtendedColumn;assembly=ExtendedGrid"
      xmlns:bsFilter="http://schemas.bolapansoft.com/xaml/Controls/ItemsFilter"
     xmlns:helpers1="clr-namespace:WPF.Core.Helpers;assembly=WPF.Core"
-    xmlns:Models="clr-namespace:GM.Entity.Models;assembly=GM.Entity"
     x:Class="GM.UI.Views.ArticleView"
              mc:Ignorable="d" 
              >

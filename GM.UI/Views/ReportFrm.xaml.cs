@@ -9,15 +9,11 @@ namespace GM.UI.Views
     /// </summary>
     public partial class ReportFrm
     {
-        public ReportFrm(IEnumerable<ArticleViewModel> articles)
+        public ReportFrm()
         {
             InitializeComponent();
-            ReportViewer.LocalReport.ReportPath = Environment.CurrentDirectory + @"\ReportMagasin.rdlc";
-            ReportViewer.LocalReport.DataSources.Clear();
-            ReportViewer.LocalReport.DataSources.Add(new Microsoft.Reporting.WinForms.ReportDataSource("DataSet1",
-                articles));
-            ReportViewer.RefreshReport();
-            ReportViewer.Show();
+            //ReportViewer.LocalReport.ReportPath = Environment.CurrentDirectory + @"\ReportMagasin.rdlc";
+            
         }
     }
 }

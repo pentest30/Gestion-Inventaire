@@ -41,7 +41,8 @@
     <Reference Include="AutoMapper.Net4">
       <HintPath>..\packages\AutoMapper.3.3.0\lib\net40\AutoMapper.Net4.dll</HintPath>
     </Reference>
-    <Reference Include="EntityFramework">
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EntityFramework.6.1.1\lib\net40\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer">
@@ -125,6 +126,7 @@
     </ApplicationDefinition>
     <Compile Include="EtatMateriel.cs" />
     <Compile Include="ModelView\ArticleViewModel.cs" />
+    <Compile Include="ModelView\BonSortieReportView.cs" />
     <Compile Include="ModelView\HorsStockView.cs" />
     <Compile Include="ModelView\StockModelView.cs" />
     <Compile Include="Reporting\ReportDS.Designer.cs">
@@ -184,6 +186,12 @@
     </Compile>
     <Compile Include="Views\ReportFrm.xaml.cs">
       <DependentUpon>ReportFrm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ReportUserControls\ArticleReportUc.xaml.cs">
+      <DependentUpon>ArticleReportUc.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ReportUserControls\BonSortieReportUc.xaml.cs">
+      <DependentUpon>BonSortieReportUc.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ServiceView.xaml.cs">
       <DependentUpon>ServiceView.xaml</DependentUpon>
@@ -284,6 +292,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\ReportUserControls\ArticleReportUc.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ReportUserControls\BonSortieReportUc.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ServiceView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -324,6 +340,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reporting\ReportMagasin.rdlc" />
+    <EmbeddedResource Include="Reporting\RpBonSortie.rdlc" />
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>

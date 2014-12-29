@@ -20,7 +20,7 @@ namespace BLL
        public PieceService()
        {
            _context = ContextSingleton.Instance;
-           _container.RegisterInstance(new EntityFactory<Piece>(_context));
+           _container.RegisterInstance(new EntityFactory<Piece>());
            _factory = _container.Resolve<EntityFactory<Piece>>();
            
        }

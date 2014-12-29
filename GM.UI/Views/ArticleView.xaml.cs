@@ -10,6 +10,7 @@ using System.Windows.Media.Imaging;
 using BLL;
 using GM.Entity.Models;
 using GM.UI.ModelView;
+using GM.UI.Views.ReportUserControls;
 using Microsoft.Practices.Unity;
 using OpenFileDialog = Microsoft.Win32.OpenFileDialog;
 
@@ -39,9 +40,6 @@ namespace GM.UI.Views
             CbCategorie.ItemsSource = categorieRepository.SelectAll();
             CbMaruqe.ItemsSource = marqueRepository.SelectAll();
         }
-
-      
-
 
         private void BtnImageLoader_OnClick(object sender, RoutedEventArgs e)
         {
@@ -154,13 +152,16 @@ namespace GM.UI.Views
             }
         }
 
-
         private void PrintBtn_OnClick(object sender, RoutedEventArgs e)
         {
-            var list = DataGrid.ItemsSource.OfType<Article>().OrderBy(x=>x.Libelle)
-                .Select(AutoMapper.Mapper.Map<ArticleViewModel>).ToList();
-            var frm = new ReportFrm(list);
+            var list = DataGrid.ItemsSource.OfType<Article>().OrderBy(x => x.Libelle);
+            var result = AutoMapper.Mapper.Map<IList<ArticleViewModel>>(list);// map list of ArticleViewModel
+            var frm = new ReportFrm();
+            var ucReport = new ArticleReportUc(result);
+            frm.ContentControl.Content = ucReport;
             frm.ShowDialog();
+            
         }
+        
     }
 }
