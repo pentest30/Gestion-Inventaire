@@ -37,6 +37,7 @@ namespace DAL
         public DbSet<BonSortieLigne> BonSortieLignes { get; set; }
         public DbSet<CommandeInterne> CommandeInternes { get; set; }
         public DbSet<CommandeLigne> CommandeLignes { get; set; }
+        public DbSet<HistoriqueInventaire> HistoriqueInventaires { get; set; }
         public DbSet<TypeArticle> Types { get; set; }
        
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

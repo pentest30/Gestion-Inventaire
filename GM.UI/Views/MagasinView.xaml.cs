@@ -53,6 +53,7 @@ namespace GM.UI.Views
             var item = (Magasin)Grid.DataContext;
             if (item.Id <= 0)
             {
+                item.Code = new Guid();
                 _magasinRepository.Insert(item);
                 ((ObservableCollection<Magasin>)DataGrid.ItemsSource).Add(item);
 
@@ -82,14 +83,11 @@ namespace GM.UI.Views
 
         private void BackButton_OnClick(object sender, RoutedEventArgs e)
         {
-            if (DataGrid.SelectedIndex < 0)
-            {
-                MessageBox.Show("Selectionner un champ", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
-            }
-            AddButton.Visibility = Visibility.Hidden;
-            UpdateButton.Visibility = Visibility.Hidden;
-            DeleteButton.Visibility = Visibility.Hidden;
+            AddButton.Visibility = Visibility.Visible;
+            UpdateButton.Visibility = Visibility.Visible;
+            DeleteButton.Visibility = Visibility.Visible;
+            var binding = new Binding { ElementName = "DataGrid", Path = new PropertyPath("SelectedItem") };
+            Grid.SetBinding(DataContextProperty, binding);
         }
 
         private void DeleteButton_OnClick(object sender, RoutedEventArgs e)

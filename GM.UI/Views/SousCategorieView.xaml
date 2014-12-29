@@ -41,13 +41,15 @@
                     <ColumnDefinition Width="100"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock  Text="Nom * : "  VerticalAlignment="Center"/>
-                <TextBox CharacterCasing="Upper"  
+                <TextBox CharacterCasing="Upper" 
+                         Margin="2"
 					IsEnabled="{Binding Visibility, Converter={StaticResource Visible2Disable}, ElementName=AddButton}" 
 					Grid.Row="0" Grid.Column="1" 
 					Text="{Binding Libelle}"/>
                 <TextBlock VerticalAlignment="Center" Grid.Row="1" Grid.Column="0" Text="Catégorie * :"/>
                 <ComboBox IsEnabled="{Binding Visibility, Converter={StaticResource Visible2Disable}, ElementName=AddButton}"
                           Name="CbDepartement" 
+                          Margin="2"
                           Grid.Column="1" 
                           Grid.Row="1" 
                           DisplayMemberPath="Libelle"

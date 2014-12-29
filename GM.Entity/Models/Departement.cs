@@ -8,5 +8,6 @@ namespace GM.Entity.Models
         public string Libelle { get; set; }
         public virtual ICollection<Employe> Employes { get; set; }
         public virtual ICollection<Magasin> Magasins { get; set; }
+        public virtual ICollection<Service> Services { get; set; }
     }
 }

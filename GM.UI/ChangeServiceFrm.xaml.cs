@@ -12,7 +12,7 @@ namespace GM.UI
     /// </summary>
     public partial class ChangeServiceFrm
     {
-        public CommndeInterneLigneFrm.UpdateDg UpdateDg;
+        public BonEntreeLigneFrm.UpdateDg UpdateDataDg { get; set; }
         readonly IRepository<Service> _serviceRepository;
         private readonly PieceEmployee _pieceEmployee;
          static  IRepository<PieceEmployee> _repository; 
@@ -50,9 +50,13 @@ namespace GM.UI
             {
                 _pieceEmployee.SousServiceId =souService.Id;
             }
+            else
+            {
+                _pieceEmployee.SousServiceId = null;
+            }
             _repository.Update(_pieceEmployee);
             _repository.Save();
-            if (UpdateDg != null) UpdateDg(0);
+            if (UpdateDataDg != null) UpdateDataDg(0);
 
         }
 

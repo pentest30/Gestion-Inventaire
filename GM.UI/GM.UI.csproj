@@ -172,6 +172,9 @@
       <DependentUpon>DepartementView.xaml</DependentUpon>
     </Compile>
     <Compile Include="EtatStock.cs" />
+    <Compile Include="Views\ExplorerMatrielsView.xaml.cs">
+      <DependentUpon>ExplorerMatrielsView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MagasinView.xaml.cs">
       <DependentUpon>MagasinView.xaml</DependentUpon>
     </Compile>
@@ -271,6 +274,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\DepartementView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ExplorerMatrielsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

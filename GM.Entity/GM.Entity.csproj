@@ -56,7 +56,9 @@
     <Compile Include="Models\CommandeLigne.cs" />
     <Compile Include="Models\Departement.cs" />
     <Compile Include="Models\Employe.cs" />
+    <Compile Include="Models\HistoriqueInventaire.cs" />
     <Compile Include="Models\IMovement.cs" />
+    <Compile Include="Models\Location.cs" />
     <Compile Include="Models\Magasin.cs" />
     <Compile Include="Models\Marque.cs" />
     <Compile Include="Models\PieceMagasin.cs" />

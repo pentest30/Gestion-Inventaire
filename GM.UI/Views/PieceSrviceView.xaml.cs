@@ -23,7 +23,7 @@ namespace GM.UI.Views
             DataGridStock.ItemsSource = LoadData();
         }
 
-        private ICollection<HorsStockView> LoadData()
+        private static ICollection<HorsStockView> LoadData()
         {
             var result =new Collection<HorsStockView>();
             var items = _repository.GetAllLazyLoad(x => x.Piece, x => x.Piece.Article, x => x.Service,  x => x.SousService,
@@ -43,13 +43,13 @@ namespace GM.UI.Views
                 return;
             }
             var frm = new ChangeServiceFrm(((HorsStockView) DataGridStock.SelectedItem).Id);
-            frm.UpdateDg += UpdateDatagrid;
+            frm.UpdateDataDg += UpdateDatagrid;
             frm.ShowDialog();
         }
 
-        private void UpdateDatagrid(int id)
+         void UpdateDatagrid(long id)
         {
-            LoadData();
+            DataGridStock.ItemsSource = LoadData();
         }
     }
 }
