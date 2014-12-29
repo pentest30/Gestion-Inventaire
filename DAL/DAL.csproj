@@ -46,14 +46,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework">
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EntityFramework.6.1.1\lib\net40\EntityFramework.dll</HintPath>
     </Reference>
-    <Reference Include="EntityFramework.SqlServer">
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EntityFramework.6.1.1\lib\net40\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServerCompact">
-      <HintPath>..\packages\EntityFramework.SqlServerCompact.6.0.0\lib\net40\EntityFramework.SqlServerCompact.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.SqlServerCompact.6.1.1\lib\net40\EntityFramework.SqlServerCompact.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Practices.ServiceLocation">
       <HintPath>..\packages\CommonServiceLocator.1.0\lib\NET35\Microsoft.Practices.ServiceLocation.dll</HintPath>
@@ -67,10 +69,6 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Data.SqlServerCe, Version=4.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.SqlServer.Compact.4.0.8876.1\lib\net40\System.Data.SqlServerCe.dll</HintPath>
-    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
@@ -78,33 +76,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GMStoreContext.cs" />
-    <Compile Include="Migrations\201412271524323_update2.cs" />
-    <Compile Include="Migrations\201412271524323_update2.Designer.cs">
-      <DependentUpon>201412271524323_update2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201412281146057_ezfc.cs" />
-    <Compile Include="Migrations\201412281146057_ezfc.Designer.cs">
-      <DependentUpon>201412281146057_ezfc.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201412281156013_ezfc1.cs" />
-    <Compile Include="Migrations\201412281156013_ezfc1.Designer.cs">
-      <DependentUpon>201412281156013_ezfc1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201412281156521_ezfc2.cs" />
-    <Compile Include="Migrations\201412281156521_ezfc2.Designer.cs">
-      <DependentUpon>201412281156521_ezfc2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201412281158494_ezfc3.cs" />
-    <Compile Include="Migrations\201412281158494_ezfc3.Designer.cs">
-      <DependentUpon>201412281158494_ezfc3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201412281612560_re.cs" />
-    <Compile Include="Migrations\201412281612560_re.Designer.cs">
-      <DependentUpon>201412281612560_re.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201412281617311_yuk.cs" />
-    <Compile Include="Migrations\201412281617311_yuk.Designer.cs">
-      <DependentUpon>201412281617311_yuk.cs</DependentUpon>
+    <Compile Include="Migrations\201412291421291_er.cs" />
+    <Compile Include="Migrations\201412291421291_er.Designer.cs">
+      <DependentUpon>201412291421291_er.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -123,29 +97,6 @@
       <Project>{2c4020f2-9a2e-405a-8a4a-12270f17f52d}</Project>
       <Name>GM.Entity</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201412271524323_update2.resx">
-      <DependentUpon>201412271524323_update2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201412281146057_ezfc.resx">
-      <DependentUpon>201412281146057_ezfc.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201412281156013_ezfc1.resx">
-      <DependentUpon>201412281156013_ezfc1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201412281156521_ezfc2.resx">
-      <DependentUpon>201412281156521_ezfc2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201412281158494_ezfc3.resx">
-      <DependentUpon>201412281158494_ezfc3.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201412281612560_re.resx">
-      <DependentUpon>201412281612560_re.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201412281617311_yuk.resx">
-      <DependentUpon>201412281617311_yuk.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0,Profile=Client">
@@ -168,6 +119,11 @@
       <ProductName>Windows Installer 4.5</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201412291421291_er.resx">
+      <DependentUpon>201412291421291_er.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

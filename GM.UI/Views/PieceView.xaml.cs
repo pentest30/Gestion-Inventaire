@@ -295,26 +295,20 @@ namespace GM.UI.Views
         private static void UpdateStockPiece(Piece piece)
         {
             var stock = StockService.Find(x => x.PieceId == piece.Id).FirstOrDefault();
-            if (stock != null)
-            {
-                if (stock.Disponibilite)
-                {
-                    stock.Disponibilite = false;
-                    StockService.Update(stock);
-                    StockService.Save();
-                }
-            }
+            if (stock == null) return;
+            if (!stock.Disponibilite) return;
+            stock.Disponibilite = false;
+            StockService.Update(stock);
+            StockService.Save();
         }
 
         private static void UpdateUtilisationPiece(Piece piece)
         {
             var ut = _pServiRepository.Find(x => x.PieceId == piece.Id).FirstOrDefault();
-            if (ut != null)
-            {
-                ut.Utilisation = false;
-                _pServiRepository.Update(ut);
-                _pServiRepository.Save();
-            }
+            if (ut == null) return;
+            ut.Utilisation = false;
+            _pServiRepository.Update(ut);
+            _pServiRepository.Save();
         }
     }
 }

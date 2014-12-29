@@ -8,10 +8,20 @@
              xmlns:extendedGridControl="clr-namespace:ExtendedGrid.ExtendedGridControl;assembly=ExtendedGrid"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid Margin="10">
+    <Grid Margin="5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition Width="120"/>
+        </Grid.ColumnDefinitions>
         <extendedGridControl:ExtendedDataGrid
             FontSize="12"
 			Margin="5"
+            Grid.RowSpan="3"
 			Grid.Column="0"
             IsReadOnly="True"
 			SelectionMode="Extended"
@@ -20,15 +30,15 @@
 			CanUserAddRows="False" 
 			x:Name="DataGridStock">
             <extendedGridControl:ExtendedDataGrid.Columns>
-            <extendedColumn:ExtendedDataGridTextColumn AllowAutoFilter="True" Width="150" Header="N° d'inventaire" Binding="{Binding Inventaire}"/>
-            <extendedColumn:ExtendedDataGridTextColumn AllowAutoFilter="True" Width="80" Header="Date de sortie" Binding="{Binding Date, StringFormat=d}"/>
-            <extendedColumn:ExtendedDataGridTextColumn AllowAutoFilter="True" Width="150" Header="Bon de sortie" Binding="{Binding NBon}"/>
-            <extendedColumn:ExtendedDataGridTextColumn AllowAutoFilter="True" Width="150" Header="Classe" Binding="{Binding Path=SousCategorie}"/>
-            <extendedColumn:ExtendedDataGridTextColumn AllowAutoFilter="True" Width="150" Header="Marquer" Binding="{Binding Path=Marque}"/>
-            <extendedColumn:ExtendedDataGridTextColumn AllowAutoFilter="True" Width="150" Header="Modèl" Binding="{Binding Path=Model}"/>
-                <extendedColumn:ExtendedDataGridTextColumn AllowAutoFilter="True" Width="150" Header="Département" Binding="{Binding Path=Departement}"/>
-                <extendedColumn:ExtendedDataGridTextColumn AllowAutoFilter="True" Width="150" Header="Service" Binding="{Binding Path=Service}"/>
-                <extendedColumn:ExtendedDataGridTextColumn AllowAutoFilter="True" Width="150" Header="Sous service" Binding="{Binding Path=SousService}"/>
+            <extendedColumn:ExtendedDataGridTextColumn AllowAutoFilter="True" Width="120" Header="N° d'inventaire" Binding="{Binding Inventaire}"/>
+            <extendedColumn:ExtendedDataGridTextColumn AllowAutoFilter="True" Width="90" Header="Date de sortie" Binding="{Binding Date, StringFormat=d}"/>
+            <extendedColumn:ExtendedDataGridTextColumn AllowAutoFilter="True" Width="100" Header="Bon de sortie" Binding="{Binding NBon}"/>
+            <extendedColumn:ExtendedDataGridTextColumn AllowAutoFilter="True" Width="110" Header="Classe" Binding="{Binding Path=SousCategorie}"/>
+            <extendedColumn:ExtendedDataGridTextColumn AllowAutoFilter="True" Width="100" Header="Marquer" Binding="{Binding Path=Marque}"/>
+            <extendedColumn:ExtendedDataGridTextColumn AllowAutoFilter="True" Width="100" Header="Modèl" Binding="{Binding Path=Model}"/>
+                <extendedColumn:ExtendedDataGridTextColumn AllowAutoFilter="True" Width="120" Header="Département" Binding="{Binding Path=Departement}"/>
+                <extendedColumn:ExtendedDataGridTextColumn AllowAutoFilter="True" Width="110" Header="Service" Binding="{Binding Path=Service}"/>
+                <extendedColumn:ExtendedDataGridTextColumn AllowAutoFilter="True" Width="110" Header="Sous service" Binding="{Binding Path=SousService}"/>
             </extendedGridControl:ExtendedDataGrid.Columns>
         <extendedGridControl:ExtendedDataGrid.FooterDataTemplate>
             <DataTemplate>
@@ -42,5 +52,11 @@
             <modelView:HorsStockView/>
         </extendedGridControl:ExtendedDataGrid.DataContext>
         </extendedGridControl:ExtendedDataGrid>
+        <Button  
+                    Click="UpdateButton_OnClick"
+                        x:Name="UpdateButton"  
+                        Margin="5,0,0,0" 
+                        Content="Modifier" 
+                        Grid.Row="0" Grid.Column="1"/>
     </Grid>
 </UserControl>

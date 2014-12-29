@@ -13,6 +13,7 @@ namespace DAL
         public GmStoreContext()
             : base("Name=GmStoreContext")
         {
+            
         }
 
         public DbSet<Article> Articles { get; set; }

@@ -43,6 +43,7 @@
                 </Grid.ColumnDefinitions>
                 <TextBlock  Text="Nom * : " VerticalAlignment="Center"/>
                 <TextBox CharacterCasing="Upper"  
+                         Margin="2"
 					IsEnabled="{Binding Visibility, Converter={StaticResource Visible2Disable}, ElementName=AddButton}" 
 					Grid.Row="0" Grid.Column="1" 
 					Text="{Binding Libelle}"/>

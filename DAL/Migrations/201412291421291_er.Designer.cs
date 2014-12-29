@@ -7,13 +7,13 @@ namespace DAL.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.1-30610")]
-    public sealed partial class ezfc1 : IMigrationMetadata
+    public sealed partial class er : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(ezfc1));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(er));
         
         string IMigrationMetadata.Id
         {
-            get { return "201412281156013_ezfc1"; }
+            get { return "201412291421291_er"; }
         }
         
         string IMigrationMetadata.Source

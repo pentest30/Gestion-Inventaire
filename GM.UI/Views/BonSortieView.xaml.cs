@@ -6,10 +6,8 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using BLL;
-using DAL.Migrations;
 using GM.Entity.Models;
 using GM.UI.ModelView;
-using GM.UI.Views.ReportUserControls;
 using GM.UI.Views.ReportUserCOntrols;
 using Microsoft.Practices.Unity;
 

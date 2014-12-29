@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows;
 using BLL;
 using GM.Entity.Models;
 using GM.UI.ModelView;
@@ -32,6 +33,23 @@ namespace GM.UI.Views
                 result.Add( AutoMapper.Mapper.Map<HorsStockView>(pieceEmployee));
             }
             return result;
+        }
+
+        private void UpdateButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (DataGridStock.SelectedIndex < 0)
+            {
+                MessageBox.Show("Selectionner un champ", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+            var frm = new ChangeServiceFrm(((HorsStockView) DataGridStock.SelectedItem).Id);
+            frm.UpdateDg += UpdateDatagrid;
+            frm.ShowDialog();
+        }
+
+        private void UpdateDatagrid(int id)
+        {
+            LoadData();
         }
     }
 }
