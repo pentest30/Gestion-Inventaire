@@ -104,7 +104,7 @@ namespace GM.UI.Views
 
         private void DeleteButton_OnClick(object sender, RoutedEventArgs e)
         {
-            if (!CheckSelectedItem()) return;
+            if (CheckSelectedItem()) return;
             var result = MessageBox.Show("Est vous sure!", "Warning", MessageBoxButton.YesNo,
                 MessageBoxImage.Warning);
             if (!result.ToString().Equals("Yes")) return;

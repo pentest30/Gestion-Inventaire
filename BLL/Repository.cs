@@ -72,6 +72,12 @@ namespace BLL
 
         }
 
+        public void RetrunId(T item)
+        {
+           _dbContext.Entry(item).GetDatabaseValues();
+            
+        }
+
       
     }
 }

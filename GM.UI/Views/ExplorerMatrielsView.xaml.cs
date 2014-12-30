@@ -1,7 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Windows;
-using GM.Entity.Models;
 using GM.UI.ModelView;
 using GM.UI.Views.ReportUserControls;
 
@@ -38,7 +36,7 @@ namespace GM.UI.Views
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
-            var list = DataGridStock.ItemsSource.OfType<HorsStockView>();
+            var list = DataGridStock.Items.OfType<HorsStockView>();
             var frm = new ReportFrm();
             var ucReport = new ReportParServiceUc(list);
             frm.ContentControl.Content = ucReport;

@@ -76,17 +76,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GMStoreContext.cs" />
-    <Compile Include="Migrations\201412292012404_tr.cs" />
-    <Compile Include="Migrations\201412292012404_tr.Designer.cs">
-      <DependentUpon>201412292012404_tr.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201412292040589_df.cs" />
-    <Compile Include="Migrations\201412292040589_df.Designer.cs">
-      <DependentUpon>201412292040589_df.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201412300932165_zrf.cs" />
-    <Compile Include="Migrations\201412300932165_zrf.Designer.cs">
-      <DependentUpon>201412300932165_zrf.cs</DependentUpon>
+    <Compile Include="Migrations\201412301847583_rt.cs" />
+    <Compile Include="Migrations\201412301847583_rt.Designer.cs">
+      <DependentUpon>201412301847583_rt.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -129,14 +121,8 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201412292012404_tr.resx">
-      <DependentUpon>201412292012404_tr.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201412292040589_df.resx">
-      <DependentUpon>201412292040589_df.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201412300932165_zrf.resx">
-      <DependentUpon>201412300932165_zrf.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201412301847583_rt.resx">
+      <DependentUpon>201412301847583_rt.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

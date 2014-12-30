@@ -8,7 +8,7 @@ namespace GM.Entity.Models
         public int LocationId { get; set; }
         public DateTime Date { get; set; }
         public int Id { get; set; }
-        public long? PieceId { get; set; }
+        public string Inventaire { get; set; }
 
 
     }

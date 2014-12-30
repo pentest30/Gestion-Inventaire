@@ -91,7 +91,7 @@ namespace GM.UI.Views
             var item = (SousService)Grid.DataContext;
             if (item.Id <= 0)
             {
-                item .Code = new Guid();
+                item.Code = Guid.NewGuid();
                 _sousServiceRepository.Insert(item);
                 ((ObservableCollection<SousService>)DataGrid.ItemsSource).Add(item);
 

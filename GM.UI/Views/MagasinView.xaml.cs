@@ -53,7 +53,7 @@ namespace GM.UI.Views
             var item = (Magasin)Grid.DataContext;
             if (item.Id <= 0)
             {
-                item.Code = new Guid();
+                item.Code = Guid.NewGuid();
                 _magasinRepository.Insert(item);
                 ((ObservableCollection<Magasin>)DataGrid.ItemsSource).Add(item);
 
@@ -102,9 +102,10 @@ namespace GM.UI.Views
             if (!result.ToString().Equals("Yes")) return;
             var deleted = DataGrid.SelectedItem as Magasin;
             if (deleted == null) return;
-            _magasinRepository.Delete(deleted.Id);
-            ((List<Magasin>)DataGrid.ItemsSource).Remove(deleted);
+            _magasinRepository.Delete(deleted.Id); 
             _magasinRepository.Save();
+            DataGrid.ItemsSource = new ObservableCollection<Magasin>(_magasinRepository.SelectAll());
+           
         }
     }
 }

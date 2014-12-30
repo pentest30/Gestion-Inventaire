@@ -38,43 +38,20 @@ namespace GM.UI.ModelView
 
            }
        }
-      
-      
+
+
        public TreeViewModel()
        {
            var container = new UnityContainer();
-            _departementRepository = container.Resolve<Repository<Departement>>();
-            _pieceEmployeeRepository = container.Resolve<Repository<PieceEmployee>>();
+           _departementRepository = container.Resolve<Repository<Departement>>();
+           _pieceEmployeeRepository = container.Resolve<Repository<PieceEmployee>>();
+           _current = null;
            DelegateCommand = new DelegateCommand<object>(LoadData);
-
        }
 
        public void UpdateDatagrid(long id)
        {
-           if (_current.GetType() == typeof(Departement))
-           {
-               HorsStockViews =
-                   new ObservableCollection<HorsStockView>(
-                       AutoMapper.Mapper.Map<IList<HorsStockView>>(
-                           _pieceEmployeeRepository.GetAllLazyLoad(x => x.Piece, x => x.Piece.Article)
-                               .Where(x => x.DepartementId == ((Departement)_current).Id)));
-           }
-           else if (_current.GetType().Name.StartsWith("Service"))
-           {
-               HorsStockViews =
-                   new ObservableCollection<HorsStockView>(
-                       AutoMapper.Mapper.Map<IList<HorsStockView>>(
-                           _pieceEmployeeRepository.GetAllLazyLoad(x => x.Piece, x => x.Piece.Article)
-                               .Where(x => x.ServiceId == ((Service)_current).Id)));
-           }
-           else if (_current.GetType().Name.StartsWith("SousService"))
-           {
-               HorsStockViews =
-                   new ObservableCollection<HorsStockView>(
-                       AutoMapper.Mapper.Map<IList<HorsStockView>>(
-                           _pieceEmployeeRepository.GetAllLazyLoad(x => x.Piece, x => x.Piece.Article)
-                               .Where(x => x.SousServiceId == ((SousService)_current).Id)));
-           }
+          LoadData(_current);
        }
 
        private void LoadData(object o)

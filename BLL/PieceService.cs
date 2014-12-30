@@ -66,6 +66,10 @@ namespace BLL
            _context.SaveChanges();
        }
 
+       public long SaveReturnId()
+       {
+           return _context.SaveChanges();
+       }
        public IEnumerable<Piece> Find(Func<Piece, bool> predicate)
        {
            return _context.Pieces.Where(predicate);
@@ -76,7 +80,11 @@ namespace BLL
            children.ToList().ForEach(x => _context.Pieces.Include(x).Load());
            return _context.Pieces;
        }
+       public void RetrunId(Piece item)
+       {
+           _context.Entry(item).GetDatabaseValues();
 
+       }
        private bool _disposed = false;
 
        protected virtual void Dispose(bool disposing)

@@ -25,6 +25,8 @@ namespace GM.UI.Views
         private readonly IRepository<BonEntreeLigne> _beLigneRepository;
         private static  IRepository<PieceEmployee> _pServiRepository;
         private static IRepository<Reformet> _reformeRepository;
+
+        public static  IRepository<HistoriqueInventaire> HistoriqueRepository; 
         
         public PieceView()
         {
@@ -41,6 +43,7 @@ namespace GM.UI.Views
             var marqueRepository = container.Resolve<Repository<Marque>>();
             _sousCategorieRepository = container.Resolve<Repository<SousCategorie>>();
             _reformeRepository = container.Resolve<Repository<Reformet>>();
+            HistoriqueRepository = container.Resolve<Repository<HistoriqueInventaire>>();
             Init(categorieRepository, magasinRepository, beRepository, marqueRepository);
         }
 
@@ -94,7 +97,6 @@ namespace GM.UI.Views
                     item.EtatStock = EtatStock.Stock.ToString();
 
                 }
-                PieceService.Insert(item);
                 // ((ObservableCollection<Article>)DataGrid.ItemsSource).Add(item);
             }
             else
@@ -102,12 +104,26 @@ namespace GM.UI.Views
                 PieceService.Update(item);
             }
             try
-            {
+            { 
+                PieceService.Insert(item);
                 PieceService.Save();
+                var historqique = new HistoriqueInventaire
+                {
+                    CodeLocation = ((Magasin)CbMagasin.SelectedItem).Code,
+                    Inventaire = item.NInventaire,
+                    LocationId = item.MagasinId,
+                    Date = DateTime.Now
+                };
+                HistoriqueRepository.Insert(historqique);
+                HistoriqueRepository.Save();
+               
                 var stcok = Mapper.Map<PieceMagasin>(item);
                 stcok.Disponibilite = true;
                 StockService.Insert(stcok);
                 StockService.Save();
+                LoadData();
+                var binding = new Binding { ElementName = "DataGrid", Path = new PropertyPath("SelectedItem") };
+                Grid.SetBinding(DataContextProperty, binding);
               
             }
             catch (Exception ex)
@@ -119,9 +135,7 @@ namespace GM.UI.Views
             }
 
             AddButton.Visibility = Visibility.Visible;
-            LoadData();
-            var binding = new Binding {ElementName = "DataGrid", Path = new PropertyPath("SelectedItem")};
-            Grid.SetBinding(DataContextProperty, binding);
+          
             UpdateButton.Visibility = Visibility.Visible;
             DeleteButton.Visibility = Visibility.Visible;
         }

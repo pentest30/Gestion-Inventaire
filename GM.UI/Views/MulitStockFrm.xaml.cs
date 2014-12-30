@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Globalization;
-using System.Linq;
 using System.Windows;
 using AutoMapper;
 using GM.Entity.Models;
@@ -97,6 +96,15 @@ namespace GM.UI.Views
         {
             PieceView.PieceService.Insert(nouveauPeice);
             PieceView.PieceService.Save();
+            var historqique = new HistoriqueInventaire
+            {
+                CodeLocation = nouveauPeice.Magasin.Code,
+                Inventaire = nouveauPeice.NInventaire,
+                LocationId = nouveauPeice.MagasinId,
+                Date = DateTime.Now
+            };
+            PieceView.HistoriqueRepository.Insert(historqique);
+            PieceView.HistoriqueRepository.Save();
             var stcok = Mapper.Map<PieceMagasin>(nouveauPeice);
             stcok.Disponibilite = true;
             PieceView.StockService.Insert(stcok);
