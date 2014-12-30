@@ -23,6 +23,7 @@ namespace GM.UI.Views
         private readonly Repository<SousCategorie> _sousCategorieRepository;
         private readonly ArticleService _articleService;
         readonly Repository<Service> _serviceRepository;
+        readonly Repository<SousService> _sousServiceRepository;
         readonly Repository<PieceEmployee> _pieceEmployeeRepository;
         Categorie _categorie ;
         SousCategorie _sousCategorie;
@@ -49,6 +50,7 @@ namespace GM.UI.Views
             var magasinRepository = container.Resolve<Repository<Magasin>>();
             var departementRepository = container.Resolve<Repository<Departement>>();
             _pieceEmployeeRepository = container.Resolve<Repository<PieceEmployee>>();
+            _sousServiceRepository = container.Resolve<Repository<SousService>>();
             CbCategorie.ItemsSource = categorieRepository.SelectAll();
             CbMarque.ItemsSource = marqueRepository.SelectAll();
             CbMagasin.ItemsSource = magasinRepository.SelectAll();
@@ -119,7 +121,9 @@ namespace GM.UI.Views
 
         private void CbService_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            
+            if (CbService.SelectedIndex == -1) return;
+            var item = CbService.SelectedItem as Service;
+            if (item != null) CbSousService.ItemsSource = _sousServiceRepository.Find(x => x.ServiceId == item.Id);
         }
 
         private void SaveBtn_OnClick(object sender, RoutedEventArgs e)

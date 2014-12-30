@@ -135,6 +135,7 @@
     <Compile Include="ModelView\BonSortieReportView.cs" />
     <Compile Include="ModelView\HorsStockView.cs" />
     <Compile Include="ModelView\StockModelView.cs" />
+    <Compile Include="ModelView\TreeViewModel.cs" />
     <Compile Include="Reporting\ReportDS.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

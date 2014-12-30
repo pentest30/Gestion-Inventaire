@@ -60,6 +60,8 @@ namespace GM.UI
                         break;
                     case "Matériels en utilisation": ContentControl.Content = new PieceSrviceView();
                         break;
+                    case "Matériels par location": ContentControl.Content = new ExplorerMatrielsView();
+                        break;
                         
                    
                         
@@ -80,6 +82,12 @@ namespace GM.UI
                  var add = buttons.FirstOrDefault(x => x.Name == "AddButton");
                     if (add != null)
                         add.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
+            }
+            if (e.Key == (Key.E) && Keyboard.IsKeyDown(Key.LeftCtrl))
+            {
+                var add = buttons.FirstOrDefault(x => x.Name == "SaveButton");
+                if (add != null)
+                    add.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
             }
             if (e.Key == (Key.M) && Keyboard.IsKeyDown(Key.LeftCtrl))
             {

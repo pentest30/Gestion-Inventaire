@@ -3,7 +3,6 @@ using GM.Entity.Models;
 using GM.UI.ModelView;
 using Microsoft.Practices.Unity;
 
-
 namespace GM.UI
 {
     /// <summary>
@@ -81,6 +80,7 @@ namespace GM.UI
             AutoMapper.Mapper.CreateMap<Piece, Reformet>()
                   .ForMember(x => x.PieceId, o => o.MapFrom(p => p.Id))
                   .ForMember(x => x.PieceNInventaire, o => o.MapFrom(p => p.NInventaire));
+            AutoMapper.Mapper.CreateMap<Location, TreeViewModel>();
 
         }
     }
