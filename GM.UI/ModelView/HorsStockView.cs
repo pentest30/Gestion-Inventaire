@@ -19,5 +19,10 @@ namespace GM.UI.ModelView
         public string SousService { get; set; }
         public string Departement { get; set; }
 
+        public DateTime DateRapport
+        {
+            get { return DateTime.Now.Date; }
+        }
+
     }
 }

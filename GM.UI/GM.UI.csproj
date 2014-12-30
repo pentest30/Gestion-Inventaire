@@ -194,6 +194,9 @@
     <Compile Include="Views\PieceView.xaml.cs">
       <DependentUpon>PieceView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\ProgressBarView.xaml.cs">
+      <DependentUpon>ProgressBarView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ReportFrm.xaml.cs">
       <DependentUpon>ReportFrm.xaml</DependentUpon>
     </Compile>
@@ -202,6 +205,9 @@
     </Compile>
     <Compile Include="Views\ReportUserControls\BonSortieReportUc.xaml.cs">
       <DependentUpon>BonSortieReportUc.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ReportUserControls\ReportParServiceUc.xaml.cs">
+      <DependentUpon>ReportParServiceUc.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ServiceView.xaml.cs">
       <DependentUpon>ServiceView.xaml</DependentUpon>
@@ -306,6 +312,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\ProgressBarView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ReportFrm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -315,6 +325,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ReportUserControls\BonSortieReportUc.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ReportUserControls\ReportParServiceUc.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -359,12 +373,14 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reporting\ReportMagasin.rdlc" />
     <EmbeddedResource Include="Reporting\RpBonSortie.rdlc" />
+    <EmbeddedResource Include="Reporting\rpParService.rdlc" />
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\DataSources\GM.Entity.Models.Article.datasource" />
     <None Include="Properties\DataSources\GM.UI.ModelView.ArticleViewModel.datasource" />
+    <None Include="Properties\DataSources\GM.UI.ModelView.HorsStockView.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

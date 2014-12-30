@@ -8,19 +8,18 @@
                 xmlns:bsFilter="http://schemas.bolapansoft.com/xaml/Controls/ItemsFilter"
              xmlns:local="clr-namespace:GM.UI"
              xmlns:uiControls="clr-namespace:UIControls;assembly=UIControls"    
-    xmlns:views ="clr-namespace:GM.UI.Views"
+   
             x:Class="GM.UI.Views.PieceView"
              mc:Ignorable="d" >
     
     <UserControl.Resources>
-       <views:StockView x:Key="StockView"/>
+     
         <converters:Nan2Visible x:Key="Nan2Visible"/>
         <converters:Visible2Enable x:Key="Visible2Enable"/>
         <converters:Visible2NDisable x:Key="Visible2Disable"/>
         <local:EtatMateriel x:Key="EtatMateriel"/>
     </UserControl.Resources>
-    <TabControl Margin="5">
-        <TabItem Header="Nouveau Stock">
+  
             <Grid>
 
                 <Grid.RowDefinitions>
@@ -255,10 +254,5 @@
                 </Grid>
             </Grid>
 
-        </TabItem>
-        <TabItem Header="Stock" >
-            <ContentControl Content="{StaticResource StockView}"/>
-        </TabItem>
        
-    </TabControl>
  </UserControl>

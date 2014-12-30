@@ -3,14 +3,15 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             mc:Ignorable="d" 
-             xmlns:data ="clr-namespace:GM.UI.ModelView"
+             mc:Ignorable="d"
+             
+              xmlns:views ="clr-namespace:GM.UI.Views"
              xmlns:extendedGridControl="clr-namespace:ExtendedGrid.ExtendedGridControl;assembly=ExtendedGrid"
              xmlns:extendedColumn="clr-namespace:ExtendedGrid.ExtendedColumn;assembly=ExtendedGrid"
             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity">
     <UserControl.Resources>
         
-       
+       <views:StockView x:Key="StockView"/>
         <DataTemplate x:Key="SousService">
             <TextBlock Text="{Binding Libelle}"/>
         </DataTemplate>
@@ -22,30 +23,52 @@
             <TextBlock Text="{Binding Libelle}"/>
         </HierarchicalDataTemplate>
     </UserControl.Resources>
-    <UserControl.DataContext>
-        <data:TreeViewModel/>
-    </UserControl.DataContext>
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="300"/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
-        <TreeView Name="TreeView" 
+   
+   <TabControl>
+       <TabItem Header="Matériels hors  le stock">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="300"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="35"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" Grid.Column="1" Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Button Content="Imprission" FontSize="10"
+                            Click="ButtonBase_OnClick"/>
+                    <Button  
+                    Click="UpdateButton_OnClick"
+                        x:Name="UpdateButton"  
+                FontSize="10"
+                        Margin="5,0,0,0" 
+                        Content="Changer l'emplacement" 
+                        Grid.Row="0" Grid.Column="1"/>
+                </Grid>
+                <TreeView Name="TreeView" 
                   Margin="5"
+                  Grid.Row="0" Grid.RowSpan="2" Grid.Column="0"
                   ItemsSource="{Binding Path=Items}" 
                   ItemTemplate="{StaticResource Departement}">
-            <i:Interaction.Triggers>
-                <i:EventTrigger EventName="SelectedItemChanged">
-                    <i:InvokeCommandAction Command="{Binding DelegateCommand}" 
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectedItemChanged">
+                            <i:InvokeCommandAction Command="{Binding DelegateCommand}" 
                     CommandParameter="{Binding ElementName=TreeView ,Path=SelectedItem}"/>
-                </i:EventTrigger>
-            </i:Interaction.Triggers>
-           
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
 
-        </TreeView>
-        <extendedGridControl:ExtendedDataGrid
+
+                </TreeView>
+                <extendedGridControl:ExtendedDataGrid
             FontSize="12"
 			Margin="5"
+            Grid.Row="1"
             ItemsSource="{Binding Path=HorsStockViews,Mode=TwoWay}"
             Grid.Column="1"
             IsReadOnly="True"
@@ -54,23 +77,28 @@
 			AutoGenerateColumns="False"
 			CanUserAddRows="False" 
 			x:Name="DataGridStock">
-            <extendedGridControl:ExtendedDataGrid.Columns>
-                <extendedColumn:ExtendedDataGridTextColumn AllowAutoFilter="True" Width="*" Header="N° d'inventaire" Binding="{Binding Inventaire}"/>
-                <extendedColumn:ExtendedDataGridTextColumn AllowAutoFilter="True" Width="*" Header="Date de sortie" Binding="{Binding Date, StringFormat=d}"/>
-                <extendedColumn:ExtendedDataGridTextColumn AllowAutoFilter="True" Width="*" Header="Classe" Binding="{Binding Path=SousCategorie}"/>
-                <extendedColumn:ExtendedDataGridTextColumn AllowAutoFilter="True" Width="*" Header="Marquer" Binding="{Binding Path=Marque}"/>
-                <extendedColumn:ExtendedDataGridTextColumn AllowAutoFilter="True" Width="*" Header="Modèl" Binding="{Binding Path=Model}"/>
-            </extendedGridControl:ExtendedDataGrid.Columns>
-            <extendedGridControl:ExtendedDataGrid.FooterDataTemplate>
-                <DataTemplate>
-                    <StackPanel  Orientation="Horizontal">
-                        <TextBlock Text="Total:" FontWeight="Bold"/>
-                        <TextBlock Margin="3,0,0,0" Foreground="OrangeRed"  Text="{Binding Items.Count, ElementName=DataGridStock}"/>
-                    </StackPanel>
-                </DataTemplate>
-            </extendedGridControl:ExtendedDataGrid.FooterDataTemplate>
-            
-        </extendedGridControl:ExtendedDataGrid>
+                    <extendedGridControl:ExtendedDataGrid.Columns>
+                        <extendedColumn:ExtendedDataGridTextColumn AllowAutoFilter="True" Width="*" Header="N° d'inventaire" Binding="{Binding Inventaire}"/>
+                        <extendedColumn:ExtendedDataGridTextColumn AllowAutoFilter="True" Width="*" Header="Date de sortie" Binding="{Binding Date, StringFormat=d}"/>
+                        <extendedColumn:ExtendedDataGridTextColumn AllowAutoFilter="True" Width="*" Header="Classe" Binding="{Binding Path=SousCategorie}"/>
+                        <extendedColumn:ExtendedDataGridTextColumn AllowAutoFilter="True" Width="*" Header="Marquer" Binding="{Binding Path=Marque}"/>
+                        <extendedColumn:ExtendedDataGridTextColumn AllowAutoFilter="True" Width="*" Header="Modèl" Binding="{Binding Path=Model}"/>
+                    </extendedGridControl:ExtendedDataGrid.Columns>
+                    <extendedGridControl:ExtendedDataGrid.FooterDataTemplate>
+                        <DataTemplate>
+                            <StackPanel  Orientation="Horizontal">
+                                <TextBlock Text="Total:" FontWeight="Bold"/>
+                                <TextBlock Margin="3,0,0,0" Foreground="OrangeRed"  Text="{Binding Items.Count, ElementName=DataGridStock}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </extendedGridControl:ExtendedDataGrid.FooterDataTemplate>
 
-    </Grid>
+                </extendedGridControl:ExtendedDataGrid>
+
+            </Grid>
+        </TabItem>
+       <TabItem Header="Matériels dans le stock">
+           <ContentControl Content="{StaticResource StockView}"/>
+       </TabItem>
+   </TabControl>
 </UserControl>

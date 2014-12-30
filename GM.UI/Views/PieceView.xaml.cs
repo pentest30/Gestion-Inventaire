@@ -9,6 +9,7 @@ using BLL;
 using GM.Entity.Models;
 using Microsoft.Practices.Unity;
 using AutoMapper;
+using WPF.Core.Helpers;
 
 namespace GM.UI.Views
 {
@@ -146,14 +147,21 @@ namespace GM.UI.Views
             if (!result.ToString().Equals("Yes")) return;
             var items = DataGrid.SelectedItems;
             if (items == null) return;
-
-            DeleteDetailsPieces(items);
+            var frm = new ProgressBarView{ Title = "Supprission en cours ..."};
+            frm.Show();
+            DeleteDetailsPieces(items, frm.PrBar);
             LoadData();
+            frm.Close();
         }
 
-        private static void DeleteDetailsPieces(IEnumerable items)
+        private static void DeleteDetailsPieces(IEnumerable items ,ProgressBar bar)
         {
-            foreach (var item in items.OfType<Piece>())
+            if (items ==null)return;
+            bar.Minimum = 0;
+            var enumerable = items as object[] ?? items.Cast<object>().ToArray();
+            bar.Maximum = enumerable.OfType<Piece>().Count();
+            var pBarHandler = new PBar(bar);
+            foreach (var item in enumerable.OfType<Piece>())
             {
                 if (item == null) continue;
                 var piece = item;
@@ -173,6 +181,7 @@ namespace GM.UI.Views
               
                 PieceService.Delete(item.Id);
                 PieceService.Save();
+                pBarHandler.IncPB();
             }
         }
 

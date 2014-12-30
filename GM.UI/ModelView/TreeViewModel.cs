@@ -13,7 +13,7 @@ namespace GM.UI.ModelView
        private static IRepository<Departement> _departementRepository;
        private readonly Repository<PieceEmployee> _pieceEmployeeRepository;
        private ObservableCollection<HorsStockView> _horsStockViews;
-
+       private object _current;
        public ObservableCollection<HorsStockView> HorsStockViews
        {
            get { return _horsStockViews; }
@@ -49,8 +49,37 @@ namespace GM.UI.ModelView
 
        }
 
+       public void UpdateDatagrid(long id)
+       {
+           if (_current.GetType() == typeof(Departement))
+           {
+               HorsStockViews =
+                   new ObservableCollection<HorsStockView>(
+                       AutoMapper.Mapper.Map<IList<HorsStockView>>(
+                           _pieceEmployeeRepository.GetAllLazyLoad(x => x.Piece, x => x.Piece.Article)
+                               .Where(x => x.DepartementId == ((Departement)_current).Id)));
+           }
+           else if (_current.GetType().Name.StartsWith("Service"))
+           {
+               HorsStockViews =
+                   new ObservableCollection<HorsStockView>(
+                       AutoMapper.Mapper.Map<IList<HorsStockView>>(
+                           _pieceEmployeeRepository.GetAllLazyLoad(x => x.Piece, x => x.Piece.Article)
+                               .Where(x => x.ServiceId == ((Service)_current).Id)));
+           }
+           else if (_current.GetType().Name.StartsWith("SousService"))
+           {
+               HorsStockViews =
+                   new ObservableCollection<HorsStockView>(
+                       AutoMapper.Mapper.Map<IList<HorsStockView>>(
+                           _pieceEmployeeRepository.GetAllLazyLoad(x => x.Piece, x => x.Piece.Article)
+                               .Where(x => x.SousServiceId == ((SousService)_current).Id)));
+           }
+       }
+
        private void LoadData(object o)
        {
+           _current = o;
            if (o.GetType() == typeof (Departement))
            {
                HorsStockViews =
