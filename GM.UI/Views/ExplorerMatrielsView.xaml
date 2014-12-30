@@ -24,7 +24,7 @@
         </HierarchicalDataTemplate>
     </UserControl.Resources>
    
-   <TabControl>
+   <TabControl BorderBrush="Gray">
        <TabItem Header="Matériels hors  le stock">
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -42,6 +42,7 @@
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
                     <Button Content="Imprission" FontSize="10"
+                            Margin="5,0,0,0" 
                             Click="ButtonBase_OnClick"/>
                     <Button  
                     Click="UpdateButton_OnClick"

@@ -23,8 +23,8 @@
             </Style>
 
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/PresentationFramework.Luna;V3.0.0.0;31bf3856ad364e35;component\themes/luna.normalcolor.xaml" />
-                <!--<ResourceDictionary Source="/Resources/WindowStyleChrome.xaml"/>
+                <!--<ResourceDictionary Source="/PresentationFramework.Luna;V3.0.0.0;31bf3856ad364e35;component\themes/luna.normalcolor.xaml" />-->
+                <ResourceDictionary Source="/Resources/WindowStyleChrome.xaml"/>
 
                 <ResourceDictionary Source="pack://application:,,,/WPFOfficeTheme;component/themes/ResizeGripStyle.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/WPFOfficeTheme;component/themes/StatusBarStyle.xaml"/>
@@ -44,26 +44,12 @@
                 <ResourceDictionary Source="pack://application:,,,/WPFOfficeTheme;component/themes/GridSplitter.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/WPFOfficeTheme;component/themes/Expander_new.xaml" />
 
-                --><!--<ResourceDictionary Source="pack://application:,,,/WPFOfficeTheme;component/themes/DataGrid.xaml"/>-->
-                <!--<ResourceDictionary Source="pack://application:,,,/WPFOfficeTheme;component/themes/TabControl.xaml"/>--><!--
+                <ResourceDictionary Source="pack://application:,,,/WPFOfficeTheme;component/themes/DataGrid.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/WPFOfficeTheme;component/themes/TabControl.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/WPFOfficeTheme;component/themes/ListView.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/WPFOfficeTheme;component/themes/TextBlockStyle.xaml"/>
-                <ResourceDictionary Source="pack://application:,,,/WPFOfficeTheme;component/themes/DatePicker.xaml" />-->
-
-                <!--<ResourceDictionary Source="/VIBlend.WPF.Theme.Office2010Blue;component/RepeatButton.xaml"/>
-                <ResourceDictionary Source="/VIBlend.WPF.Theme.Office2010Blue;component/Button.xaml"/>
-                <ResourceDictionary Source="/VIBlend.WPF.Theme.Office2010Blue;component/CheckBox.xaml"/>
-                <ResourceDictionary Source="/VIBlend.WPF.Theme.Office2010Blue;component/RadioButton.xaml"/>
-                <ResourceDictionary Source="pack://application:,,,/WPFOfficeTheme;component/themes/DataGrid.xaml"/>
-                <ResourceDictionary Source="/VIBlend.WPF.Theme.Office2010Blue;component/TreeView.xaml"/>
-                <ResourceDictionary Source="/VIBlend.WPF.Theme.Office2010Blue;component/ToggleButton.xaml"/>
-                <ResourceDictionary Source="/VIBlend.WPF.Theme.Office2010Blue;component/Slider.xaml"/>
-                <ResourceDictionary Source="/VIBlend.WPF.Theme.Office2010Blue;component/TextBox.xaml"/>
-                <ResourceDictionary Source="/VIBlend.WPF.Theme.Office2010Blue;component/PasswordBox.xaml"/>
-                <ResourceDictionary Source="/VIBlend.WPF.Theme.Office2010Blue;component/RichTextBox.xaml"/>
-                <ResourceDictionary Source="/VIBlend.WPF.Theme.Office2010Blue;component/ProgressBar.xaml"/>
-                <ResourceDictionary Source="/VIBlend.WPF.Theme.Office2010Blue;component/Menu.xaml"/>-->
-            </ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/WPFOfficeTheme;component/themes/DatePicker.xaml" />
+          </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
