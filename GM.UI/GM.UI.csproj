@@ -162,6 +162,9 @@
     <Compile Include="Views\CategorieView.xaml.cs">
       <DependentUpon>CategorieView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\ChangeEtatInvfrm.xaml.cs">
+      <DependentUpon>ChangeEtatInvfrm.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ChangementPiceFrm.xaml.cs">
       <DependentUpon>ChangementPiceFrm.xaml</DependentUpon>
     </Compile>
@@ -211,6 +214,9 @@
     </Compile>
     <Compile Include="Views\ReportUserControls\BonSortieReportUc.xaml.cs">
       <DependentUpon>BonSortieReportUc.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ReportUserControls\MagasinDetailRpUc.xaml.cs">
+      <DependentUpon>MagasinDetailRpUc.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ReportUserControls\ReportParServiceUc.xaml.cs">
       <DependentUpon>ReportParServiceUc.xaml</DependentUpon>
@@ -278,6 +284,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\ChangeEtatInvfrm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ChangementPiceFrm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -342,6 +352,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\ReportUserControls\MagasinDetailRpUc.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ReportUserControls\ReportParServiceUc.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -387,6 +401,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reporting\ReportMagasin.rdlc" />
     <EmbeddedResource Include="Reporting\RpBonSortie.rdlc" />
+    <EmbeddedResource Include="Reporting\rpMagasinDetaiis.rdlc" />
     <EmbeddedResource Include="Reporting\rpParService.rdlc" />
     <None Include="App.config">
       <SubType>Designer</SubType>

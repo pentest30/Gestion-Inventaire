@@ -5,6 +5,7 @@ using System.Windows.Controls;
 using BLL;
 using GM.Entity.Models;
 using GM.UI.ModelView;
+using GM.UI.Views.ReportUserControls;
 using Microsoft.Practices.Unity;
 
 namespace GM.UI.Views
@@ -47,7 +48,31 @@ namespace GM.UI.Views
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
-            
+            var list = DataGridStock.Items.OfType<StockModelView>();
+            var frm = new ReportFrm();
+            var ucReport = new MagasinDetailRpUc(list);
+            frm.ContentControl.Content = ucReport;
+            frm.ShowDialog();
+        }
+
+        private void UpdateBtn_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (DataGridStock.SelectedIndex < 0)
+            {
+                MessageBox.Show("Selectionner un champ", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+            var stockModelView= DataGridStock.SelectedItem as StockModelView;
+            if (stockModelView == null) return;
+            var frm = new ChangeEtatInvfrm(stockModelView.Id);
+            frm.UpdateDataDg += UpdateDatagrid;
+            frm.Show();
+        }
+
+        private void UpdateDatagrid(long id)
+        {
+            var magasin = CbMagasin.SelectedItem as Magasin;
+            GetData(magasin);
         }
     }
 }

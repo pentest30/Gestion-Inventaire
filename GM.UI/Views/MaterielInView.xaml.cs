@@ -136,7 +136,7 @@ namespace GM.UI.Views
             var items = DataGridStock.SelectedItems;
             if (departemet == null || service == null || bSortie == null || items.Count == 0)
             {
-                MessageBox.Show("");
+                MessageBox.Show("valeures vides non autorisé");
                 return;
             }
          

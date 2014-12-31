@@ -15,12 +15,12 @@ namespace GM.UI
                 new EtatMateriel
                 {
                     Id = 2,
-                    Etat = "En panne"
+                    Etat = "Bon"
                 },
                 new EtatMateriel
                 {
                     Id = 3,
-                    Etat = "Réforme"
+                    Etat = "mauvais"
                 },
                 new EtatMateriel
                 {
@@ -30,7 +30,7 @@ namespace GM.UI
                  new EtatMateriel
                 {
                     Id = 4,
-                    Etat = "Defeaut de fabrication"
+                    Etat = "Défectueux"
                 }
             };
             return etats;

@@ -129,8 +129,8 @@ namespace GM.UI.Views
                 LocationId = ((Magasin) CbMagasin.SelectedItem).Id,
                 Date = DateTime.Now
             };
-            var p = _pieceService.FindReturnSingle(x => x.Id == _piece.PieceId);
-            var etatMateriel = new EtatMateriel();
+           // var p = _pieceService.FindReturnSingle(x => x.Id == _piece.PieceId);
+            //var etatMateriel = new EtatMateriel();
 
             var stock = _stockService.FindSingle(x => x.PieceId == _piece.PieceId);
             if (stock == null) return true;
@@ -138,24 +138,24 @@ namespace GM.UI.Views
             {
                 stock.EtatStock = EtatStock.Defaut.ToString();
                 historqiqueSource.Etat = EtatStock.Defaut.ToString();
-                p.EtatPiece = etatMateriel.EtatMateriels[4].Etat;
-            }
-            else if (RepareRbtn.IsChecked == true)
-            {
-                stock.EtatStock = EtatStock.Reforme.ToString();
-                historqiqueSource.Etat = EtatStock.Reforme.ToString();
-                p.EtatPiece = etatMateriel.EtatMateriels[1].Etat;
+                //p.EtatPiece = etatMateriel.EtatMateriels[4].Etat;
             }
             else if (FetormeRbtb.IsChecked == true)
             {
+                stock.EtatStock = EtatStock.Reforme.ToString();
+                historqiqueSource.Etat = EtatStock.Reforme.ToString();
+                //p.EtatPiece = etatMateriel.EtatMateriels[1].Etat;
+            }
+            else if (RepareRbtn .IsChecked == true)
+            {
                 stock.EtatStock = EtatStock.Reparation.ToString();
                 historqiqueSource.Etat = EtatStock.Reparation.ToString();
-                p.EtatPiece = etatMateriel.EtatMateriels[2].Etat;
+                //p.EtatPiece = etatMateriel.EtatMateriels[2].Etat;
             }
             AdHistoryInventaire(historqiqueSource);
             UpdateStock(stock);
-            _pieceService.Update(p);
-            _pieceService.Save();
+            //_pieceService.Update(p);
+            //_pieceService.Save();
             _pServiRepository.Delete(_piece.Id);
             _pServiRepository.Save();
             return false;

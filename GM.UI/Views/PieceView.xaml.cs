@@ -30,11 +30,12 @@ namespace GM.UI.Views
         {
             InitializeComponent();
             var container = new UnityContainer();
+            StockService = container.Resolve<StockService>();
             var magasinRepository = container.Resolve<Repository<Magasin>>();
             _articleService = container.Resolve<ArticleService>();
             var marqueRepository = container.Resolve<Repository<Marque>>();
             PieceService = container.Resolve<PieceService>();
-            StockService = container.Resolve<StockService>();
+           
             _pServiRepository = container.Resolve<Repository<PieceEmployee>>();
             var beRepository = container.Resolve<Repository<BonEntree>>();
             _beLigneRepository = container.Resolve<Repository<BonEntreeLigne>>();

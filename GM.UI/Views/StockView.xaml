@@ -7,7 +7,7 @@
              xmlns:extendedColumn="clr-namespace:ExtendedGrid.ExtendedColumn;assembly=ExtendedGrid"
              xmlns:modelView="clr-namespace:GM.UI.ModelView" x:Class="GM.UI.Views.StockView"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             >
     <Grid Margin="5">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
@@ -64,6 +64,13 @@
                 <modelView:StockModelView/>
             </extendedGridControl:ExtendedDataGrid.DataContext>
         </extendedGridControl:ExtendedDataGrid>
-        <Button Click="ButtonBase_OnClick" Grid.Row="0" Grid.Column="2" Width="80" Content="Imprission"/>
+        <Grid Grid.Column="2" Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button Click="ButtonBase_OnClick" Grid.Row="0" Grid.Column="0" Width="80" Content="Imprission"/>
+            <Button Grid.Column="1" Content="Modifier l'état d'inventaire" Name="UpdateBtn" Click="UpdateBtn_OnClick"/>
+        </Grid>
     </Grid>
 </UserControl>
