@@ -4,19 +4,7 @@
         xmlns:xPlorerBar="clr-namespace:ZonaTools.XPlorerBar;assembly=ZonaTools.XPlorerBar"
         Title="MainWindow" WindowState="Maximized" KeyDown="MainWindow_OnKeyDown">
     <DockPanel >
-        <Menu Height="25" DockPanel.Dock="Top">
-            <MenuItem Header="Fichier">
-                <MenuItem Header="Fermer"/>
-            </MenuItem>
-            <MenuItem Header="Paramètres">
-                <MenuItem Header="Fermer"/>
-            </MenuItem>
-            <MenuItem Header="Structure">
-                <MenuItem Header="Fermer"/>
-            </MenuItem>
-
-
-        </Menu>
+       
         <Border BorderBrush="DarkGray"  BorderThickness="2">
             <!--<Border.Background>
                 <LinearGradientBrush EndPoint="0.144,0.49" MappingMode="RelativeToBoundingBox" StartPoint="0.87,0.303">
