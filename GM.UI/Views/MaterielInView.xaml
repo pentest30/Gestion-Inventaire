@@ -169,7 +169,5 @@
             </extendedDataGrid:ExtendedDataGrid>
         </Grid>
         <ProgressBar x:Name="ProgressBar" Grid.Row="2" Grid.Column="1" Margin="2" Visibility="Collapsed"/>
-
-
     </Grid>
 </UserControl>

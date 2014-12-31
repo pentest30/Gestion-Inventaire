@@ -51,6 +51,7 @@ namespace GM.UI.Views
             var departementRepository = container.Resolve<Repository<Departement>>();
             _pieceEmployeeRepository = container.Resolve<Repository<PieceEmployee>>();
             _sousServiceRepository = container.Resolve<Repository<SousService>>();
+            _historiqueRepository = container.Resolve<Repository<HistoriqueInventaire>>();
             CbCategorie.ItemsSource = categorieRepository.SelectAll();
             CbMarque.ItemsSource = marqueRepository.SelectAll();
             CbMagasin.ItemsSource = magasinRepository.SelectAll();
@@ -173,12 +174,24 @@ namespace GM.UI.Views
                 if (sousService != null) p.SousServiceId = sousService.Id;
                 _pieceEmployeeRepository.Insert(p);
                 _pieceEmployeeRepository.Save();
+                var historqique = new HistoriqueInventaire
+                {
+                    CodeLocation = ((Magasin)CbMagasin.SelectedItem).Code,
+                    Inventaire = item.Inventaire,
+                    LocationId = ((Magasin)CbMagasin.SelectedItem).Id,
+                    Date = DateTime.Now
+                };
+                _historiqueRepository.Insert(historqique);
+                _historiqueRepository.Save();
+               
                 stock.Disponibilite = false;
                 _stockService.Update(stock);
                 _stockService.Save();
                 pBar.IncPB();
             }
         }
+
+        private readonly IRepository<HistoriqueInventaire> _historiqueRepository;
 
         private void CbBonSortie_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {

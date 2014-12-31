@@ -11,6 +11,7 @@ namespace GM.UI.ModelView
        public string Magasin { get; set; }
        public string Code { get; set; }
        public int QntTotal { get; set; }
+       public string Marque { get; set; }
 
        public DateTime DateTime
        {

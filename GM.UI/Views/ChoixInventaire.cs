@@ -5,9 +5,7 @@
         
         AutoGeneration ,
         
-        SuiverInventaireExistant,
-         
-        Vide
+        SuiverInventaireExistant
         
     }
 

@@ -67,7 +67,8 @@ namespace GM.UI
                 .ForMember(x => x.Model, o => o.MapFrom(p => p.Libelle))
                  .ForMember(x => x.QntTotal, o => o.MapFrom(p => p.QntTotal))
                  .ForMember(x => x.Qnt, o => o.MapFrom(p => p.QntMagsin))
-                .ForMember(x => x.SousCategorie, o => o.MapFrom(p => p.SousCategorie.Libelle));
+                .ForMember(x => x.SousCategorie, o => o.MapFrom(p => p.SousCategorie.Libelle))
+                .ForMember(x => x.Marque, o => o.MapFrom(p => p.Marque.Libelle));
             AutoMapper.Mapper.CreateMap<BonSortieLigne, BonSortieReportView>()
                 .ForMember(x => x.NBon, o => o.MapFrom(p => p.BonSortie.NBon))
                 .ForMember(x => x.Magasin, o => o.MapFrom(p => p.BonSortie.Magasin.Libelle))

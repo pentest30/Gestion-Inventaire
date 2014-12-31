@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 using BLL;
 using GM.Entity.Models;
@@ -16,7 +17,11 @@ namespace GM.UI
         readonly IRepository<Service> _serviceRepository;
         private readonly PieceEmployee _pieceEmployee;
          static  IRepository<PieceEmployee> _repository; 
-        private static  IRepository<SousService> _sousSrviceRepository; 
+        private static  IRepository<SousService> _sousSrviceRepository;
+        private readonly IRepository<HistoriqueInventaire> _historiqueRepository;
+
+        private static  PieceService _pieceService; 
+
         public ChangeServiceFrm(long pieceEmployee)
         {
             InitializeComponent();
@@ -25,7 +30,9 @@ namespace GM.UI
             var departememntRepository = container.Resolve<Repository<Departement>>();
             _serviceRepository = container.Resolve<Repository<Service>>();
             _sousSrviceRepository = container.Resolve<Repository<SousService>>();
-            _repository = container.Resolve<Repository<PieceEmployee>>(); 
+            _repository = container.Resolve<Repository<PieceEmployee>>();
+            _historiqueRepository = container.Resolve<Repository<HistoriqueInventaire>>();
+            _pieceService = container.Resolve<PieceService>();
             _pieceEmployee = _repository.SelectById(pieceEmployee);
             CbDepartement.ItemsSource = departememntRepository.SelectAll();
         }
@@ -56,6 +63,20 @@ namespace GM.UI
             }
             _repository.Update(_pieceEmployee);
             _repository.Save();
+            if (souService != null)
+            {
+
+                var historqique = new HistoriqueInventaire
+                {
+                    CodeLocation = souService.Code,
+                    Inventaire =_pieceService.FindReturnSingle(w=>w.Id== _pieceEmployee.PieceId).NInventaire ,
+                    LocationId = souService.Id,
+                    Date = DateTime.Now
+                };
+                _historiqueRepository.Insert(historqique);
+            }
+            _historiqueRepository.Save();
+               
             if (UpdateDataDg != null) UpdateDataDg(0);
 
         }
