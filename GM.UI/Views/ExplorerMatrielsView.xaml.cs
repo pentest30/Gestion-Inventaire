@@ -51,6 +51,7 @@ namespace GM.UI.Views
                 return;
             }
             var frm = new ChangementPiceFrm(DataGridStock.SelectedItem as HorsStockView);
+            frm.UpdateDataDg += ViewModel.UpdateDatagrid;
             frm.Show();
         }
     }

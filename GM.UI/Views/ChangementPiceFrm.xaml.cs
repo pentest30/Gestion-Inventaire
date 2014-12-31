@@ -22,7 +22,8 @@ namespace GM.UI.Views
         private static IRepository<PieceEmployee> _pServiRepository;
         private readonly IRepository<HistoriqueInventaire> _historiqueRepository;
         private readonly Repository<SousCategorie> _sousCategorieRepository;
-        private readonly Repository<SousService> _sousServeiceRepository; 
+        private readonly Repository<SousService> _sousServeiceRepository;
+        public BonEntreeLigneFrm.UpdateDg UpdateDataDg { get; set; }
       
         public ChangementPiceFrm(HorsStockView piece)
         {
@@ -39,7 +40,6 @@ namespace GM.UI.Views
             _articleService = container.Resolve<ArticleService>();
             _sousServeiceRepository = container.Resolve<Repository<SousService>>();
             _pServiRepository = container.Resolve<Repository<PieceEmployee>>();
-         
             CbMagasin.ItemsSource = magasinRepository.SelectAll();
             CbMarque.ItemsSource = marqueRepository.SelectAll();
           
@@ -56,9 +56,26 @@ namespace GM.UI.Views
 
         private void AddBtn_OnClick(object sender, RoutedEventArgs e)
         {
-            if (DefautRbtn.IsChecked==false && FetormeRbtb.IsChecked==false && RepareRbtn.IsChecked==false)return;
-            if (WorksOnSource()) return;
-            DoWorksOnDist();
+            if (DefautRbtn.IsChecked == false && FetormeRbtb.IsChecked == false && RepareRbtn.IsChecked == false)
+            {
+                MessageBox.Show("désigner la raison de changement stp", "Attention", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            if (CbArticle.SelectedIndex == -1 && CbMarque.SelectedIndex == -1 && CbPices.SelectedIndex == -1)
+            {
+                MessageBox.Show("Valeures vides","Attention" ,MessageBoxButton.OK,MessageBoxImage.Error);
+                return;
+            }
+            try
+            {
+                if (WorksOnSource()) return;
+                DoWorksOnDist();
+                if (UpdateDataDg != null) UpdateDataDg(0);
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message, "Attention", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void DoWorksOnDist()
@@ -126,13 +143,13 @@ namespace GM.UI.Views
             else if (RepareRbtn.IsChecked == true)
             {
                 stock.EtatStock = EtatStock.Reforme.ToString();
-                historqiqueSource.Etat = EtatStock.Defaut.ToString();
+                historqiqueSource.Etat = EtatStock.Reforme.ToString();
                 p.EtatPiece = etatMateriel.EtatMateriels[1].Etat;
             }
             else if (FetormeRbtb.IsChecked == true)
             {
                 stock.EtatStock = EtatStock.Reparation.ToString();
-                historqiqueSource.Etat = EtatStock.Defaut.ToString();
+                historqiqueSource.Etat = EtatStock.Reparation.ToString();
                 p.EtatPiece = etatMateriel.EtatMateriels[2].Etat;
             }
             AdHistoryInventaire(historqiqueSource);

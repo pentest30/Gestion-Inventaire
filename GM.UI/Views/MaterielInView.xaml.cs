@@ -45,18 +45,17 @@ namespace GM.UI.Views
             var marqueRepository = container.Resolve<Repository<Marque>>();
             var categorieRepository = container.Resolve<Repository<Categorie>>();
             _sousCategorieRepository = container.Resolve<Repository<SousCategorie>>();
-            var beRepository =container.Resolve<Repository<BonSortie>>();
+            var bsRepository=container.Resolve<Repository<BonSortie>>();
             _pieceEmployeeRepository = container.Resolve<Repository<PieceEmployee>>(); 
             var magasinRepository = container.Resolve<Repository<Magasin>>();
             var departementRepository = container.Resolve<Repository<Departement>>();
-           
             _serviceRepository=container.Resolve<Repository<Service>>();
             _sousServiceRepository = container.Resolve<Repository<SousService>>();
             _historiqueRepository = container.Resolve<Repository<HistoriqueInventaire>>();
             CbCategorie.ItemsSource = categorieRepository.SelectAll();
             CbMarque.ItemsSource = marqueRepository.SelectAll();
             CbMagasin.ItemsSource = magasinRepository.SelectAll();
-            CbBonSortie.ItemsSource = beRepository.SelectAll();
+            CbBonSortie.ItemsSource = bsRepository.SelectAll();
             CbDepartement.ItemsSource = departementRepository.SelectAll();
 
         }

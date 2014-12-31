@@ -45,11 +45,13 @@
             <extendedGridControl:ExtendedDataGrid.Columns>
                 <extendedColumn:ExtendedDataGridTextColumn AllowAutoFilter="True" Width="*" Header="N° d'inventaire" Binding="{Binding Inventaire}"/>
                 <extendedColumn:ExtendedDataGridTextColumn AllowAutoFilter="True" Width="*" Header="Date d'entrée" Binding="{Binding Date, StringFormat=d}"/>
-                <extendedColumn:ExtendedDataGridTextColumn AllowAutoFilter="True" Width="*" Header="Famille" Binding="{Binding Path=Categorie}"/>
-                <extendedColumn:ExtendedDataGridTextColumn AllowAutoFilter="True" Width="*" Header="Classe" Binding="{Binding Path=SousCategorie}"/>
+                 <extendedColumn:ExtendedDataGridTextColumn AllowAutoFilter="True" Width="*" Header="Classe" Binding="{Binding Path=SousCategorie}"/>
                 <extendedColumn:ExtendedDataGridTextColumn AllowAutoFilter="True" Width="*" Header="Marquer" Binding="{Binding Path=Marque}"/>
                 <extendedColumn:ExtendedDataGridTextColumn AllowAutoFilter="True" Width="*" Header="Modèl" Binding="{Binding Path=Model}"/>
-               </extendedGridControl:ExtendedDataGrid.Columns>
+                <extendedColumn:ExtendedDataGridTextColumn AllowAutoFilter="True" Width="*" Header="Etat" Binding="{Binding Path=Etat}"/>
+                <extendedColumn:ExtendedDataGridCheckBoxColumn AllowAutoFilter="True" Width="*" Header="Disponibilité" Binding="{Binding Path=Disponibilite}"/>
+
+            </extendedGridControl:ExtendedDataGrid.Columns>
             <extendedGridControl:ExtendedDataGrid.FooterDataTemplate>
                 <DataTemplate>
                     <StackPanel  Orientation="Horizontal">
