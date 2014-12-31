@@ -14,7 +14,7 @@ namespace BLL
 
         public Repository()
         {
-            _dbContext = ContextSingleton.Instance;
+            _dbContext =ContextSingleton.Instance;
             Set = _dbContext.Set<T>();
         }
 
@@ -26,7 +26,7 @@ namespace BLL
         public void Delete(object id)
         {
             var item = Set.Find(id);
-            Set.Attach(item);
+           // Set.Attach(item);
             if (item== null) return;
             Set.Remove(item);
         }
@@ -40,7 +40,10 @@ namespace BLL
         {
             return Set.Where(predicate);
         }
-
+        public T FindSingle(Func<T, bool> predicate)
+        {
+            return Set.FirstOrDefault(predicate);
+        }
         public IQueryable<T> GetAllLazyLoad( params Expression<Func<T, object>>[] children)
         {
             children.ToList().ForEach(x => Set.Include(x).Load());

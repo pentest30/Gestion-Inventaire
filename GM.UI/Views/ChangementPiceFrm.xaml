@@ -1,0 +1,86 @@
+﻿<Window x:Class="GM.UI.Views.ChangementPiceFrm"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:helpers="clr-namespace:WPF.Core.Helpers;assembly=WPF.Core"
+        Title="ChangementPiceFrm" Height="325" Width="400">
+   <Grid>
+       <Grid.RowDefinitions>
+           <RowDefinition Height="Auto"/>
+           <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <GroupBox Margin="5" BorderBrush="Gray" Header="Piece a changer:">
+            <Grid Margin="5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="45"/>
+                    
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Magasin:" VerticalAlignment="Center"/>
+                <GroupBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" >
+                   <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <RadioButton Name="DefautRbtn" Margin="5" VerticalAlignment="Center" Content="Défaut de fabrication"/>
+                        <RadioButton Name="RepareRbtn" Margin="5" VerticalAlignment="Center" Content="Réparation"/>
+                        <RadioButton Name="FetormeRbtb" Margin="5" VerticalAlignment="Center" Content="Réforme"/>
+                    </StackPanel>
+                </GroupBox>
+                <ComboBox Margin="2"  Name="CbMagasin" Grid.Column="1" Grid.Row="0" DisplayMemberPath="Libelle" SelectedValuePath="Id" SelectedValue="{Binding Path=MagasinId}"/>
+
+            </Grid>
+        </GroupBox>
+       <GroupBox Grid.Row="1" Header="Piece de rechange:"  BorderBrush="Gray" Margin="5">
+            <Grid Margin="5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <TextBlock VerticalAlignment="Center" Text="N° d'inventaire:" Grid.Row="2"/>
+
+                <helpers:AutoFilteredComboBox 
+            x:Name="CbPices" 
+            Grid.Column="1" 
+            Grid.Row="2" 
+            Margin="2" 
+       	
+                    DisplayMemberPath="Inventaire" 
+            SelectedValuePath="Id" 
+                  
+           />
+                <helpers:AutoFilteredComboBox 
+            x:Name="CbMarque" 
+            Grid.Column="1" 
+            Grid.Row="0"
+            Margin="2" 
+                    SelectionChanged="CbMarque_OnSelectionChanged"
+            DisplayMemberPath="Libelle" 
+            SelectedValuePath="Id" 
+                  
+            SelectedValue="{Binding Article.MarqueId}"/>
+                <helpers:AutoFilteredComboBox 
+            x:Name="CbArticle" 
+            Grid.Column="1" 
+            Grid.Row="1"
+            Margin="2" 
+            DisplayMemberPath="Libelle" 
+                    SelectionChanged="CbArticle_OnSelectionChanged"
+            SelectedValuePath="Id" 
+           />
+                <TextBlock Grid.Row="0" Grid.Column="0" Text="Marque:" VerticalAlignment="Center"/>
+                <TextBlock Grid.Row="1" Grid.Column="0" Text="Modél:" VerticalAlignment="Center"/>
+            </Grid>
+
+        </GroupBox>
+        <Button Grid.Row="2" Height="30" Width="120" HorizontalAlignment="Right" Content="Enregistrer" Name="AddBtn" Click="AddBtn_OnClick"/>
+    </Grid>
+</Window>

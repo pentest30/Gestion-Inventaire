@@ -39,6 +39,7 @@ namespace DAL
         public DbSet<CommandeLigne> CommandeLignes { get; set; }
         public DbSet<HistoriqueInventaire> HistoriqueInventaires { get; set; }
         public DbSet<TypeArticle> Types { get; set; }
+        public DbSet<PvChangemant> PvChangemants { get; set; }
        
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

@@ -26,6 +26,11 @@ namespace GM.UI
                 {
                     Id = 4,
                     Etat = "Occasion"
+                },
+                 new EtatMateriel
+                {
+                    Id = 4,
+                    Etat = "Defeaut de fabrication"
                 }
             };
             return etats;

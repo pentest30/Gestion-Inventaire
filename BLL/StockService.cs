@@ -40,8 +40,11 @@ namespace BLL
            _db.PieceMagasins.Add(item);
        }
 
-     
 
+       public PieceMagasin FindSingle(Func<PieceMagasin, bool> predicate)
+       {
+           return _db.PieceMagasins.FirstOrDefault(predicate);
+       }
        public void Update(PieceMagasin item)
        {
          
@@ -77,15 +80,22 @@ namespace BLL
 
        public  IEnumerable<PieceMagasin> PieceMagasins(Categorie categorie, SousCategorie sousCategorie, Marque marque,Article article, Magasin magasin)
        {
-           var result = new ObservableCollection<PieceMagasin>(GetAllLazyLoad(x => x.BonEntree, x => x.Piece,
+           try
+           {
+               var result = new ObservableCollection<PieceMagasin>(GetAllLazyLoad(x => x.BonEntree, x => x.Piece,
                w => w.Magasin))
                .Where(x => x.Article.Categorie.Id == categorie.Id
                            && x.Article.SousCategorie.Id == sousCategorie.Id
                            && x.Article.Marque.Id == marque.Id
                            && x.Article.Libelle == article.Libelle
                            && x.MagasinId == magasin.Id
-                           &&x.Disponibilite);
-           return result;
+                           && x.Disponibilite);
+               return result;
+           }
+           catch (Exception)
+           {
+               return null;
+           }
        }
    }
 }

@@ -46,10 +46,11 @@ namespace GM.UI.Views
             var categorieRepository = container.Resolve<Repository<Categorie>>();
             _sousCategorieRepository = container.Resolve<Repository<SousCategorie>>();
             var beRepository =container.Resolve<Repository<BonSortie>>();
-            _serviceRepository=container.Resolve<Repository<Service>>();
+            _pieceEmployeeRepository = container.Resolve<Repository<PieceEmployee>>(); 
             var magasinRepository = container.Resolve<Repository<Magasin>>();
             var departementRepository = container.Resolve<Repository<Departement>>();
-            _pieceEmployeeRepository = container.Resolve<Repository<PieceEmployee>>();
+           
+            _serviceRepository=container.Resolve<Repository<Service>>();
             _sousServiceRepository = container.Resolve<Repository<SousService>>();
             _historiqueRepository = container.Resolve<Repository<HistoriqueInventaire>>();
             CbCategorie.ItemsSource = categorieRepository.SelectAll();
@@ -169,7 +170,8 @@ namespace GM.UI.Views
                     BonSortieId = bSortie.Id,
                     DepartementId = departemet.Id,
                     ServiceId = service.Id,
-                    Utilisation = true
+                    Utilisation = true,
+                    Etat = PieceEtat.Opérationnel.ToString()
                 };
                 if (sousService != null) p.SousServiceId = sousService.Id;
                 _pieceEmployeeRepository.Insert(p);
@@ -205,5 +207,11 @@ namespace GM.UI.Views
         {
             CbArticle.SelectedIndex = -1;
         }
+    }
+
+    public enum PieceEtat
+    {
+        Opérationnel,
+        Réparation
     }
 }

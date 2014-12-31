@@ -51,6 +51,7 @@
                         Margin="5,0,0,0" 
                         Content="Changer l'emplacement" 
                         Grid.Row="0" Grid.Column="1"/>
+                    <Button Margin="5,0,0,0" FontSize="10" Grid.Row="0" Grid.Column="2" Content="Changement du materiel" Name="CHangePieceBtn" Click="CHangePieceBtn_OnClick"/>
                 </Grid>
                 <TreeView Name="TreeView" 
                   Margin="5"

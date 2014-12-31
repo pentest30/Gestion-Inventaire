@@ -13,6 +13,7 @@ namespace GM.UI
         public App()
         {
             var container = new UnityContainer();
+           
             container.RegisterInstance(new StockService());
             container.RegisterInstance(new ArticleService(container.Resolve<StockService>()));
             container.RegisterInstance(new PieceService());
@@ -32,6 +33,7 @@ namespace GM.UI
             container.RegisterInstance(new Repository<BonSortie>());
             container.RegisterInstance(new Repository<BonSortieLigne>());
             container.RegisterInstance(new Repository<TypeArticle>());
+
             AutoMapper.Mapper.CreateMap<Piece, Piece>()
                 .ForMember(x => x.Id, o => o.Ignore())
                 .ForMember(x => x.NInventaire, o => o.MapFrom(x => x.NInventaire));
@@ -39,7 +41,8 @@ namespace GM.UI
                 // .ForMember(x => x.ArticleId, o => o.MapFrom(p => p.ArticleId))
                 .ForMember(x => x.PieceId, o => o.MapFrom(p => p.Id))
                 //  .ForMember(x => x.MagasinId, o => o.MapFrom(p => p.MagasinId))
-                .ForMember(x => x.Date, o => o.MapFrom(p => p.DateEntree));
+                .ForMember(x => x.Date, o => o.MapFrom(p => p.DateEntree))
+                .ReverseMap();
             //   .ForMember(x => x.BonEntreeId, o => o.MapFrom(p => p.BonEntreeId));
             AutoMapper.Mapper.CreateMap<PieceMagasin, StockModelView>()
                 .ForMember(x => x.Etat, o => o.MapFrom(p => p.Piece.EtatPiece))
@@ -63,10 +66,12 @@ namespace GM.UI
                 .ForMember(x => x.Departement, o => o.MapFrom(p => p.Departement.Libelle))
                 .ForMember(x => x.Service, o => o.MapFrom(p => p.Service.Libelle))
                 .ForMember(x => x.SousService, o => o.MapFrom(p => p.SousService.Libelle));
+               
+         //   AutoMapper.Mapper.CreateMap<PieceEmployee, HorsStockView>();
             AutoMapper.Mapper.CreateMap<Article, ArticleViewModel>()
                 .ForMember(x => x.Model, o => o.MapFrom(p => p.Libelle))
-                 .ForMember(x => x.QntTotal, o => o.MapFrom(p => p.QntTotal))
-                 .ForMember(x => x.Qnt, o => o.MapFrom(p => p.QntMagsin))
+                .ForMember(x => x.QntTotal, o => o.MapFrom(p => p.QntTotal))
+                .ForMember(x => x.Qnt, o => o.MapFrom(p => p.QntMagsin))
                 .ForMember(x => x.SousCategorie, o => o.MapFrom(p => p.SousCategorie.Libelle))
                 .ForMember(x => x.Marque, o => o.MapFrom(p => p.Marque.Libelle));
             AutoMapper.Mapper.CreateMap<BonSortieLigne, BonSortieReportView>()
@@ -79,8 +84,8 @@ namespace GM.UI
                 .ForMember(x => x.Materiel, o => o.MapFrom(p => p.Article.SousCategorie.Libelle))
                 .ForMember(x => x.DateSortie, o => o.MapFrom(p => p.BonSortie.DateSortie));
             AutoMapper.Mapper.CreateMap<Piece, Reformet>()
-                  .ForMember(x => x.PieceId, o => o.MapFrom(p => p.Id))
-                  .ForMember(x => x.PieceNInventaire, o => o.MapFrom(p => p.NInventaire));
+                .ForMember(x => x.PieceId, o => o.MapFrom(p => p.Id))
+                .ForMember(x => x.PieceNInventaire, o => o.MapFrom(p => p.NInventaire));
             AutoMapper.Mapper.CreateMap<Location, TreeViewModel>();
 
         }

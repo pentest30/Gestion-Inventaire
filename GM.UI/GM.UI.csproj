@@ -162,6 +162,9 @@
     <Compile Include="Views\CategorieView.xaml.cs">
       <DependentUpon>CategorieView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\ChangementPiceFrm.xaml.cs">
+      <DependentUpon>ChangementPiceFrm.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ChoixInventaire.cs" />
     <Compile Include="Views\CommandeView.xaml.cs">
       <DependentUpon>CommandeView.xaml</DependentUpon>
@@ -175,6 +178,9 @@
     <Compile Include="EtatStock.cs" />
     <Compile Include="Views\ExplorerMatrielsView.xaml.cs">
       <DependentUpon>ExplorerMatrielsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\HistorquePieceFrm.xaml.cs">
+      <DependentUpon>HistorquePieceFrm.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MagasinView.xaml.cs">
       <DependentUpon>MagasinView.xaml</DependentUpon>
@@ -272,6 +278,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\ChangementPiceFrm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\CommandeView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -285,6 +295,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ExplorerMatrielsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\HistorquePieceFrm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -25,22 +25,22 @@ namespace GM.UI.Views
         private readonly IRepository<BonEntreeLigne> _beLigneRepository;
         private static  IRepository<PieceEmployee> _pServiRepository;
         private static IRepository<Reformet> _reformeRepository;
-
         public static  IRepository<HistoriqueInventaire> HistoriqueRepository; 
-        
         public PieceView()
         {
             InitializeComponent();
             var container = new UnityContainer();
+            var magasinRepository = container.Resolve<Repository<Magasin>>();
             _articleService = container.Resolve<ArticleService>();
+            var marqueRepository = container.Resolve<Repository<Marque>>();
             PieceService = container.Resolve<PieceService>();
             StockService = container.Resolve<StockService>();
             _pServiRepository = container.Resolve<Repository<PieceEmployee>>();
             var beRepository = container.Resolve<Repository<BonEntree>>();
             _beLigneRepository = container.Resolve<Repository<BonEntreeLigne>>();
-            var magasinRepository = container.Resolve<Repository<Magasin>>();
+           
             var categorieRepository = container.Resolve<Repository<Categorie>>();
-            var marqueRepository = container.Resolve<Repository<Marque>>();
+           
             _sousCategorieRepository = container.Resolve<Repository<SousCategorie>>();
             _reformeRepository = container.Resolve<Repository<Reformet>>();
             HistoriqueRepository = container.Resolve<Repository<HistoriqueInventaire>>();
@@ -94,7 +94,7 @@ namespace GM.UI.Views
                 {
                     var article = _articleService.SelectById(item.ArticleId);
                     item.NInventaire = GenerateInventoryName(article.Libelle);
-                    item.EtatStock = EtatStock.Stock.ToString();
+                    item.EtatStock = EtatStock.Normal.ToString();
 
                 }
                 // ((ObservableCollection<Article>)DataGrid.ItemsSource).Add(item);
@@ -112,13 +112,15 @@ namespace GM.UI.Views
                     CodeLocation = ((Magasin)CbMagasin.SelectedItem).Code,
                     Inventaire = item.NInventaire,
                     LocationId = item.MagasinId,
-                    Date = DateTime.Now
+                    Date = DateTime.Now, 
+                    Etat = EtatStock.Normal.ToString()
                 };
                 HistoriqueRepository.Insert(historqique);
                 HistoriqueRepository.Save();
                
                 var stcok = Mapper.Map<PieceMagasin>(item);
                 stcok.Disponibilite = true;
+                stcok.EtatStock = EtatStock.Normal.ToString();
                 StockService.Insert(stcok);
                 StockService.Save();
                 LoadData();

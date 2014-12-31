@@ -18,6 +18,10 @@ namespace GM.UI.ModelView
         public string Service { get; set; }
         public string SousService { get; set; }
         public string Departement { get; set; }
+        public int DepartementId { get; set; }
+
+        public int ServiceId { get; set; }
+        public int SousServiceId { get; set; }
 
         public DateTime DateRapport
         {

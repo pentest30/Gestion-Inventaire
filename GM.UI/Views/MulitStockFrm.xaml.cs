@@ -38,6 +38,7 @@ namespace GM.UI.Views
                 {
                     var nouveauPeice = NouveauPeice();
                     nouveauPeice.NInventaire = PieceView.GenerateInventoryName(nouveauPeice.Article.Libelle);
+                    
                     SavePiece(nouveauPeice);
                     pBar.IncPB();
                 }
@@ -107,6 +108,7 @@ namespace GM.UI.Views
             PieceView.HistoriqueRepository.Save();
             var stcok = Mapper.Map<PieceMagasin>(nouveauPeice);
             stcok.Disponibilite = true;
+            stcok.EtatStock = EtatStock.Normal.ToString();
             PieceView.StockService.Insert(stcok);
             PieceView.StockService.Save();
 

@@ -9,6 +9,7 @@ namespace GM.Entity.Models
         public DateTime Date { get; set; }
         public int Id { get; set; }
         public string Inventaire { get; set; }
+        public string Etat { get; set; }    
 
 
     }

@@ -3,9 +3,10 @@
     public enum EtatStock
     {
         
-        Stock,
-        Utilisation,
-        Reparation
+        Normal,
+        Reforme,
+        Reparation,
+        Defaut
 
     }
 

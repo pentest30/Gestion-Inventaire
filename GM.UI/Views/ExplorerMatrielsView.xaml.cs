@@ -42,5 +42,16 @@ namespace GM.UI.Views
             frm.ContentControl.Content = ucReport;
             frm.ShowDialog();
         }
+
+        private void CHangePieceBtn_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (DataGridStock.SelectedIndex < 0)
+            {
+                MessageBox.Show("Selectionner un champ", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+            var frm = new ChangementPiceFrm(DataGridStock.SelectedItem as HorsStockView);
+            frm.Show();
+        }
     }
 }

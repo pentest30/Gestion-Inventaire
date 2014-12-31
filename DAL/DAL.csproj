@@ -80,6 +80,26 @@
     <Compile Include="Migrations\201412301847583_rt.Designer.cs">
       <DependentUpon>201412301847583_rt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201412311047221_fg.cs" />
+    <Compile Include="Migrations\201412311047221_fg.Designer.cs">
+      <DependentUpon>201412311047221_fg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201412311226455_fg1.cs" />
+    <Compile Include="Migrations\201412311226455_fg1.Designer.cs">
+      <DependentUpon>201412311226455_fg1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201412311423099_fg2.cs" />
+    <Compile Include="Migrations\201412311423099_fg2.Designer.cs">
+      <DependentUpon>201412311423099_fg2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201412311723560_fg3.cs" />
+    <Compile Include="Migrations\201412311723560_fg3.Designer.cs">
+      <DependentUpon>201412311723560_fg3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201412311725373_fg4.cs" />
+    <Compile Include="Migrations\201412311725373_fg4.Designer.cs">
+      <DependentUpon>201412311725373_fg4.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -123,6 +143,21 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201412301847583_rt.resx">
       <DependentUpon>201412301847583_rt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201412311047221_fg.resx">
+      <DependentUpon>201412311047221_fg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201412311226455_fg1.resx">
+      <DependentUpon>201412311226455_fg1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201412311423099_fg2.resx">
+      <DependentUpon>201412311423099_fg2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201412311723560_fg3.resx">
+      <DependentUpon>201412311723560_fg3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201412311725373_fg4.resx">
+      <DependentUpon>201412311725373_fg4.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

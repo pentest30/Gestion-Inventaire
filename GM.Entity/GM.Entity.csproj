@@ -62,6 +62,7 @@
     <Compile Include="Models\Magasin.cs" />
     <Compile Include="Models\Marque.cs" />
     <Compile Include="Models\PieceMagasin.cs" />
+    <Compile Include="Models\PvChangemant.cs" />
     <Compile Include="Models\Reformet.cs" />
     <Compile Include="Models\PieceEmployee.cs" />
     <Compile Include="Models\Piece.cs" />
