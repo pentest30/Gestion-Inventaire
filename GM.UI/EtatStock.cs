@@ -6,7 +6,8 @@
         Normal,
         Reforme,
         Reparation,
-        Defaut
+        Defaut,
+        Perte
 
     }
 

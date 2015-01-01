@@ -25,6 +25,7 @@
                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                         <RadioButton Name="DefautRbtn" Margin="5" VerticalAlignment="Center" Content="Défaut de fabrication"/>
                         <RadioButton Name="RepareRbtn" Margin="5" VerticalAlignment="Center" Content="Réparation"/>
+                        <RadioButton Name="PerteRbtb" Margin="5" VerticalAlignment="Center" Content="Perte"/>
                         <RadioButton Name="FetormeRbtb" Margin="5" VerticalAlignment="Center" Content="Réforme"/>
                     </StackPanel>
                 </GroupBox>

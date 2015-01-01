@@ -82,29 +82,27 @@ namespace GM.UI.Views
         {
             var pieceMagasin = CbPices.SelectedItem as PieceMagasin;
 
-            if (pieceMagasin != null)
+            if (pieceMagasin == null) return;
+            pieceMagasin.Disponibilite = false;
+            UpdateStock(pieceMagasin);
+            var pieceRechange = new PieceEmployee
             {
-                pieceMagasin.Disponibilite = false;
-                UpdateStock(pieceMagasin);
-                var pieceRechange = new PieceEmployee
-                {
-                    PieceId = pieceMagasin.PieceId,
-                    ServiceId = _piece.ServiceId,
-                    DepartementId = _piece.DepartementId,
-                    SousServiceId = _piece.SousServiceId,
-                    Date = DateTime.Now.Date,
-                    Utilisation = true
-                };
-                var historiqueDist = new HistoriqueInventaire
-                {
-                    CodeLocation = _sousServeiceRepository.FindSingle(x => x.Id == _piece.SousServiceId).Code,
-                    Inventaire = _pieceService.FindReturnSingle(x => x.Id == pieceMagasin.PieceId).NInventaire,
-                    LocationId = Convert.ToInt32(pieceRechange.SousServiceId),
-                    Date = DateTime.Now
-                };
-                AdHistoryInventaire(historiqueDist);
-                AddUpdatePieceService(pieceRechange);
-            }
+                PieceId = pieceMagasin.PieceId,
+                ServiceId = _piece.ServiceId,
+                DepartementId = _piece.DepartementId,
+                SousServiceId = _piece.SousServiceId,
+                Date = DateTime.Now.Date,
+                Utilisation = true
+            };
+            var historiqueDist = new HistoriqueInventaire
+            {
+                CodeLocation = _sousServeiceRepository.FindSingle(x => x.Id == _piece.SousServiceId).Code,
+                Inventaire = _pieceService.FindReturnSingle(x => x.Id == pieceMagasin.PieceId).NInventaire,
+                LocationId = Convert.ToInt32(pieceRechange.SousServiceId),
+                Date = DateTime.Now
+            };
+            AdHistoryInventaire(historiqueDist);
+            AddUpdatePieceService(pieceRechange);
         }
 
         private static void AddUpdatePieceService(PieceEmployee pieceRechange)
@@ -134,6 +132,18 @@ namespace GM.UI.Views
 
             var stock = _stockService.FindSingle(x => x.PieceId == _piece.PieceId);
             if (stock == null) return true;
+            ChekOptions(stock, historqiqueSource);
+            AdHistoryInventaire(historqiqueSource);
+            UpdateStock(stock);
+            //_pieceService.Update(p);
+            //_pieceService.Save();
+            _pServiRepository.Delete(_piece.Id);
+            _pServiRepository.Save();
+            return false;
+        }
+
+        private void ChekOptions(PieceMagasin stock, HistoriqueInventaire historqiqueSource)
+        {
             if (DefautRbtn.IsChecked == true)
             {
                 stock.EtatStock = EtatStock.Defaut.ToString();
@@ -146,19 +156,18 @@ namespace GM.UI.Views
                 historqiqueSource.Etat = EtatStock.Reforme.ToString();
                 //p.EtatPiece = etatMateriel.EtatMateriels[1].Etat;
             }
-            else if (RepareRbtn .IsChecked == true)
+            else if (RepareRbtn.IsChecked == true)
             {
                 stock.EtatStock = EtatStock.Reparation.ToString();
                 historqiqueSource.Etat = EtatStock.Reparation.ToString();
                 //p.EtatPiece = etatMateriel.EtatMateriels[2].Etat;
             }
-            AdHistoryInventaire(historqiqueSource);
-            UpdateStock(stock);
-            //_pieceService.Update(p);
-            //_pieceService.Save();
-            _pServiRepository.Delete(_piece.Id);
-            _pServiRepository.Save();
-            return false;
+            else if (PerteRbtb.IsChecked == true)
+            {
+                stock.EtatStock = EtatStock.Perte.ToString();
+                historqiqueSource.Etat = EtatStock.Reparation.ToString();
+                //p.EtatPiece = etatMateriel.EtatMateriels[2].Etat;
+            }
         }
 
         private void AdHistoryInventaire(HistoriqueInventaire historqiqueSource)
