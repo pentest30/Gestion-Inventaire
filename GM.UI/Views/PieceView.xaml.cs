@@ -305,17 +305,13 @@ namespace GM.UI.Views
             _reformeRepository.Insert(reforme);
             _reformeRepository.Save();
             var etat = new EtatMateriel();
-            if (piece != null)
-            {
-                UpdateUtilisationPiece(piece);
-                piece.EtatPiece = etat.EtatMateriels[2].Etat;
-                PieceService.Update(piece);
-                PieceService.Save();
-                UpdateStockPiece(piece);
-                MessageBox.Show("Reforme terminé correctement");
-            }
-            
-            
+            if (piece == null) return;
+            UpdateUtilisationPiece(piece);
+            piece.EtatPiece = etat.EtatMateriels[2].Etat;
+            PieceService.Update(piece);
+            PieceService.Save();
+            UpdateStockPiece(piece);
+            MessageBox.Show("Reforme terminé correctement");
         }
 
         private static void UpdateStockPiece(Piece piece)

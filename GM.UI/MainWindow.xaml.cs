@@ -18,7 +18,7 @@ namespace GM.UI
         public MainWindow()
         {
             InitializeComponent();
-            //ContentControl.Content = new DepartementView();
+           ContentControl.Content = new MainView();
 
         }
 
