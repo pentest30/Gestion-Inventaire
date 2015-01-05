@@ -144,7 +144,7 @@
                     <helpers:AutoFilteredComboBox x:Name="CbSousService" Grid.Column="1" Grid.Row="1" Margin="2" DisplayMemberPath="Libelle" SelectedValuePath="Id" SelectedValue="{Binding SousServiceId}"/>
                     <helpers:AutoFilteredComboBox SelectionChanged="CbBonSortie_OnSelectionChanged" x:Name="CbBonSortie" Grid.Column="3" Grid.Row="1" Margin="2" DisplayMemberPath="NBon" SelectedValuePath="Id" SelectedValue="{Binding BonSortieId}"/>
                     <Separator  BorderBrush="Gray" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3"/>
-                    <Button x:Name="SaveBtn" Grid.Column="3" Grid.Row="3" VerticalAlignment="Stretch" Click="SaveBtn_OnClick" HorizontalAlignment="Right" Width="100" Margin="5,0,0,0" Content="Enregistrer" />
+                    <Button x:Name="SaveBtn" Grid.Column="3" Grid.Row="3" VerticalAlignment="Stretch" Click="SaveBtn_OnClick" HorizontalAlignment="Right" Width="100" Margin="5,0,0,2" Content="Enregistrer" />
 
                 </Grid>
 

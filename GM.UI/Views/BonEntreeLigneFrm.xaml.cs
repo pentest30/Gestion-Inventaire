@@ -3,6 +3,7 @@ using System.Windows;
 using BLL;
 using GM.Entity.Models;
 using Microsoft.Practices.Unity;
+using System.Collections.Generic;
 
 namespace GM.UI.Views
 {
@@ -62,7 +63,7 @@ namespace GM.UI.Views
             
             _beLigneRepository = _container.Resolve<Repository<BonEntreeLigne>>();
             var articleLigneRepository = _container.Resolve<Repository<Article>>();
-            CbArticle.ItemsSource = articleLigneRepository.SelectAll();
+            CbArticle.ItemsSource = articleLigneRepository.SelectAll() ;
         }
     }
 }

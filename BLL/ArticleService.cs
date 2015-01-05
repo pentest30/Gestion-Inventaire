@@ -95,10 +95,10 @@ namespace BLL
            return _db.Articles.Where(predicate);
        }
 
-       public IQueryable<Article> GetAllLazyLoad(params Expression<Func<Article, object>>[] children)
+       public IEnumerable<Article> GetAllLazyLoad(params Expression<Func<Article, object>>[] children)
        {
            children.ToList().ForEach(x => _db.Articles.Include(x).Load());
-           return _db.Articles;
+           return _db.Articles.ToList();
        }
    }
 }

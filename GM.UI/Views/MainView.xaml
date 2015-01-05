@@ -6,41 +6,9 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <TabControl Grid.Row="0" Padding="0">
-            <TabControl.Resources>
-                <Style TargetType="TabItem" BasedOn="{StaticResource AzureTabItem}"/>
-            </TabControl.Resources>
-            <TabItem Header="HOME">
-                <TabControl>
-                    <TabControl.Resources>
-                        <Style TargetType="TabItem" BasedOn="{StaticResource AzureNavTabItem}"/>
-                    </TabControl.Resources>
-                    <TabItem Header="PAGE INFO"></TabItem>
-                    <TabItem Header="CHANGE HISTORY"></TabItem>
-                </TabControl>
-            </TabItem>
-            <TabItem Header="SOURCE CODE" BorderBrush="Red">
-                <TabControl>
-                    <TabControl.Resources>
-                        <Style TargetType="TabItem" BasedOn="{StaticResource AzureNavTabItem}"/>
-                    </TabControl.Resources>
-                    <TabItem Header="FILES"></TabItem>
-                    <TabItem Header="HISTORY"></TabItem>
-                    <TabItem Header="FORKS"></TabItem>
-                </TabControl>
-            </TabItem>
-            <TabItem Header="DOCUMENTATION" BorderBrush="LightGreen">
-                <TabControl>
-                    <TabControl.Resources>
-                        <Style TargetType="TabItem" BasedOn="{StaticResource AzureNavTabItem}"/>
-                    </TabControl.Resources>
-                    <TabItem Header="ITEM 1"></TabItem>
-                    <TabItem Header="ITEM 2"></TabItem>
-                </TabControl>
-            </TabItem>
+        <TabControl>
+            <TabItem Header="Paramètres"></TabItem>
         </TabControl>
+       
     </Grid>
 </UserControl>

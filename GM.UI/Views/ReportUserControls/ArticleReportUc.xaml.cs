@@ -12,6 +12,7 @@ namespace GM.UI.Views.ReportUserControls
         public ArticleReportUc(IEnumerable<ArticleViewModel> articles)
         {
             InitializeComponent();
+            
             ReportViewer.LocalReport.ReportPath = ReportViewer.LocalReport.ReportPath = Environment.CurrentDirectory + @"\Reporting\ReportMagasin.rdlc";
             ReportViewer.LocalReport.DataSources.Clear();
             ReportViewer.LocalReport.DataSources.Add(new Microsoft.Reporting.WinForms.ReportDataSource("DataSet1",

@@ -55,7 +55,7 @@
         <Button  
                     Click="UpdateButton_OnClick"
                         x:Name="UpdateButton"  
-                        Margin="5,0,0,0" 
+                        Margin="5,0,0,2" 
                         Content="Modifier" 
                         Grid.Row="0" Grid.Column="1"/>
     </Grid>

@@ -19,6 +19,6 @@
             <ComboBoxItem>Réforme</ComboBoxItem>
         </ComboBox>
         <Separator Grid.Row="1" Grid.Column="1"></Separator>
-        <Button Content="Enregistrer" Name="SaveBtn" Click="SaveBtn_OnClick" Grid.Row="2" Grid.Column="1" Width="100" HorizontalAlignment="Right"/>
+        <Button Content="Enregistrer" Height="30" Name="SaveBtn" Click="SaveBtn_OnClick" Grid.Row="2" Grid.Column="1" Width="100" HorizontalAlignment="Right"/>
     </Grid>
 </Window>

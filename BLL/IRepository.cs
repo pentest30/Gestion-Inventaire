@@ -14,7 +14,7 @@ namespace BLL
         void Delete(object id);
         void Save();
         IEnumerable<T> Find(Func<T, bool> predicate);
-        IQueryable<T> GetAllLazyLoad( params Expression<Func<T, object>>[] children);
+        IEnumerable<T> GetAllLazyLoad( params Expression<Func<T, object>>[] children);
 
     }
 }

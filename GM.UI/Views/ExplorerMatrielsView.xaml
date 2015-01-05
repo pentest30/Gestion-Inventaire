@@ -42,16 +42,16 @@
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
                     <Button Content="Imprission" FontSize="10"
-                            Margin="5,0,0,0" 
+                            Margin="5,0,0,2" 
                             Click="ButtonBase_OnClick"/>
                     <Button  
                     Click="UpdateButton_OnClick"
                         x:Name="UpdateButton"  
                 FontSize="10"
-                        Margin="5,0,0,0" 
+                        Margin="5,0,0,2" 
                         Content="Changer l'emplacement" 
                         Grid.Row="0" Grid.Column="1"/>
-                    <Button Margin="5,0,0,0" FontSize="10" Grid.Row="0" Grid.Column="2" Content="Changement du materiel" Name="CHangePieceBtn" Click="CHangePieceBtn_OnClick"/>
+                    <Button Margin="5,0,0,2" FontSize="10" Grid.Row="0" Grid.Column="2" Content="Changement du materiel" Name="CHangePieceBtn" Click="CHangePieceBtn_OnClick"/>
                 </Grid>
                 <TreeView Name="TreeView" 
                   Margin="5"

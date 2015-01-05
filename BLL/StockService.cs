@@ -67,7 +67,7 @@ namespace BLL
           return _db.PieceMagasins.Where(predicate);
        }
 
-       public IQueryable<PieceMagasin> GetAllLazyLoad(params Expression<Func<PieceMagasin, object>>[] children)
+       public IEnumerable<PieceMagasin> GetAllLazyLoad(params Expression<Func<PieceMagasin, object>>[] children)
        {
            children.ToList().ForEach(x => _db.PieceMagasins.Include(x).Load());
            return _db.PieceMagasins;

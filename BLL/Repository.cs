@@ -44,7 +44,7 @@ namespace BLL
         {
             return Set.FirstOrDefault(predicate);
         }
-        public IQueryable<T> GetAllLazyLoad( params Expression<Func<T, object>>[] children)
+        public IEnumerable<T> GetAllLazyLoad( params Expression<Func<T, object>>[] children)
         {
             children.ToList().ForEach(x => Set.Include(x).Load());
             return Set;

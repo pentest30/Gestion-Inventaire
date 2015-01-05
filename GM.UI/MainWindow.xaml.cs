@@ -28,7 +28,7 @@ namespace GM.UI
             {
                 switch (((XPlorerItem)sender).ItemText)
                 {
-                    
+
                     case "Sous catégories": ContentControl.Content = new SousCategorieView();
                         break;
                     case "Départements": ContentControl.Content = new DepartementView();
@@ -48,7 +48,7 @@ namespace GM.UI
                     case "Distribution du matériels": ContentControl.Content = new MaterielInView();
                         break;
                     case "Bons d'entrées": ContentControl.Content = new BonEntreeMagasinView();
-                   
+
                         break;
                     case "Commandes Internes": ContentControl.Content = new CommandeView();
                         break;
@@ -62,9 +62,9 @@ namespace GM.UI
                         break;
                     case "Matériels par location": ContentControl.Content = new ExplorerMatrielsView();
                         break;
-                        
-                   
-                        
+
+
+
                 }
             }
             catch (Exception exception)
@@ -77,11 +77,11 @@ namespace GM.UI
         private void MainWindow_OnKeyDown(object sender, KeyEventArgs e)
         {
             List<Button> buttons = EventHelper.GetLogicalChildCollection<Button>(ContentControl);
-            if (e.Key == (Key.A  ) &&Keyboard.IsKeyDown(Key.LeftCtrl))
+            if (e.Key == (Key.A) && Keyboard.IsKeyDown(Key.LeftCtrl))
             {
-                 var add = buttons.FirstOrDefault(x => x.Name == "AddButton");
-                    if (add != null)
-                        add.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
+                var add = buttons.FirstOrDefault(x => x.Name == "AddButton");
+                if (add != null)
+                    add.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
             }
             if (e.Key == (Key.E) && Keyboard.IsKeyDown(Key.LeftCtrl))
             {
@@ -92,8 +92,8 @@ namespace GM.UI
             if (e.Key == (Key.M) && Keyboard.IsKeyDown(Key.LeftCtrl))
             {
                 var update = buttons.FirstOrDefault(x => x.Name == "UpdateButton");
-                    if (update != null)
-                        update.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
+                if (update != null)
+                    update.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
             }
             if (e.Key == (Key.S) && Keyboard.IsKeyDown(Key.LeftCtrl))
             {

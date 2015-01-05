@@ -1,6 +1,7 @@
 ﻿<Window x:Class="GM.UI.Views.BonSortieLigneFrm"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:extra="http://schemas.extra.com/ui"
         xmlns:helpers="clr-namespace:WPF.Core.Helpers;assembly=WPF.Core"
         WindowStyle="ToolWindow"
         Title="Ligne ..." Height="200" Width="450">
@@ -21,7 +22,14 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <TextBlock Text="Article:" VerticalAlignment="Center"/>
-        <helpers:AutoFilteredComboBox Name="CbArticle" Grid.Column="1" Grid.Row="0" Margin="2" DisplayMemberPath="Libelle" SelectedValuePath="Id" SelectedValue="{Binding Path=ArticleId}"/>
+        <extra:ComboDataGrid
+            x:Name="CbArticle" Grid.Column="1" Grid.Row="0" Margin="2" DisplayMemberPath="Libelle" SelectedValuePath="Id" SelectedValue="{Binding Path=ArticleId}">
+            <extra:ComboDataGrid.Columns>
+                <DataGridTextColumn Width="*" Header="Type" Binding="{Binding SousCategorie.Libelle}"/>
+                <DataGridTextColumn Width="*" Header="Marque" Binding="{Binding Marque.Libelle}"/>
+                <DataGridTextColumn Width="*" Header="Modèl" Binding="{Binding Libelle}"/>
+            </extra:ComboDataGrid.Columns>
+        </extra:ComboDataGrid>
         <TextBlock VerticalAlignment="Center" Grid.Row="0" Grid.Column="2" Text="Qnt:"/>
         <TextBox Grid.Column="3" Grid.Row="0" Text="{Binding Path=Qnt}" helpers:TextBoxMaskBehavior.Mask="Integer"/>
         <TextBlock Text="Département:"  Grid.Row="1" Grid.Column="0"  VerticalAlignment="Center"/>

@@ -28,7 +28,7 @@
                     <RowDefinition/>
                 </Grid.RowDefinitions>
                 <uiControls:SearchTextBox Margin="5"   CharacterCasing="Upper"  Name="TxtSearch"  TextChanged="TxtSearch_OnTextChanged"  />
-                <GroupBox Grid.Row="1" Header="Informations:" BorderBrush="Gray" Margin="5" DataContext="{Binding ElementName=DataGrid ,Path=SelectedItem}">
+                <GroupBox Grid.Row="1" Header="Informations:"  Margin="5" DataContext="{Binding ElementName=DataGrid ,Path=SelectedItem}">
                     <Grid Margin="10" Name="Grid">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="auto"/>
@@ -207,48 +207,51 @@
                             <DataGridTextColumn Width="*" Header="Date d'entrée" Binding="{Binding DateEntree ,StringFormat=d}"/>
                         </bsFilter:FilterDataGrid.Columns>
                     </bsFilter:FilterDataGrid>
-                    <Button  
+                    <Button  FontSize="11"
                     Visibility="Visible" 
                          x:Name="AddButton" 
                         Click="AddButton_OnClick"
                         
-                         Margin="5,0,0,0" 
+                         Margin="5,0,0,2" 
                          Content="Ajouter (ctr+ A)"
                          Grid.Row="0" Grid.Column="1" />
                     <Button  
+                        FontSize="11"
                     Click="UpdateButton_OnClick"
                         x:Name="UpdateButton"  
-                        Margin="5,0,0,0" 
+                        Margin="5,0,0,2" 
                         Content="Modifier(ctr +M)" 
                         Grid.Row="1" Grid.Column="1"/>
                     <Button  
                      
                         Visibility="{Binding Visibility, Converter={StaticResource Nan2Visible}, ElementName=AddButton}" 
                         x:Name="SaveButton"  
-                        Margin="5,0,0,0" 
+                        Margin="5,0,0,2" 
                         Click="SaveButton_OnClick"
                         Content="Enregistrer" 
                          Grid.Row="0" Grid.Column="1"/>
                     <Button 
                         x:Name="BackButton"  
                         Visibility="{Binding Visibility, Converter={StaticResource Nan2Visible}, ElementName=AddButton}" 
-                        Margin="5,0,0,0" 
+                        Margin="5,0,0,2" 
                         Content="Annuler" 
                     Click="BackButton_OnClick"
                          Grid.Row="1" Grid.Column="1"/>
                     <Button
+                        FontSize="11"
                        x:Name="DeleteButton" 
                     Click="DeleteButton_OnClick"
-                        Margin="5,0,0,0" 
+                        Margin="5,0,0,2" 
                         Content="Supprimer(ctr +S)" 
                         Grid.Row="2" Grid.Column="1"/>
                     <Button
+                        FontSize="11"
                        x:Name="AddMultButton" 
                     Click="AddMultButton_OnClick"
-                        Margin="5,0,0,0" 
+                        Margin="5,0,0,2" 
                         Content="Ajout Multiple" 
                         Grid.Row="3" Grid.Column="1"/>
-                    <Button   Margin="5,0,0,0" Grid.Row="4" Grid.Column="1" Content="Réforme" Name="ReformeBtn" Click="ReformeBtn_OnClick"/>
+            <Button  FontSize="11" Margin="5,0,0,2" Grid.Row="4" Grid.Column="1" Content="Réforme" Name="ReformeBtn" Click="ReformeBtn_OnClick"/>
 
 
                 </Grid>

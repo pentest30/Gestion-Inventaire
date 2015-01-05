@@ -75,7 +75,7 @@ namespace BLL
        {
            return _context.Pieces.FirstOrDefault(predicate);
        }
-       public IQueryable<Piece> GetAllLazyLoad(params Expression<Func<Piece, object>>[] children)
+       public IEnumerable<Piece> GetAllLazyLoad(params Expression<Func<Piece, object>>[] children)
        {
            children.ToList().ForEach(x => _context.Pieces.Include(x).Load());
            return _context.Pieces;
