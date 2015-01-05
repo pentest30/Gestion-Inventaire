@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using GM.UI.ModelView;
+using Microsoft.Reporting.WinForms;
 
 namespace GM.UI.Views.ReportUserControls
 {
@@ -15,7 +16,7 @@ namespace GM.UI.Views.ReportUserControls
             
             ReportViewer.LocalReport.ReportPath = ReportViewer.LocalReport.ReportPath = Environment.CurrentDirectory + @"\Reporting\ReportMagasin.rdlc";
             ReportViewer.LocalReport.DataSources.Clear();
-            ReportViewer.LocalReport.DataSources.Add(new Microsoft.Reporting.WinForms.ReportDataSource("DataSet1",
+            ReportViewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1",
                 articles));
             ReportViewer.RefreshReport();
             ReportViewer.Show();

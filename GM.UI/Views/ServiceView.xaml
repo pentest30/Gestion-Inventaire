@@ -55,7 +55,8 @@
                           DisplayMemberPath="Libelle"
                           SelectedValue="{Binding Path=DepartementId}" 
                           SelectedValuePath="Id"/>
-                <bsFilter:FilterDataGrid   
+                <bsFilter:FilterDataGrid 
+                    RowHeight="20"
                     IsEnabled="{Binding Visibility, Converter={StaticResource Visible2Enable}, ElementName=AddButton}" 
                     Grid.Row="2" 
                     Grid.ColumnSpan="2"
